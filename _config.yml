@@ -49,14 +49,17 @@ background-img: "../img/intro-bg.jpg"
 
 dynamic-typing: True
 shuffle: True # Shuffle the lines.
-loop: True
+loop: False
 loop-count: False # Set False for infinite loop, or set any number for finite loop.
 type-speed: 10
 start-delay: 200
 delete-delay: 5000
 lines: # You can add HTML Tags in the Text
-  - text: "The lower you fall, the higher you'll fly."
-  - text: "Where’s your will to be weird?"
+  - text: "You don't have to see the whole staircase. Just take the first step."
+  - text: "Do something today that your future self will thank you for."
+  - text: "If we are facing in the right direction, all we have to do is keep on walking."
+  - text: "Everyone you will ever meet knows something you don't."
+  - text: "An investment in knowledge pays the best interest."
 
 me-img: "/img/jetpacktocat.png"
 
