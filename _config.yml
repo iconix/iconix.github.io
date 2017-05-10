@@ -29,7 +29,7 @@ force-https: True
 #############
 
 lang: "en"
-author: "iconix"
+author: "Nadja Rhodes"
 title: "{ Nadja Rhodes }"
 description: "Blog and website of Nadja Rhodes, blogging mainly while I learn. Opinions expressed are mine."
 keywords: "rhodes, nadja, personal, jekyll, theme"
@@ -41,7 +41,7 @@ favicon: "/img/favicon.ico"
 
 black-favicon: "/img/black-lab-glass.ico"
 
-background-img: "../img/intro-bg.jpg"
+background-img: "../img/cover-bg.jpg"
 
 ##############################
 # Dynamic Text on the Header #
@@ -53,15 +53,13 @@ loop: False
 loop-count: False # Set False for infinite loop, or set any number for finite loop.
 type-speed: 10
 start-delay: 200
-delete-delay: 5000
+delete-delay: 60000
 lines: # You can add HTML Tags in the Text
   - text: "You don't have to see the whole staircase. Just take the first step."
   - text: "Do something today that your future self will thank you for."
   - text: "If we are facing in the right direction, all we have to do is keep on walking."
   - text: "Everyone you will ever meet knows something you don't."
   - text: "An investment in knowledge pays the best interest."
-
-me-img: "/img/jetpacktocat.png"
 
 ##############################
 # Color the browser elements #
@@ -99,13 +97,11 @@ fb-share: True
 twitter-share: True
 linkedin-share: True
 reddit-share: True
-google-plus-share: True
-tumblr-share: True
-pinterest-share: True
+google-plus-share: False
+tumblr-share: False
+pinterest-share: False
 pocket-share: True
-vkontakte-share: True
-
-disqus-shortname: "panossakkos"
+vkontakte-share: False
 
 syntax-highlight: True
 
@@ -140,7 +136,7 @@ email: "narhodes1@gmail.com"
 
 # if the author_blurb is not set, then this feature is skipped
 author_blurb: "Nadja Rhodes is an awesome person. She lives in Flatland, where she works on two-dimensional engineering projects. In her spare time, Nadja likes to eat cotton candy."
-author_blurb_image: "/img/author.png"
+author_blurb_image: "/img/author_white_transparent.png"
 
 ##################
 # Social Buttons #
@@ -175,8 +171,8 @@ keybase-in-footer: True
 # Sections shown in the index page
 
 pages_list:
-  About: 'about'
   Blog: 'latest-post'
+  About: 'about'
   Timeline: 'timeline'
   Contact: 'contact'
 
