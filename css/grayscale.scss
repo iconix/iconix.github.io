@@ -174,11 +174,12 @@ a {
             font-size: 40px;
         }
         .intro-text {
-            color: $font-color;
+            color: $font-color; /* Added by iconix */
             font-size: 18px;
             @if $navbar-text-shadow {
                 text-shadow: 1px 0 1px #000;
             }
+            /* Added by iconix */
             &:focus,
             &:hover {
                 color: rgba($font-color, 0.8);
@@ -411,4 +412,22 @@ body {
 
 .fourofour {
   border: 1px solid $primary-color !important;
+}
+
+/* Added by iconix */
+.a-onenote > a {
+    color: #fff;
+    text-shadow: 2px 2px 1px #7321a6;
+}
+
+/* Added by iconix */
+.underline,
+.a-underline > a {
+    color: #fff;
+    text-decoration: underline $secondary-color;
+    &:hover,
+    &:focus {
+        color: #fff;
+        text-decoration: underline darken($secondary-color,20%);
+    }
 }
