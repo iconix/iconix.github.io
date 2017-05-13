@@ -153,6 +153,8 @@ social:
     url: "/feed.xml"
   - title: "envelope"
     url: "narhodes1@gmail.com"
+  - title: "lastfm"
+    url: "https://www.last.fm/user/iconix"
 
 ############
 # 404 page #
