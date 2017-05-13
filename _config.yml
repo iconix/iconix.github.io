@@ -31,8 +31,8 @@ force-https: True
 lang: "en"
 author: "Nadja Rhodes"
 title: "{ Nadja Rhodes }"
-description: "Blog and website of Nadja Rhodes, blogging mainly while I learn. Opinions expressed are mine."
-keywords: "rhodes, nadja, personal, jekyll, theme"
+description: "Nadja Rhodes is a software developer and aspiring data scientist. I like to code for the web, and I blog (mainly) as I learn to tell stories with data. Opinions expressed are mine."
+keywords: "rhodes, nadja, software, development, data, science, analytics, code, web, stanford, microsoft"
 favicon: "/img/favicon.ico"
 
 ################
@@ -60,6 +60,8 @@ lines: # You can add HTML Tags in the Text
   - text: "If we are facing in the right direction, all we have to do is keep on walking."
   - text: "Everyone you will ever meet knows something you don't."
   - text: "An investment in knowledge pays the best interest."
+
+me-img: "/img/jetpacktocat.png"
 
 ##############################
 # Color the browser elements #
@@ -135,7 +137,7 @@ email: "narhodes1@gmail.com"
 # This works best when your author blurb image has a transparent background, or matches your site background color.
 
 # if the author_blurb is not set, then this feature is skipped
-author_blurb: "Nadja Rhodes is an awesome person. She lives in Flatland, where she works on two-dimensional engineering projects. In her spare time, Nadja likes to eat cotton candy."
+author_blurb: 'Nadja Rhodes does not particularly enjoy <a class="underline" href="/#about">writing about herself</a>.'
 author_blurb_image: "/img/author_white_transparent.png"
 
 ##################
@@ -149,6 +151,8 @@ social:
     url: "https://github.com/iconix"
   - title: "rss"
     url: "/feed.xml"
+  - title: "envelope"
+    url: "narhodes1@gmail.com"
 
 ############
 # 404 page #
