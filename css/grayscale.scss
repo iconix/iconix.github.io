@@ -240,7 +240,7 @@ a {
     padding-top: 100px;
     @media(min-width:767px) {
         margin-top: 125px;
-        padding-top: 125px;
+        padding-top: 35px;
     }
     /* Added in { Personal } for responsive images in posts and section contents */
     img {
@@ -278,6 +278,7 @@ a {
             border: 0px;
             margin-bottom: 20px;
             padding: 4px;
+            border-radius: 50%; /* Added by iconix */
         }
     }
 }
@@ -418,6 +419,11 @@ body {
 .a-onenote > a {
     color: #fff;
     text-shadow: 2px 2px 1px #7321a6;
+    &:hover,
+    &:focus {
+        color: #7321a6;
+        text-shadow: none;
+    }
 }
 
 /* Added by iconix */

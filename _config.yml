@@ -61,7 +61,7 @@ lines: # You can add HTML Tags in the Text
   - text: "Everyone you will ever meet knows something you don't."
   - text: "An investment in knowledge pays the best interest."
 
-me-img: "/img/jetpacktocat.png"
+me-img: "/img/allo-moji1.png"
 
 ##############################
 # Color the browser elements #
@@ -121,7 +121,7 @@ events:
 
 # First image of the Timeline
 
-timeline-img: "/img/timeline/default.png"
+timeline-img: "/img/allo-moji2.png"
 
 ###########
 # Contact #
@@ -137,8 +137,8 @@ email: "narhodes1@gmail.com"
 # This works best when your author blurb image has a transparent background, or matches your site background color.
 
 # if the author_blurb is not set, then this feature is skipped
-author_blurb: 'Nadja Rhodes does not particularly enjoy <a class="underline" href="/#about">writing about herself</a>.'
-author_blurb_image: "/img/author_white_transparent.png"
+author_blurb: 'Nadja does not particularly enjoy <a class="underline" href="/#about">writing about herself</a>.'
+author_blurb_image: "/img/allo-moji3.png"
 
 ##################
 # Social Buttons #
