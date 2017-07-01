@@ -168,7 +168,7 @@ timeline-img: "/img/allo-moji2.png"
 # Contact #
 ###########
 
-email: "narhodes1@gmail.com"
+email: "narhodes1+blog@gmail.com"
 
 ################
 # Author Blurb #
@@ -193,7 +193,7 @@ social:
   - title: "rss"
     url: "/feed.xml"
   - title: "envelope"
-    url: "narhodes1@gmail.com"
+    url: "narhodes1+blog@gmail.com"
   - title: "lastfm"
     url: "https://www.last.fm/user/iconix"
 
