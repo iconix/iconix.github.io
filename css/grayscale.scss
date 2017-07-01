@@ -437,3 +437,13 @@ body {
         text-decoration: underline darken($secondary-color,20%);
     }
 }
+
+/* Added by iconix */
+.timeline-image img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}

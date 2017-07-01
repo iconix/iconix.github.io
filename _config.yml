@@ -16,7 +16,7 @@ baseurl:
 
 # Google tracking id
 
-google-tracking-id: ""
+google-tracking-id: "UA-101920397-1"
 
 # Forces https everywhere in your website, except when you serve it locally
 # If you are not hosted on Github Pages, and your host doesn't support https
@@ -60,6 +60,10 @@ lines: # You can add HTML Tags in the Text
   - text: "If we are facing in the right direction, all we have to do is keep on walking."
   - text: "Everyone you will ever meet knows something you don't."
   - text: "An investment in knowledge pays the best interest."
+  - text: "Same old slippers. Same old rice. Same old glimpse of paradise."
+  - text: "The new multitasking: procrastinating on many things at once."
+  - text: "Without deviation from the norm, progress is not possible."
+  - text: "Better late than never."
 
 me-img: "/img/allo-moji1.png"
 
@@ -112,15 +116,52 @@ syntax-highlight: True
 ############
 
 events:
-  - image: "/img/timeline/spidertocat.png"
-    date: "September 2013 - Today"
-    description: "Saving the neighborhood!"
+  - image: "/img/timeline/enterHH_uk.gif"
+    date: "2004-2007"
+    description: '<a class="underline" href="https://en.wikipedia.org/wiki/Habbo">Habbo UK</a> made me internet (from Maryland)'
   - image: "/img/timeline/baracktocat.jpg"
-    date: "September 2007 - August 2013"
-    description: "Started coding"
+    date: "Fall 2008"
+    description: "Started coding in earnest for my senior year of high school; accepted into Stanford University, Class of 2013!"
+  - image: "/img/timeline/effectivecplusplus.jpg"
+    date: "Summer 2011"
+    description: "First summer in Seattle; during Google internship, read Effective C++ and became charmed by design patterns"
+  - image: "/img/timeline/prefixspan.png"
+    date: "Summer 2012"
+    description: 'Dove deep into <a class="underline" href="https://en.wikipedia.org/wiki/PrefixSpan">Sequential Pattern Mining</a> at a <a class="underline" href="http://www.kecl.ntt.co.jp/rps/index.html">research facility</a> internship in Japan'
+  - image: "/img/timeline/summersonic.jpg"
+    date: "August 18-19, 2012"
+    description: 'Attended first #LiveMusic festival: <a class="underline" href="http://www.summersonic.com/2012/">Summer Sonic</a> in Osaka, Japan'
+  - image: "/img/timeline/stanford.png"
+    date: "Spring 2013"
+    description: 'Senior year: <a class="underline" href="http://cs142.stanford.edu/">CS 142</a> and <a class="underline" href="http://cs210.stanford.edu/">CS 210</a> solidified my enthusiasm for web development; my 210 senior <a class="underline" href="https://github.com/iconix/atc">project</a> took me to SAP HQ in Walldorf, Germany'
+  - image: "/img/timeline/onenote2013.png"
+    date: "June 2013"
+    description: "Graduated Stanford... with a job at Microsoft!"
+  - image: "/img/timeline/bumbershoot.jpg"
+    date: "August 31, 2013"
+    description: 'Attended <a class="underline" href="https://www.bumbershoot.com">Bumbershoot</a> in Seattle #LiveMusic'
+  - image: "/img/timeline/ng_ml.png"
+    date: "Summer 2014"
+    description: 'Second summer in Seattle; completed <a class="underline" href="https://www.coursera.org/learn/machine-learning">Andrew Ng&#39;s Machine Learning</a> course in June'
+    // TODO: add link to post with ML course notes
+  - image: "/img/timeline/sasquatch.jpg"
+    date: "May 22-25, 2015"
+    description: 'Attended <a class="underline" href="https://www.sasquatchfestival.com/">Sasquatch</a> at the Gorge, WA #LiveMusic'
+  - image: "/img/timeline/github.png"
+    date: "2013~2016"
+    description: 'My side projects centered around "big"-data-for-news ideas (<a class="underline" href="http://thetechmblog.blogspot.com/">The Tech Machine</a>; <a class="underline" href="https://github.com/iconix/tn">Trending News</a>), building off of my PrefixSpan experience in Japan; meanwhile, the <a class="underline" href="https://github.com/OneNoteDev/WebClipper/wiki">best parts of my career</a> centered around the web'
+  - image: "/img/timeline/labtocat.png"
+    date: "May 7, 2017"
+    description: "Started this blog to dive deeper into data products!"
+  - image: "/img/timeline/paradiso.png"
+    date: "June 23-24, 2017"
+    description: 'Attended <a class="underline" href="http://paradisofestival.com/">Paradiso</a> at the Gorge, WA #LiveMusic'
+  - image: "/img/timeline/adventurecat.png"
+    date: "Today"
+    description: "Adventure Time!"
+    // TODO: resume link
 
 # First image of the Timeline
-
 timeline-img: "/img/allo-moji2.png"
 
 ###########
