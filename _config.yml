@@ -158,8 +158,7 @@ events:
     description: 'Attended <a class="underline" href="http://paradisofestival.com/">Paradiso</a> at the Gorge, WA #LiveMusic'
   - image: "/img/timeline/adventurecat.png"
     date: "Today"
-    description: "Adventure Time!"
-    // TODO: resume link
+    description: 'Adventure Time! (<a class="underline" href="https://github.com/iconix/resume/blob/master/latex/datascience/resume.pdf">resume</a>)'
 
 # First image of the Timeline
 timeline-img: "/img/allo-moji2.png"
