@@ -55,15 +55,15 @@ type-speed: 10
 start-delay: 200
 delete-delay: 60000
 lines: # You can add HTML Tags in the Text
-  - text: "You don't have to see the whole staircase. Just take the first step."
   - text: "Do something today that your future self will thank you for."
-  - text: "If we are facing in the right direction, all we have to do is keep on walking."
-  - text: "Everyone you will ever meet knows something you don't."
   - text: "An investment in knowledge pays the best interest."
-  - text: "Same old slippers. Same old rice. Same old glimpse of paradise."
-  - text: "The new multitasking: procrastinating on many things at once."
-  - text: "Without deviation from the norm, progress is not possible."
   - text: "Better late than never."
+  - text: "Everyone you will ever meet knows something that you don't."
+  - text: "If we are facing in the right direction, all we have to do is keep on walking."
+  - text: "The new multitasking: procrastinating on many things at once."
+  - text: "Same old slippers. Same old rice. Same old glimpse of paradise."
+  - text: "Without deviation from the norm, progress is not possible."
+  - text: "You don't have to see the whole staircase. Just take the first step."
 
 me-img: "/img/allo-moji1.png"
 
@@ -94,7 +94,7 @@ icon-192p: "/img/web-app/icon-192p.png"
 
 enable-gesture-navigation: True
 
-post-preview-words: 96
+post-preview-words: 84
 
 paginate: 5
 
@@ -107,6 +107,7 @@ google-plus-share: False
 tumblr-share: False
 pinterest-share: False
 pocket-share: True
+disqus-shortname: "iconix-github-io"
 vkontakte-share: False
 
 syntax-highlight: True
@@ -142,8 +143,7 @@ events:
     description: 'Attended <a class="underline" href="https://www.bumbershoot.com">Bumbershoot</a> in Seattle #LiveMusic'
   - image: "/img/timeline/ng_ml.png"
     date: "Summer 2014"
-    description: 'Second summer in Seattle; completed <a class="underline" href="https://www.coursera.org/learn/machine-learning">Andrew Ng&#39;s Machine Learning</a> course in June'
-    // TODO: add link to post with ML course notes
+    description: 'Second summer in Seattle; completed <a class="underline" href="https://www.coursera.org/learn/machine-learning">Andrew Ng&#39;s Machine Learning</a> course in June (<a class="underline" href="/notes/2017/07/03/ng-ml-notes.html">notes</a>)'
   - image: "/img/timeline/sasquatch.jpg"
     date: "May 22-25, 2015"
     description: 'Attended <a class="underline" href="https://www.sasquatchfestival.com/">Sasquatch</a> at the Gorge, WA #LiveMusic'
