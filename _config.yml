@@ -134,7 +134,7 @@ events:
     description: 'Attended first #LiveMusic festival: <a class="underline" href="http://www.summersonic.com/2012/">Summer Sonic</a> in Osaka, Japan'
   - image: "/img/timeline/stanford.png"
     date: "Spring 2013"
-    description: 'Senior year: <a class="underline" href="http://cs142.stanford.edu/">CS 142</a> and <a class="underline" href="http://cs210.stanford.edu/">CS 210</a> solidified my enthusiasm for web development; my 210 senior <a class="underline" href="https://github.com/iconix/atc">project</a> took me to SAP HQ in Walldorf, Germany'
+    description: 'Senior year: <a class="underline" href="http://cs142.stanford.edu/">CS 142</a> (with the <a class="underline" href="https://www.quora.com/What-are-the-most-profound-life-lessons-from-Stanford-Professor-John-Ousterhout">legendary</a> Prof. John Ousterhout) and <a class="underline" href="http://cs210.stanford.edu/">CS 210</a> solidified my enthusiasm for web development; my 210 senior <a class="underline" href="https://github.com/iconix/atc">project</a> took me to SAP HQ in Walldorf, Germany'
   - image: "/img/timeline/onenote2013.png"
     date: "June 2013"
     description: "Graduated Stanford... with a job at Microsoft!"
