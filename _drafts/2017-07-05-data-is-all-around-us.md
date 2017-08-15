@@ -6,7 +6,7 @@ category: Portfolio Building
 tags: [ 'python', 'r' ]
 ---
 
-In my [first post](/blogging/2017/05/07/hello-world.html), I mentioned having a mentor who _encouraged me to build up a portfolio of at least 3 well-curated, beautiful data projects_. Unsure on how to get to beautiful, I asked whether she could share any projects that I could hold as the "gold standard" while building my own portfolio.
+In my [first post](/blogging/2017/05/07/hello-world.html#building-a-portfolio), I mentioned having a mentor who _encouraged me to build up a portfolio of at least 3 well-curated, beautiful data projects_. Unsure on how to get to beautiful, I asked whether she could share any projects that I could hold as the "gold standard" while building my own portfolio.
 
 She shared a few of her favorites on the web, mentioning that David Robinson of the [Variance Explained](http://varianceexplained.org/) blog has a lot of great examples.
 
