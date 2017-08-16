@@ -14,8 +14,30 @@ body {
     width: 100%;
     height: 100%;
     font-family: "Lora","Helvetica Neue",Helvetica,Arial,sans-serif;
-    color: $font-color;
-    background-color: $primary-color;
+    color: $font-color-dark; /* Added by iconix */
+    background-color: $primary-color-light; /* Added by iconix */
+
+    /* Added by iconix */
+    &#page-top {
+        color: $font-color-light;
+        background-color: $primary-color-dark;
+
+        > .navbar-custom {
+            background: $navbar-lg-background;
+
+            &.top-nav-collapse {
+                background: $navbar-lg-collapse-background-color;
+            }
+        }
+
+        a:not(.page-scroll) {
+            &:hover,
+            &:focus {
+                text-decoration: none;
+                color: darken($secondary-color,20%);
+            }
+        }
+    }
 }
 
 html {
@@ -73,17 +95,17 @@ a {
     transition: all .2s ease-in-out;
     &:hover,
     &:focus {
-        text-decoration: none;
-        color: darken($secondary-color,20%);
+        text-decoration: underline $secondary-color; /* Added by iconix */
+        color: $secondary-color; /* Added by iconix */
     }
 }
 
 .navbar-custom {
     margin-bottom: 0;
-    border-bottom: 1px solid rgba($font-color, 0.3);
+    border-bottom: 1px solid rgba($font-color-light, 0.3);
     text-transform: uppercase;
     font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background-color: $navbar-sm-background-color;
+    background: $navbar-sm-background-color;
 
     /* Fix height limit and scroll for small screen and many items menu */
     max-height: 100%;
@@ -103,6 +125,11 @@ a {
         &:focus {
             outline: none;
         }
+        /* Added by iconix */
+        &:focus,
+        &:hover {
+            color: rgba($font-color-light, 0.8);
+        }
     }
     a {
         color: $navbar-color;
@@ -117,21 +144,18 @@ a {
                 -webkit-transition: background .3s ease-in-out;
                 -moz-transition: background .3s ease-in-out;
                 transition: background .3s ease-in-out;
-                &:hover {
-                    /* color: rgba($font-color, 0.8); */
-                    outline: none;
-                    background-color: rgba($font-color, 0.3);
-                }
+                &:hover,
                 &:focus,
                 &:active {
+                    color: rgba($font-color-light, 0.8);
                     outline: none;
-                      background-color: rgba($font-color, 0.3);
+                    background-color: rgba($font-color-light, 0.3);
                 }
             }
             &.active {
                 outline: none;
                 a {
-                    background-color: rgba($font-color, 0.3);
+                    background-color: rgba($font-color-light, 0.3);
                     &:hover {
                         color: $navbar-color;
                     }
@@ -143,14 +167,12 @@ a {
         padding: 20px 0;
         border-bottom: none;
         letter-spacing: 1px;
-        background: $navbar-lg-background;
         -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
         -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
         transition: background .5s ease-in-out,padding .5s ease-in-out;
         &.top-nav-collapse {
             padding: 0;
-            background: $navbar-lg-collapse-background-color;
-            border-bottom: 1px solid rgba($font-color, 0.3);
+            border-bottom: 1px solid rgba($font-color-light, 0.3);
         }
     }
 }
@@ -173,8 +195,13 @@ a {
         .brand-heading {
             font-size: 40px;
         }
+        /* Added by iconix */
+        a {
+            text-decoration: none;
+            outline: none;
+        }
         .intro-text {
-            color: $font-color; /* Added by iconix */
+            color: $font-color-light; /* Added by iconix */
             font-size: 18px;
             @if $navbar-text-shadow {
                 text-shadow: 1px 0 1px #000;
@@ -182,8 +209,7 @@ a {
             /* Added by iconix */
             &:focus,
             &:hover {
-                color: rgba($font-color, 0.8);
-                outline: none; // TODO: remove outline on the parent link instead
+                color: rgba($font-color-light, 0.8);
             }
         }
     }
@@ -248,7 +274,7 @@ a {
         max-width: 100%;
         height: auto;
         margin: 0 auto;
-        border: 1px solid $font-color;
+        border: 1px solid $font-color-light;
     }
     /* Added in { Personal } */
     ul,
@@ -257,7 +283,7 @@ a {
         margin: 0 0 25px;
         font-size: 18px;
         line-height: 1.5;
-        list-style-position: inside;
+        /* list-style-position: inside;  Removed by iconix */
     }
     pre {
       padding: 0;
@@ -269,7 +295,7 @@ a {
       /* Override any img styles to ensure Emojis are displayed inline */
       margin: 0px !important;
       display: inline !important;
-      border: 1px solid $primary-color !important;
+      /* border: 1px solid $primary-color !important; Removed by iconix */
     }
 
     /* Added in { Personal } */
@@ -341,13 +367,13 @@ footer {
 ::-moz-selection {
     text-shadow: none;
     background: #fcfcfc;
-    background: rgba($font-color, 0.2);
+    background: rgba($font-color-light, 0.2);
 }
 
 ::selection {
     text-shadow: none;
     background: #fcfcfc;
-    background: rgba($font-color, 0.2);
+    background: rgba($font-color-light, 0.2);
 }
 
 img::selection {
@@ -359,7 +385,7 @@ img::-moz-selection {
 }
 
 body {
-    -webkit-tap-highlight-color: rgba($font-color, 0.2);
+    -webkit-tap-highlight-color: rgba($font-color-light, 0.2);
 }
 
 /* Added in { Personal } for Typed Cursor in Header */
@@ -412,7 +438,7 @@ body {
  /* END Animation for hand-swipe */
 
 .fourofour {
-  border: 1px solid $primary-color !important;
+  border: 1px solid $primary-color-dark !important;
 }
 
 /* Added by iconix */
@@ -425,18 +451,13 @@ body {
         text-shadow: none;
     }
 }
-
-/* Added by iconix */
-.underline,
-.a-underline > a {
-    color: #fff;
-    text-decoration: underline $secondary-color;
+/*.a-onenote > a {
     &:hover,
     &:focus {
-        color: #fff;
-        text-decoration: underline darken($secondary-color,20%);
+        color: #7321a6;
+        text-decoration: none;
     }
-}
+}*/
 
 /* Added by iconix */
 .timeline-image img {
@@ -446,4 +467,20 @@ body {
     left: 0;
     right: 0;
     margin: auto;
+}
+
+/* Added by iconix */
+a.footnote {
+    padding-top: $navbar-height;
+}
+
+/* Added by iconix */
+.footnotes {
+    p {
+        margin-bottom: 0;
+    }
+    li {
+        padding-top: $navbar-height;
+        margin-top: -$navbar-height;
+    }
 }

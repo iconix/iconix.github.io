@@ -119,7 +119,7 @@ syntax-highlight: True
 events:
   - image: "/img/timeline/enterHH_uk.gif"
     date: "2004-2007"
-    description: '<a class="underline" href="https://en.wikipedia.org/wiki/Habbo">Habbo UK</a> made me internet (from Maryland)'
+    description: '<a href="https://en.wikipedia.org/wiki/Habbo">Habbo UK</a> made me internet (from Maryland)'
   - image: "/img/timeline/baracktocat.jpg"
     date: "Fall 2008"
     description: "Started coding in earnest for my senior year of high school; accepted into Stanford University, Class of 2013!"
@@ -128,37 +128,37 @@ events:
     description: "First summer in Seattle; during Google internship, read Effective C++ and became charmed by design patterns"
   - image: "/img/timeline/prefixspan.png"
     date: "Summer 2012"
-    description: 'Dove deep into <a class="underline" href="https://en.wikipedia.org/wiki/PrefixSpan">Sequential Pattern Mining</a> at a <a class="underline" href="http://www.kecl.ntt.co.jp/rps/index.html">research facility</a> internship in Japan'
+    description: 'Dove deep into <a href="https://en.wikipedia.org/wiki/PrefixSpan">Sequential Pattern Mining</a> at a <a href="http://www.kecl.ntt.co.jp/rps/index.html">research facility</a> internship in Japan'
   - image: "/img/timeline/summersonic.jpg"
     date: "August 18-19, 2012"
-    description: 'Attended first #LiveMusic festival: <a class="underline" href="http://www.summersonic.com/2012/">Summer Sonic</a> in Osaka, Japan'
+    description: 'Attended first #LiveMusic festival: <a href="http://www.summersonic.com/2012/">Summer Sonic</a> in Osaka, Japan'
   - image: "/img/timeline/stanford.png"
     date: "Spring 2013"
-    description: 'Senior year: <a class="underline" href="http://cs142.stanford.edu/">CS 142</a> (with the <a class="underline" href="https://www.quora.com/What-are-the-most-profound-life-lessons-from-Stanford-Professor-John-Ousterhout">legendary</a> Prof. John Ousterhout) and <a class="underline" href="http://cs210.stanford.edu/">CS 210</a> solidified my enthusiasm for web development; my 210 senior <a class="underline" href="https://github.com/iconix/atc">project</a> took me to SAP HQ in Walldorf, Germany'
+    description: 'Senior year: <a href="http://cs142.stanford.edu/">CS 142</a> (with the <a href="https://www.quora.com/What-are-the-most-profound-life-lessons-from-Stanford-Professor-John-Ousterhout">legendary</a> Prof. John Ousterhout) and <a href="http://cs210.stanford.edu/">CS 210</a> solidified my enthusiasm for web development; my 210 senior <a href="https://github.com/iconix/atc">project</a> took me to SAP HQ in Walldorf, Germany'
   - image: "/img/timeline/onenote2013.png"
     date: "June 2013"
     description: "Graduated Stanford... with a job at Microsoft!"
   - image: "/img/timeline/bumbershoot.jpg"
     date: "August 31, 2013"
-    description: 'Attended <a class="underline" href="https://www.bumbershoot.com">Bumbershoot</a> in Seattle #LiveMusic'
+    description: 'Attended <a href="https://www.bumbershoot.com">Bumbershoot</a> in Seattle #LiveMusic'
   - image: "/img/timeline/ng_ml.png"
     date: "Summer 2014"
-    description: 'Second summer in Seattle; completed <a class="underline" href="https://www.coursera.org/learn/machine-learning">Andrew Ng&#39;s Machine Learning</a> course in June (<a class="underline" href="/notes/2017/07/03/ng-ml-notes.html">notes</a>)'
+    description: 'Second summer in Seattle; completed <a href="https://www.coursera.org/learn/machine-learning">Andrew Ng&#39;s Machine Learning</a> course in June (<a href="/notes/2017/07/03/ng-ml-notes.html">notes</a>)'
   - image: "/img/timeline/sasquatch.jpg"
     date: "May 22-25, 2015"
-    description: 'Attended <a class="underline" href="https://www.sasquatchfestival.com/">Sasquatch</a> at the Gorge, WA #LiveMusic'
+    description: 'Attended <a href="https://www.sasquatchfestival.com/">Sasquatch</a> at the Gorge, WA #LiveMusic'
   - image: "/img/timeline/github.png"
     date: "2013~2016"
-    description: 'My side projects centered around "big"-data-for-news ideas (<a class="underline" href="http://thetechmblog.blogspot.com/">The Tech Machine</a>; <a class="underline" href="https://github.com/iconix/tn">Trending News</a>), building off of my PrefixSpan experience in Japan; meanwhile, the <a class="underline" href="https://github.com/OneNoteDev/WebClipper/wiki">best parts of my career</a> centered around the web'
+    description: 'My side projects centered around "big"-data-for-news ideas (<a href="http://thetechmblog.blogspot.com/">The Tech Machine</a>; <a href="https://github.com/iconix/tn">Trending News</a>), building off of my PrefixSpan experience in Japan; meanwhile, the <a href="https://github.com/OneNoteDev/WebClipper/wiki">best parts of my career</a> centered around the web'
   - image: "/img/timeline/labtocat.png"
     date: "May 7, 2017"
     description: "Started this blog to dive deeper into data products!"
   - image: "/img/timeline/paradiso.png"
     date: "June 23-24, 2017"
-    description: 'Attended <a class="underline" href="http://paradisofestival.com/">Paradiso</a> at the Gorge, WA #LiveMusic'
+    description: 'Attended <a href="http://paradisofestival.com/">Paradiso</a> at the Gorge, WA #LiveMusic'
   - image: "/img/timeline/adventurecat.png"
     date: "Today"
-    description: 'Adventure Time! (<a class="underline" href="https://github.com/iconix/resume/blob/master/latex/datascience/resume.pdf">resume</a>)'
+    description: 'Adventure Time! (<a href="https://github.com/iconix/resume/blob/master/latex/datascience/resume.pdf">resume</a>)'
 
 # First image of the Timeline
 timeline-img: "/img/allo-moji2.png"
@@ -177,7 +177,7 @@ email: "narhodes1+blog@gmail.com"
 # This works best when your author blurb image has a transparent background, or matches your site background color.
 
 # if the author_blurb is not set, then this feature is skipped
-author_blurb: 'Nadja does not particularly enjoy <a class="underline" href="/#about">writing about herself</a>.'
+author_blurb: 'Nadja does not particularly enjoy <a href="/#about">writing about herself</a>.'
 author_blurb_image: "/img/allo-moji3.png"
 
 ##################
