@@ -21,5 +21,5 @@ Like Jeremy has stressed in lecture, learning in this way takes a leap of faith.
 
 #### Footnotes
 [^fast-ai-blog]: [Previous blog post](/blogging/2017/07/09/fast-ai-blog.html) about my intro to fast.ai.
-[^notebook]: I placed [my Jupyter notebook](https://github.com/iconix/fast.ai/blob/master/nbs/lesson1-hmwk.ipynb) for this assignment/competition on GitHub.
+[^notebook]: I placed my [Jupyter notebook](https://github.com/iconix/fast.ai/blob/master/nbs/lesson1-hmwk.ipynb) for this assignment/competition on GitHub.
 [^rnn]: I'm also a _little_ impatient to get to [Week 5 NLP + Recurrent Neural Networks](http://course.fast.ai/lessons/lesson5.html), which I feel will have the most immediate benefit to my day job in the Notes world.
