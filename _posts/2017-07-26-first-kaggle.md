@@ -2,7 +2,7 @@
 layout: post
 section-type: post
 title: First Kaggle Competition
-category: Portfolio Building
+category: Portfolio-Building
 tags: [ ]
 ---
 
