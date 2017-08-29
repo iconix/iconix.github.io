@@ -26,4 +26,4 @@ Just a little more validation about this new venture :slightly_smiling_face: I a
 
 #### Footnotes
 
-[^pattern]: Now, I do like [patterns](/blogging/2017/05/07/hello-world.html).
+[^pattern]: Now, I do like [patterns](/blogging/2017/05/07/hello-world.html)...
