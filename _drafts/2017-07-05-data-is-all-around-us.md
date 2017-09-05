@@ -10,7 +10,7 @@ In my [first post](/blogging/2017/05/07/hello-world.html#building-a-portfolio), 
 
 She shared a few of her favorites on the web, mentioning that David Robinson of the [Variance Explained](http://varianceexplained.org/) blog has a lot of great examples.
 
-Right now, I want to focus on one particular blog post of David's that I admire: ["Analyzing networks of characters in _Love Actually_"](http://varianceexplained.org/r/love-actually-network/). Why? It's a cute and simple and effective example of playing with data for neat results. I especially like his closing paragraphs on the why behind the post:
+Right now, I want to focus on one particular blog post of David's that I admire: ["Analyzing networks of characters in _Love Actually_"](http://varianceexplained.org/r/love-actually-network/). Why? It's a cute, simple, effective example of playing with data for neat results. I especially like his closing paragraphs on the why behind the post:
 
 > Have you heard the complaint that we are "drowning in data"? How about the horror stories about how no one understands statistics, and we need trained statisticians as the "police" to keep people from misinterpreting their methods? It sure makes data science sound like important, dreary work.
 >
@@ -30,7 +30,7 @@ This will allow me to set up my coding environment, reacquaint myself with nitty
 
 **1. Environment setup**
 
-For understanding David's script, I already had R and RStudio installed from [an intro course I took on R](https://www.coursera.org/learn/r-programming). Note that the `installr` package (I reference it later) recommends usage through RGui rather than RStudio. Since it wasn't obvious to me, RGui is the default R console that comes with your R installation.
+For understanding David's script, I already had R and RStudio installed from [an intro course I took on R](https://www.coursera.org/learn/r-programming). Note that the `installr` package (I reference it later) recommends usage through RGui rather than RStudio. Since it wasn't obvious to me, RGui is the default R console that comes with your R installation. (I went back to RStudio after running `installr`.)
 
 **2. Error: package or namespace load failed for 'dplyr'**
 
@@ -47,7 +47,24 @@ I forgot and had to look up this command.
 
 ### Code Walkthrough
 
+**TODO**: Should I just include this section as part of the notebook?
+
 First pass through the R code was to understand what each line does. There was plenty unfamiliar, and the code could get dense at times. ...
+
+**Original stated goal**: Visualize the connections quantitatively, based on how often characters share scenes.
+
+Tasks accomplished in R:
+> 1. Read in script lines, character->actor csv
+> 2. Transform script into data frame with scene#, line#, character speaking, line of dialogue, and actor
+> 3. Counts lines per scene per character
+> 4. Cast into binary speaker-scene matrix
+> 5. Hierarchical clustering
+> 6. Timeline visualization
+> 7. Coocurrence heatmap
+> 8. Network graph visualization
+> 9. Output data frame in a way R can consume for Shiny app usage
+
+Tasks 1-4 are data munging/parsing/tidying. 5-8 are analysis and visualization. Task 9 is UX-friendly output.
 
 #### R Libraries
 
@@ -73,27 +90,36 @@ Tidyverse packages used in David's code: dplyr, stringr, tidyr, ggplot2, magritt
 
 ### From R to Python
 
+**My goal**: Recreate `love_actually_data.rda` in Python using pandas; then convert output into `.Rdata` format and feed into Shiny app.
+
+[Pandas Docs: Comparison with R / R libraries](https://pandas.pydata.org/pandas-docs/stable/comparison_with_r.html)
+
 Questions:
 > 1. Python IDE: should I use Spyder (that came with Anaconda)? VS Code? Jupyter directly?
+>       - Going to try Jupyter since I foresee a lot of experimentation while writing the code, and its [interactivity](/notes/2017/08/18/fast-week2.html#jupyter-notebooks-reading-vs-running) will be great for that.
+>       - If I need a more traditional IDE, I'll try using VS Code.
 > 2. pip install, pandas, anaconda (cheat sheet), matplotlib, numpy, scipy
-> 3. Where to start?/Where is Python now? [Data Analysis with Python and Pandas Tutorial Introduction](https://www.youtube.com/watch?v=Iqjy9UqKKuo)
+> 3. [Data Analysis with Python and Pandas Tutorial Introduction](https://www.youtube.com/watch?v=Iqjy9UqKKuo)
 
-Tasks to accomplish:
-> 1. Read in script lines, character->actor csv
-> 2. Transform script into data frame with scene#, line#, character speaking, line of dialogue, and actor
-> 3. Counts lines per scene per character
-> 4. Cast into binary speaker-scene matrix
-> 5. Hierarchical clustering
-> 6. Timeline visualization
-> 7. Coocurrence heatmap
-> 8. Network graph visualization
-> 9. Output data frame in a way R can consume for Shiny app usage
+**TODO** embed Jupyter notebook here
 
-Tasks 1-4 are data munging/parsing/tidying. 5-8 are analysis and visualization. Task 9 is UX-friendly output.
+#### _Python for Data Analysis_
 
-### Shiny
+Access through work: https://www.safaribooksonline.com
 
-### Jupyter
+Hoping this will be useful for finding functionality that is in R that I now need for Python.
+
+#### Anaconda
+
+Virtual environment for Python. First introduced to me during a [CNTK/Microsoft Cognitive Toolkit](https://github.com/Microsoft/CNTK) tutorial at an internal machine learning and data science conference at Microsoft. Also used for fast.ai course.
+
+#### Jupyter
+
+(When I first started drafting this post on July 5, 2017, I had no hands-on experience with Juypter. The fast.ai coursework I [started mid-July](/portfolio-building/2017/07/26/first-kaggle.html) has changed that. This experience has helped clear up the "where to start?/where is python now?" question I had back then.)
+
+tmux
+
+#### Shiny
 
 ### David's pearls of wisdom
 
