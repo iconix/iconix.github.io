@@ -102,6 +102,11 @@ Questions:
 > 3. [Data Analysis with Python and Pandas Tutorial Introduction](https://www.youtube.com/watch?v=Iqjy9UqKKuo)
 
 **TODO** embed Jupyter notebook here
+    - This lady seems to be doing similar: http://www.mprat.org/blog/2017/03/18/blogging-with-jupyter.html
+        > "I've included my notebook here. You can see the original on Github if you like."
+        >
+        > - http://learningjulia.com/2017/03/26/image-stitching-part-1.html
+    - Might be able to make it more blog-like using pieces from: https://nipunbatra.github.io/blog/2017/Jupyter-powered-blog.html
 
 #### _Python for Data Analysis_
 
