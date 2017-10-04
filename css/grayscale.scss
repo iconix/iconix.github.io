@@ -27,6 +27,7 @@ body {
 
             &.top-nav-collapse {
                 background: $navbar-lg-collapse-background-color;
+                background-size: cover;
             }
         }
 
@@ -116,6 +117,7 @@ a {
     text-transform: uppercase;
     font-family: "Montserrat","Helvetica Neue",Helvetica,Arial,sans-serif;
     background: $navbar-sm-background-color;
+    background-size: cover;
 
     /* Fix height limit and scroll for small screen and many items menu */
     max-height: 100%;
