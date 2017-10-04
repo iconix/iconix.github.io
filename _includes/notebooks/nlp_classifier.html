@@ -1,10 +1,9 @@
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="NLP-for-Task-Classification">NLP for Task Classification<a class="anchor-link" href="#NLP-for-Task-Classification">&#182;</a></h2>
+<h2 id="NLP-for-Task-Classification">Notebook<a class="anchor-link" href="#NLP-for-Task-Classification">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -203,6 +202,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<br>
 <h2 id="spaCy.io-for-NLP"><a href="https://spacy.io/">spaCy.io</a> for NLP<a class="anchor-link" href="#spaCy.io-for-NLP">&#182;</a></h2><p><em>Because Stanford CoreNLP is hard to install for Python</em></p>
 <p>Found Spacy through an article on <a href="https://www.microsoft.com/developerblog/2016/09/13/training-a-classifier-for-relation-extraction-from-medical-literature/">"Training a Classifier for Relation Extraction from Medical Literature"</a> (<a href="https://github.com/CatalystCode/corpus-to-graph-ml">GitHub</a>)</p>
 
@@ -214,7 +214,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="nltk_library_comparison.png" alt="NLTK library comparison chart https://spacy.io/docs/api/#comparison" style="width: 400px; margin: 0;"/></p>
+<p><img src="/assets/imgs/nlp_classifier/nltk_library_comparison.png" alt="NLTK library comparison chart https://spacy.io/docs/api/#comparison" style="width: 400px; margin: 0;"/></p>
 
 </div>
 </div>
@@ -239,6 +239,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<br>
 <h3 id="Using-the-Spacy-Data-Model-for-NLP">Using the Spacy Data Model for NLP<a class="anchor-link" href="#Using-the-Spacy-Data-Model-for-NLP">&#182;</a></h3>
 </div>
 </div>
@@ -304,6 +305,7 @@
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<br>
 <h3 id="NLP-output">NLP output<a class="anchor-link" href="#NLP-output">&#182;</a></h3>
 </div>
 </div>
@@ -442,83 +444,7 @@ set acl set VERB VBN toss [aside, marinate]
 aside advmod aside ADV RB set []
 to aux to PART TO marinate []
 marinate advcl marinate VERB VB set [to]
-. punct . PUNCT . Add []
-Scatter ROOT scatter ADJ JJ Scatter [cheese, ., grate, .]
-cheese dobj cheese NOUN NN Scatter [on]
-on prep on ADP IN cheese [top]
-top pobj top NOUN NN on []
-. punct . PUNCT . Scatter []
-Finely advmod finely ADV RB grate []
-grate conj grate VERB VB Scatter [Finely, some lemon zest]
-some lemon zest dobj some lemon zest NOUN NN grate [over]
-over prep over ADP IN some lemon zest [salad]
-salad pobj salad NOUN NN over [,, lemon]
-, punct , PUNCT , salad []
-then advmod then ADV RB slice []
-slice compound slice NOUN NN lemon [then]
-open amod open ADJ JJ lemon []
-lemon appos lemon NOUN NN salad [slice, open, and, squeeze]
-and cc and CCONJ CC lemon []
-squeeze conj squeeze NOUN NN lemon [on]
-on prep on ADP IN squeeze [some juice]
-some juice pobj some juice NOUN NN on []
-. punct . PUNCT . Scatter []
-Toss advcl toss VERB VB chopped [zucchini]
-zucchini dobj zucchini NOUN NNS Toss [,]
-, punct , PUNCT , zucchini []
-vinegar nsubj vinegar NOUN NN chopped [,]
-, punct , PUNCT , vinegar []
-chopped ROOT chop VERB VBD chopped [Toss, vinegar, oregano, ,, and, 1/4 cup oil, .]
-oregano dobj oregano NOUN NN chopped []
-, punct , PUNCT , chopped []
-and cc and CCONJ CC chopped []
-1/4 cup oil conj 1/4 cup oil NOUN NN chopped [in, combine, ;, salsa]
-in prep in ADP IN 1/4 cup oil [a medium bowl]
-a medium bowl pobj a medium bowl NOUN NN in []
-to aux to PART TO combine []
-combine advcl combine VERB VB 1/4 cup oil [to]
-; punct ; PUNCT : 1/4 cup oil []
-season compound season NOUN NN salsa []
-zucchini compound zucchini NOUN NNS salsa []
-salsa appos salsa NOUN NN 1/4 cup oil [season, zucchini, with]
-with prep with ADP IN salsa [salt]
-salt pobj salt NOUN NN with [and, pepper]
-and cc and CCONJ CC salt []
-pepper conj pepper NOUN NN salt []
-. punct . PUNCT . chopped []
-Berry syrup nsubjpass Berry syrup NOUN NN made []
-can aux can VERB MD made []
-be auxpass be VERB VB made []
-made ROOT make VERB VBN made [Berry syrup, can, be, ahead, .]
-3 nummod 3 NUM CD days []
-days npadvmod day NOUN NNS ahead [3]
-ahead advmod ahead ADV RB made [days]
-. punct . PUNCT . made []
-Cook ROOT Cook PROPN NNP Cook [,, scraping]
-, punct , PUNCT , Cook []
-stirring advcl stir VERB VBG scraping []
-continuously advmod continuously ADV RB scraping [and]
-and cc and CCONJ CC continuously []
-occasionally advmod occasionally ADV RB scraping []
-scraping appos scrap VERB VBG Cook [stirring, continuously, occasionally, the bottom, thickened, coats, .]
-the bottom dobj the bottom NOUN NN scraping [of]
-of prep of ADP IN the bottom [the pan]
-the pan pobj the pan NOUN NN of [with]
-with prep with ADP IN the pan [the wooden spoon]
-the wooden spoon pobj the wooden spoon NOUN NN with [,]
-, punct , PUNCT , the wooden spoon []
-until mark until ADP IN thickened []
-the mixture nsubj the mixture NOUN NN thickened []
-has aux have VERB VBZ thickened []
-thickened advcl thicken VERB VBN scraping [until, the mixture, has, and]
-and cc and CCONJ CC thickened []
-coats conj coat NOUN NNS scraping [the spoon]
-the spoon dobj the spoon NOUN NN coats [with]
-with prep with ADP IN the spoon [to]
-little amod little ADJ JJ to []
-to prep to PART TO with [little, no transparency]
-no transparency pobj no transparency NOUN NN to []
-. punct . PUNCT . scraping []
+...
 </pre>
 </div>
 </div>
@@ -532,6 +458,7 @@ no transparency pobj no transparency NOUN NN to []
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<br>
 <h3 id="Featurization">Featurization<a class="anchor-link" href="#Featurization">&#182;</a></h3>
 </div>
 </div>
@@ -960,6 +887,7 @@ RandomForest classifier accuracy percent: 81.91721132897604
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<br>
 <h3 id="SGD:-Multiple-Epochs">SGD: Multiple Epochs<a class="anchor-link" href="#SGD:-Multiple-Epochs">&#182;</a></h3>
 </div>
 </div>
@@ -1262,8 +1190,7 @@ LinearSVC
 
 
 <div class="output_png output_subarea ">
-<img src="/assets/imgs/nlp_classifier\nlp_classifier_51_0.png"
->
+<img src="/assets/imgs/nlp_classifier/nlp_classifier_51_0.png">
 </div>
 
 </div>
@@ -1293,251 +1220,7 @@ LinearSVC
 18. feature 86 (0.013001)
 19. feature 63 (0.012677)
 20. feature 99 (0.012374)
-21. feature 112 (0.012132)
-22. feature 27 (0.011459)
-23. feature 162 (0.011128)
-24. feature 42 (0.011032)
-25. feature 3 (0.010996)
-26. feature 2 (0.010728)
-27. feature 262 (0.010429)
-28. feature 64 (0.010033)
-29. feature 100 (0.009873)
-30. feature 210 (0.009828)
-31. feature 255 (0.009780)
-32. feature 78 (0.008624)
-33. feature 132 (0.008554)
-34. feature 226 (0.008397)
-35. feature 4 (0.008100)
-36. feature 68 (0.007814)
-37. feature 73 (0.007493)
-38. feature 126 (0.006799)
-39. feature 18 (0.006382)
-40. feature 201 (0.006177)
-41. feature 31 (0.006172)
-42. feature 167 (0.006134)
-43. feature 173 (0.006133)
-44. feature 157 (0.006096)
-45. feature 29 (0.006041)
-46. feature 106 (0.005978)
-47. feature 158 (0.005777)
-48. feature 140 (0.005249)
-49. feature 84 (0.005249)
-50. feature 16 (0.005241)
-51. feature 185 (0.005120)
-52. feature 259 (0.005056)
-53. feature 221 (0.004981)
-54. feature 53 (0.004878)
-55. feature 118 (0.004828)
-56. feature 51 (0.004802)
-57. feature 52 (0.004791)
-58. feature 93 (0.004480)
-59. feature 241 (0.004301)
-60. feature 249 (0.004202)
-61. feature 135 (0.004175)
-62. feature 168 (0.003865)
-63. feature 102 (0.003843)
-64. feature 209 (0.003841)
-65. feature 227 (0.003786)
-66. feature 90 (0.003740)
-67. feature 189 (0.003568)
-68. feature 108 (0.003522)
-69. feature 228 (0.003460)
-70. feature 250 (0.003427)
-71. feature 138 (0.003418)
-72. feature 149 (0.003406)
-73. feature 115 (0.003380)
-74. feature 71 (0.003380)
-75. feature 7 (0.003370)
-76. feature 13 (0.003278)
-77. feature 163 (0.003238)
-78. feature 88 (0.003231)
-79. feature 204 (0.003184)
-80. feature 164 (0.003160)
-81. feature 15 (0.003135)
-82. feature 127 (0.003102)
-83. feature 165 (0.003050)
-84. feature 49 (0.002979)
-85. feature 220 (0.002947)
-86. feature 59 (0.002930)
-87. feature 156 (0.002922)
-88. feature 240 (0.002859)
-89. feature 46 (0.002858)
-90. feature 57 (0.002734)
-91. feature 101 (0.002714)
-92. feature 33 (0.002660)
-93. feature 179 (0.002629)
-94. feature 89 (0.002555)
-95. feature 81 (0.002500)
-96. feature 144 (0.002468)
-97. feature 143 (0.002452)
-98. feature 62 (0.002420)
-99. feature 242 (0.002358)
-100. feature 55 (0.002289)
-101. feature 25 (0.002237)
-102. feature 35 (0.002200)
-103. feature 170 (0.002177)
-104. feature 160 (0.002138)
-105. feature 121 (0.002111)
-106. feature 87 (0.002039)
-107. feature 195 (0.002021)
-108. feature 60 (0.001977)
-109. feature 122 (0.001880)
-110. feature 95 (0.001770)
-111. feature 21 (0.001760)
-112. feature 36 (0.001673)
-113. feature 159 (0.001660)
-114. feature 183 (0.001563)
-115. feature 172 (0.001504)
-116. feature 148 (0.001460)
-117. feature 58 (0.001455)
-118. feature 239 (0.001388)
-119. feature 174 (0.001387)
-120. feature 177 (0.001384)
-121. feature 120 (0.001377)
-122. feature 105 (0.001330)
-123. feature 211 (0.001151)
-124. feature 251 (0.001140)
-125. feature 79 (0.001058)
-126. feature 188 (0.001054)
-127. feature 26 (0.001007)
-128. feature 97 (0.001000)
-129. feature 141 (0.000980)
-130. feature 233 (0.000930)
-131. feature 117 (0.000921)
-132. feature 65 (0.000828)
-133. feature 200 (0.000807)
-134. feature 17 (0.000730)
-135. feature 66 (0.000726)
-136. feature 194 (0.000725)
-137. feature 19 (0.000684)
-138. feature 125 (0.000655)
-139. feature 50 (0.000649)
-140. feature 20 (0.000584)
-141. feature 5 (0.000565)
-142. feature 253 (0.000535)
-143. feature 151 (0.000514)
-144. feature 9 (0.000514)
-145. feature 146 (0.000509)
-146. feature 119 (0.000503)
-147. feature 234 (0.000487)
-148. feature 256 (0.000444)
-149. feature 8 (0.000443)
-150. feature 208 (0.000440)
-151. feature 69 (0.000428)
-152. feature 22 (0.000416)
-153. feature 199 (0.000394)
-154. feature 0 (0.000354)
-155. feature 166 (0.000338)
-156. feature 218 (0.000332)
-157. feature 260 (0.000316)
-158. feature 198 (0.000287)
-159. feature 217 (0.000280)
-160. feature 147 (0.000277)
-161. feature 133 (0.000245)
-162. feature 113 (0.000243)
-163. feature 128 (0.000239)
-164. feature 130 (0.000237)
-165. feature 224 (0.000231)
-166. feature 41 (0.000215)
-167. feature 30 (0.000215)
-168. feature 182 (0.000214)
-169. feature 34 (0.000191)
-170. feature 116 (0.000175)
-171. feature 176 (0.000173)
-172. feature 184 (0.000168)
-173. feature 61 (0.000165)
-174. feature 154 (0.000154)
-175. feature 103 (0.000150)
-176. feature 187 (0.000137)
-177. feature 39 (0.000124)
-178. feature 150 (0.000124)
-179. feature 85 (0.000120)
-180. feature 223 (0.000118)
-181. feature 196 (0.000117)
-182. feature 222 (0.000116)
-183. feature 180 (0.000116)
-184. feature 77 (0.000115)
-185. feature 139 (0.000114)
-186. feature 48 (0.000109)
-187. feature 129 (0.000105)
-188. feature 246 (0.000105)
-189. feature 28 (0.000105)
-190. feature 142 (0.000105)
-191. feature 74 (0.000100)
-192. feature 131 (0.000093)
-193. feature 212 (0.000092)
-194. feature 40 (0.000089)
-195. feature 24 (0.000084)
-196. feature 213 (0.000078)
-197. feature 6 (0.000072)
-198. feature 80 (0.000068)
-199. feature 225 (0.000066)
-200. feature 82 (0.000063)
-201. feature 191 (0.000061)
-202. feature 153 (0.000061)
-203. feature 263 (0.000059)
-204. feature 14 (0.000054)
-205. feature 186 (0.000052)
-206. feature 75 (0.000051)
-207. feature 190 (0.000045)
-208. feature 192 (0.000044)
-209. feature 56 (0.000044)
-210. feature 247 (0.000041)
-211. feature 136 (0.000039)
-212. feature 231 (0.000039)
-213. feature 67 (0.000039)
-214. feature 96 (0.000038)
-215. feature 10 (0.000035)
-216. feature 155 (0.000034)
-217. feature 219 (0.000031)
-218. feature 181 (0.000031)
-219. feature 134 (0.000030)
-220. feature 72 (0.000029)
-221. feature 258 (0.000027)
-222. feature 43 (0.000027)
-223. feature 44 (0.000025)
-224. feature 114 (0.000024)
-225. feature 206 (0.000023)
-226. feature 244 (0.000022)
-227. feature 38 (0.000021)
-228. feature 110 (0.000021)
-229. feature 137 (0.000020)
-230. feature 257 (0.000019)
-231. feature 193 (0.000019)
-232. feature 197 (0.000018)
-233. feature 178 (0.000017)
-234. feature 145 (0.000016)
-235. feature 161 (0.000015)
-236. feature 202 (0.000015)
-237. feature 245 (0.000010)
-238. feature 37 (0.000010)
-239. feature 237 (0.000009)
-240. feature 45 (0.000009)
-241. feature 254 (0.000009)
-242. feature 248 (0.000009)
-243. feature 235 (0.000006)
-244. feature 236 (0.000003)
-245. feature 152 (0.000002)
-246. feature 94 (0.000002)
-247. feature 232 (0.000002)
-248. feature 1 (0.000002)
-249. feature 171 (0.000001)
-250. feature 229 (0.000000)
-251. feature 123 (0.000000)
-252. feature 261 (0.000000)
-253. feature 230 (0.000000)
-254. feature 111 (0.000000)
-255. feature 214 (0.000000)
-256. feature 175 (0.000000)
-257. feature 252 (0.000000)
-258. feature 124 (0.000000)
-259. feature 169 (0.000000)
-260. feature 216 (0.000000)
-261. feature 215 (0.000000)
-262. feature 207 (0.000000)
-263. feature 203 (0.000000)
-264. feature 83 (0.000000)
-265. feature 205 (0.000000)
+...
 </pre>
 </div>
 </div>
@@ -1551,6 +1234,7 @@ LinearSVC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<br>
 <h4 id="Scikit-Learn-metrics:-Confusion-matrix,-Classification-report,-F1-score,-Log-loss">Scikit Learn metrics: Confusion matrix, Classification report, F1 score, Log loss<a class="anchor-link" href="#Scikit-Learn-metrics:-Confusion-matrix,-Classification-report,-F1-score,-Log-loss">&#182;</a></h4><p><a href="http://scikit-learn.org/stable/modules/model_evaluation.html">http://scikit-learn.org/stable/modules/model_evaluation.html</a></p>
 
 </div>
@@ -1957,226 +1641,8 @@ Random Forest: [(&#39;pos&#39;, 0.5399701926070386), (&#39;pos&#39;, 0.924000000
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="NLTK">NLTK<a class="anchor-link" href="#NLTK">&#182;</a></h2>
+<p>See the <a href="https://github.com/iconix/nlp-sandbox/blob/master/nlp_classifier.ipynb">original notebook</a> for this section.</p>
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>I needed a library that supports dependency parsing, which NLTK does not... so I thought I'd add the <a href="https://stanfordnlp.github.io/CoreNLP/">Stanford CoreNLP</a> toolkit and <a href="https://nlp.stanford.edu/software/">its associated software</a> to NLTK. However, there are many conflicting instructions for installing the Java-based project, depending on NLTK version used. By the time I figured this out, the installation had become a time sink. So I abandoned this effort in favor of Spacy.io.</p>
-<p>I might return this way if I want to improve results/implement a voter system between the various linguistic and classification methods later.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">nltk</span>
-<span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="k">import</span> <span class="n">sent_tokenize</span><span class="p">,</span> <span class="n">word_tokenize</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;punkt&#39;</span><span class="p">)</span>
-<span class="n">nltk</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s1">&#39;averaged_perceptron_tagger&#39;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Tokenization">Tokenization<a class="anchor-link" href="#Tokenization">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lines</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sent_tokenize</span><span class="p">(</span><span class="n">l</span><span class="p">)]</span> <span class="c1"># punkt</span>
-<span class="n">sentences</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tagged_sentences</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
-    <span class="n">words</span> <span class="o">=</span> <span class="n">word_tokenize</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-    <span class="n">tagged</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">pos_tag</span><span class="p">(</span><span class="n">words</span><span class="p">)</span> <span class="c1"># averaged_perceptron_tagger</span>
-    <span class="n">tagged_sentences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tagged</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">tagged_sentences</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Note:-POS-accuracy">Note: POS accuracy<a class="anchor-link" href="#Note:-POS-accuracy">&#182;</a></h4><p><code>Run down to the shop, will you, Peter</code> is parsed unexpectedly by <code>nltk.pos_tag</code>:</p>
-<blockquote><p><code>[('Run', 'NNP'), ('down', 'RB'), ('to', 'TO'), ('the', 'DT'), ('shop', 'NN'), (',', ','), ('will', 'MD'), ('you', 'PRP'), (',', ','), ('Peter', 'NNP')]</code></p>
-</blockquote>
-<p><code>Run</code> is tagged as a <code>NNP (proper noun, singular)</code></p>
-<p>I expected an output more like what the <a href="http://nlp.stanford.edu:8080/parser/">Stanford Parser</a> provides:</p>
-<blockquote><p><code>Run/VBG down/RP to/TO the/DT shop/NN ,/, will/MD you/PRP ,/, Peter/NNP</code></p>
-</blockquote>
-<p><code>Run</code> is tagged as a <code>VGB (verb, gerund/present participle)</code> - still not quite the <code>VB</code> I want, but at least it's a <code>V*</code></p>
-<p><em>MEANWHILE...</em></p>
-<p><code>nltk.pos_tag</code> did better with:</p>
-<blockquote><p><code>[('Do', 'VB'), ('not', 'RB'), ('clean', 'VB'), ('soot', 'NN'), ('off', 'IN'), ('the', 'DT'), ('window', 'NN')]</code></p>
-</blockquote>
-<p>Compared to <a href="http://nlp.stanford.edu:8080/corenlp/process">Stanford CoreNLP</a> (note that this is different than what <a href="http://nlp.stanford.edu:8080/parser/">Stanford Parser</a> outputs):</p>
-<blockquote><p><code>(ROOT (S (VP (VB Do) (NP (RB not) (JJ clean) (NN soot)) (PP (IN off) (NP (DT the) (NN window))))))</code></p>
-</blockquote>
-<p>Concern: <em>clean</em> as <code>VB (verb, base form)</code> vs <code>JJ (adjective)</code></p>
-<p><strong>IMPROVE</strong> POS taggers should vote: nltk.pos_tag (averaged_perceptron_tagger), Stanford Parser, CoreNLP, etc.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Note what Spacy POS tagger did with <code>Run down to the shop, will you Peter</code>:</p>
-<p><code>Run/VB down/RP to/IN the shop/NN ,/, will/MD you/PRP ,/, Peter/NNP</code></p>
-
-<pre><code>where `Run` is the `VB` I expected from POS tagging (compared to `nltk.pos_tag` result of `NNP`). Also note that Spacy collapses `the shop` into a single unit, which should be helpful during featurization.</code></pre>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Featurization">Featurization<a class="anchor-link" href="#Featurization">&#182;</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="k">import</span> <span class="n">defaultdict</span>
-
-<span class="n">featuresets</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">ts</span> <span class="ow">in</span> <span class="n">tagged_sentences</span><span class="p">:</span>
-    <span class="n">s_features</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">tup</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span>
-        <span class="c1">#print(tup)</span>
-        <span class="n">pos</span> <span class="o">=</span> <span class="n">tup</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="c1"># FeatureName.VERB</span>
-        <span class="n">is_verb</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;VB.?&#39;</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">tup</span><span class="p">,</span> <span class="n">is_verb</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">is_verb</span><span class="p">:</span>
-            <span class="n">s_features</span><span class="p">[</span><span class="n">FeatureName</span><span class="o">.</span><span class="n">VERB</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="c1"># FOLLOWING_POS</span>
-            <span class="n">next_idx</span> <span class="o">=</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-            <span class="k">if</span> <span class="n">next_idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">ts</span><span class="p">):</span>
-                <span class="n">s_features</span><span class="p">[</span><span class="n">f</span><span class="s1">&#39;</span><span class="si">{FeatureName.FOLLOWING}</span><span class="s1">_</span><span class="si">{ts[next_idx][1]}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="c1"># VERB_MODIFIER</span>
-            <span class="c1"># VERB_MODIFYING</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">s_features</span><span class="p">[</span><span class="n">FeatureName</span><span class="o">.</span><span class="n">VERB</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">featuresets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">s_features</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">featuresets</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Stanford-NLP"><a href="https://nlp.stanford.edu/software/">Stanford NLP</a><a class="anchor-link" href="#Stanford-NLP">&#182;</a></h3><p>Setup guide used: <a href="https://stackoverflow.com/a/34112695">https://stackoverflow.com/a/34112695</a></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Get dependency parser, NER, POS tagger</span>
-<span class="o">!</span>wget https://nlp.stanford.edu/software/stanford-parser-full-2017-06-09.zip
-<span class="o">!</span>wget https://nlp.stanford.edu/software/stanford-ner-2017-06-09.zip
-<span class="o">!</span>wget https://nlp.stanford.edu/software/stanford-postagger-full-2017-06-09.zip
-<span class="o">!</span>unzip stanford-parser-full-2017-06-09.zip
-<span class="o">!</span>unzip stanford-ner-2017-06-09.zip
-<span class="o">!</span>unzip stanford-postagger-full-2017-06-09.zip
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.parse.stanford</span> <span class="k">import</span> <span class="n">StanfordParser</span>
-<span class="kn">from</span> <span class="nn">nltk.parse.stanford</span> <span class="k">import</span> <span class="n">StanfordDependencyParser</span>
-<span class="kn">from</span> <span class="nn">nltk.parse.stanford</span> <span class="k">import</span> <span class="n">StanfordNeuralDependencyParser</span>
-<span class="kn">from</span> <span class="nn">nltk.tag.stanford</span> <span class="k">import</span> <span class="n">StanfordPOSTagger</span><span class="p">,</span> <span class="n">StanfordNERTagger</span>
-<span class="kn">from</span> <span class="nn">nltk.tokenize.stanford</span> <span class="k">import</span> <span class="n">StanfordTokenizer</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-
-
