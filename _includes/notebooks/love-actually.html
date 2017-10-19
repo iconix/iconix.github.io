@@ -1,0 +1,2685 @@
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Analyzing-networks-of-characters-in-Love-Actually-in-Python">Analyzing networks of characters in <em>Love Actually</em> in Python<a class="anchor-link" href="#Analyzing-networks-of-characters-in-Love-Actually-in-Python">&#182;</a></h2><p>Source material in R: <a href="http://varianceexplained.org/r/love-actually-network/">http://varianceexplained.org/r/love-actually-network/</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>David's original stated goal</strong>: "Visualize the connections quantitatively, based on how often characters share scenes."</p>
+<p>Tasks accomplished in R:</p>
+<ol>
+<li>Organize the raw data into a table</li>
+<li>Create a binary speaker-by-scene matrix</li>
+<li>Hierarchical clustering</li>
+<li>Timeline visualization</li>
+<li>Coocurrence heatmap</li>
+<li>Network graph visualization</li>
+<li>Output data frame in a way R can consume for Shiny app usage</li>
+</ol>
+<p>Tasks 1-2 are data munging/parsing/tidying. 3-6 are analysis and visualization. Task 7 is R-friendly output.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Organize-the-raw-data-into-a-table">Organize the raw data into a table<a class="anchor-link" href="#Organize-the-raw-data-into-a-table">&#182;</a></h2><p><strong>Section subgoals</strong>: read in script lines; map characters to actors; transform script into a data frame with scene#, line#, character speaking, line of dialogue, and actor</p>
+<p>David uses the R package <code>dplyr</code> extensively (along with a little <code>stringr</code> and <code>tidyr</code>) and in a very dense way to perform reach this goal. We'll need to unpack this in order to understand and then translate it to Python.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">BASE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;/..&#39;</span>
+<span class="n">RAWDATA_DIR</span> <span class="o">=</span> <span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;/rawdata&#39;</span>
+
+<span class="n">raw_script</span> <span class="o">=</span> <span class="n">RAWDATA_DIR</span> <span class="o">+</span> <span class="s1">&#39;/love_actually.txt&#39;</span>
+<span class="n">cast_csv</span> <span class="o">=</span> <span class="n">RAWDATA_DIR</span> <span class="o">+</span> <span class="s1">&#39;/love_actually_cast.csv&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">DataFrame</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># read in the script</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">raw_script</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+    <span class="n">raw_df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="n">s</span><span class="o">.</span><span class="n">readlines</span><span class="p">()})</span>
+<span class="n">raw_df</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[2]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>raw</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>﻿Love Actually Scripts\n</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>\n</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>\n</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>\n</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[ Scene #1 ]\n</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>(Man): 'Whenever I get gloomy with the state o...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>I think about the arrival's gate at Heathrow...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>General opinion started to make out that we ...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>but I don't see that. Seems to me that love ...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Often it's not particularly dignified or new...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">raw_df</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>1437</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># filter out new/empty lines and lines annotated as songs</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">raw_df</span><span class="p">[(</span><span class="n">raw_df</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="o">~</span><span class="p">(</span><span class="n">raw_df</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;\(song\)&#39;</span><span class="p">))])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[5]:</div>
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>1265</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lines</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[6]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>raw</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>﻿Love Actually Scripts\n</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[ Scene #1 ]\n</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>(Man): 'Whenever I get gloomy with the state o...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>I think about the arrival's gate at Heathrow...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>General opinion started to make out that we ...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>but I don't see that. Seems to me that love ...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Often it's not particularly dignified or new...</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Fathers and sons, mothers and daughters, hus...</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>When the planes hit the Twin Towers, as far ...</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>none of the phone calls from people on board...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># mutate: add new columns to annotate scene markers and then calculate scene numbers for each line, based on markers.</span>
+
+<span class="n">lines</span><span class="p">[</span><span class="s1">&#39;is_scene&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">lines</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;\[ Scene #&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="c1"># fortunately, numpy has a cumsum method like R</span>
+<span class="n">lines</span><span class="p">[</span><span class="s1">&#39;scene&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">lines</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;\[ Scene #&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lines</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[8]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>raw</th>
+      <th>is_scene</th>
+      <th>scene</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>﻿Love Actually Scripts\n</td>
+      <td>False</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>[ Scene #1 ]\n</td>
+      <td>True</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>(Man): 'Whenever I get gloomy with the state o...</td>
+      <td>False</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>I think about the arrival's gate at Heathrow...</td>
+      <td>False</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>General opinion started to make out that we ...</td>
+      <td>False</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>but I don't see that. Seems to me that love ...</td>
+      <td>False</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Often it's not particularly dignified or new...</td>
+      <td>False</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Fathers and sons, mothers and daughters, hus...</td>
+      <td>False</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>When the planes hit the Twin Towers, as far ...</td>
+      <td>False</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>none of the phone calls from people on board...</td>
+      <td>False</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># clean up now that we&#39;re done with the is_scene column</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="o">~</span><span class="n">lines</span><span class="o">.</span><span class="n">is_scene</span><span class="p">]</span> <span class="c1"># filter out scene markers</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;is_scene&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># remove is_scene column</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lines</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[10]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>raw</th>
+      <th>scene</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>﻿Love Actually Scripts\n</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>(Man): 'Whenever I get gloomy with the state o...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>I think about the arrival's gate at Heathrow...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>General opinion started to make out that we ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>but I don't see that. Seems to me that love ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Often it's not particularly dignified or new...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Fathers and sons, mothers and daughters, hus...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>When the planes hit the Twin Towers, as far ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>none of the phone calls from people on board...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>they were all messages of love. \n</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># take raw and partition by &#39;:&#39;</span>
+<span class="c1"># if partition exists, left side represents the speaker, right side the dialogue of the speaker</span>
+<span class="c1"># if partition does not exist, entire line is dialogue</span>
+<span class="n">raw_partitioned</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">rpartition</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lines</span><span class="p">[</span><span class="s1">&#39;speaker&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_partitioned</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">lines</span><span class="p">[</span><span class="s1">&#39;dialogue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_partitioned</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># add new column with line numbers</span>
+<span class="n">lines</span><span class="p">[</span><span class="s1">&#39;line&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">lines</span><span class="o">.</span><span class="n">speaker</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lines</span><span class="p">[:</span><span class="mi">15</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[14]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>raw</th>
+      <th>scene</th>
+      <th>speaker</th>
+      <th>dialogue</th>
+      <th>line</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>﻿Love Actually Scripts\n</td>
+      <td>0</td>
+      <td></td>
+      <td>﻿Love Actually Scripts\n</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>(Man): 'Whenever I get gloomy with the state o...</td>
+      <td>1</td>
+      <td>(Man)</td>
+      <td>'Whenever I get gloomy with the state of the ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>I think about the arrival's gate at Heathrow...</td>
+      <td>1</td>
+      <td></td>
+      <td>I think about the arrival's gate at Heathrow...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>General opinion started to make out that we ...</td>
+      <td>1</td>
+      <td></td>
+      <td>General opinion started to make out that we ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>but I don't see that. Seems to me that love ...</td>
+      <td>1</td>
+      <td></td>
+      <td>but I don't see that. Seems to me that love ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Often it's not particularly dignified or new...</td>
+      <td>1</td>
+      <td></td>
+      <td>Often it's not particularly dignified or new...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Fathers and sons, mothers and daughters, hus...</td>
+      <td>1</td>
+      <td></td>
+      <td>Fathers and sons, mothers and daughters, hus...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>When the planes hit the Twin Towers, as far ...</td>
+      <td>1</td>
+      <td></td>
+      <td>When the planes hit the Twin Towers, as far ...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>none of the phone calls from people on board...</td>
+      <td>1</td>
+      <td></td>
+      <td>none of the phone calls from people on board...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>they were all messages of love. \n</td>
+      <td>1</td>
+      <td></td>
+      <td>they were all messages of love. \n</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>If you look for it, I've got a sneaky feelin...</td>
+      <td>1</td>
+      <td></td>
+      <td>If you look for it, I've got a sneaky feelin...</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>Billy: ♪ I feel it in my fingers ♪ I feel it i...</td>
+      <td>2</td>
+      <td>Billy</td>
+      <td>♪ I feel it in my fingers ♪ I feel it in my t...</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Love is all around me And so the... ♪\n</td>
+      <td>2</td>
+      <td></td>
+      <td>Love is all around me And so the... ♪\n</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Joe: I'm afraid you did it again, Bill.\n</td>
+      <td>2</td>
+      <td>Joe</td>
+      <td>I'm afraid you did it again, Bill.\n</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Billy: It's just I know the old version so wel...</td>
+      <td>2</td>
+      <td>Billy</td>
+      <td>It's just I know the old version so well, you...</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># collapse dialogue belonging to the same line into one row:</span>
+    <span class="c1"># group by scene and line (do not index by group labels, else we&#39;ll get a weird multi-level index at the end)</span>
+    <span class="c1"># aggregate the dialogue across these groups (and aggregate speaker, but each line should have one speaker anyway)</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;scene&#39;</span><span class="p">,</span> <span class="s1">&#39;line&#39;</span><span class="p">],</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">({</span><span class="s1">&#39;dialogue&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="s1">&#39;speaker&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">()})</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lines</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[16]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>scene</th>
+      <th>line</th>
+      <th>dialogue</th>
+      <th>speaker</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>﻿Love Actually Scripts</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>1</td>
+      <td>'Whenever I get gloomy with the state of the w...</td>
+      <td>(Man)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>2</td>
+      <td>♪ I feel it in my fingers ♪ I feel it in my to...</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>3</td>
+      <td>I'm afraid you did it again, Bill.</td>
+      <td>Joe</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>4</td>
+      <td>It's just I know the old version so well, you ...</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2</td>
+      <td>5</td>
+      <td>Well, we all do. That's why we're making the n...</td>
+      <td>Joe</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2</td>
+      <td>6</td>
+      <td>Right, OK, let's go. ♪ I feel it in my fingers...</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2</td>
+      <td>7</td>
+      <td>Oh, fuck, wank, bugger, shitting, arsehead and...</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2</td>
+      <td>8</td>
+      <td>This is shit, isn't it?</td>
+      <td>Billy</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2</td>
+      <td>9</td>
+      <td>Yup, solid gold shit, Maestro.</td>
+      <td>Joe</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>^Note that David did everything so far in one (extremely) dense line of R code with a bunch of piping!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># read in the character -&gt; actor mapping</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">cast_csv</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">c</span><span class="p">:</span>
+    <span class="n">cast</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lines</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">cast</span><span class="p">)</span>
+<span class="n">lines</span><span class="p">[</span><span class="s1">&#39;character&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="s1">&#39;speaker&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; (&#39;</span> <span class="o">+</span> <span class="n">lines</span><span class="p">[</span><span class="s1">&#39;actor&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+
+<span class="c1"># clean up the output</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;line&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lines</span><span class="p">[:</span><span class="mi">15</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[19]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>scene</th>
+      <th>line</th>
+      <th>dialogue</th>
+      <th>speaker</th>
+      <th>actor</th>
+      <th>character</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>2</td>
+      <td>♪ I feel it in my fingers ♪ I feel it in my to...</td>
+      <td>Billy</td>
+      <td>Bill Nighy</td>
+      <td>Billy (Bill Nighy)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>3</td>
+      <td>I'm afraid you did it again, Bill.</td>
+      <td>Joe</td>
+      <td>Gregor Fisher</td>
+      <td>Joe (Gregor Fisher)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>4</td>
+      <td>It's just I know the old version so well, you ...</td>
+      <td>Billy</td>
+      <td>Bill Nighy</td>
+      <td>Billy (Bill Nighy)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2</td>
+      <td>5</td>
+      <td>Well, we all do. That's why we're making the n...</td>
+      <td>Joe</td>
+      <td>Gregor Fisher</td>
+      <td>Joe (Gregor Fisher)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>6</td>
+      <td>Right, OK, let's go. ♪ I feel it in my fingers...</td>
+      <td>Billy</td>
+      <td>Bill Nighy</td>
+      <td>Billy (Bill Nighy)</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2</td>
+      <td>7</td>
+      <td>Oh, fuck, wank, bugger, shitting, arsehead and...</td>
+      <td>Billy</td>
+      <td>Bill Nighy</td>
+      <td>Billy (Bill Nighy)</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2</td>
+      <td>8</td>
+      <td>This is shit, isn't it?</td>
+      <td>Billy</td>
+      <td>Bill Nighy</td>
+      <td>Billy (Bill Nighy)</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2</td>
+      <td>9</td>
+      <td>Yup, solid gold shit, Maestro.</td>
+      <td>Joe</td>
+      <td>Gregor Fisher</td>
+      <td>Joe (Gregor Fisher)</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>3</td>
+      <td>10</td>
+      <td>God, I'm so late.</td>
+      <td>Jamie</td>
+      <td>Colin Firth</td>
+      <td>Jamie (Colin Firth)</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>3</td>
+      <td>11</td>
+      <td>It's just round the corner, you'll make it.</td>
+      <td>Kataya</td>
+      <td>Sienna Guillory</td>
+      <td>Kataya (Sienna Guillory)</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>3</td>
+      <td>12</td>
+      <td>You sure you don't mind me going without you?</td>
+      <td>Jamie</td>
+      <td>Colin Firth</td>
+      <td>Jamie (Colin Firth)</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>3</td>
+      <td>13</td>
+      <td>No, really. I'm just feeling so rotten.</td>
+      <td>Kataya</td>
+      <td>Sienna Guillory</td>
+      <td>Kataya (Sienna Guillory)</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>3</td>
+      <td>14</td>
+      <td>I love you.</td>
+      <td>Jamie</td>
+      <td>Colin Firth</td>
+      <td>Jamie (Colin Firth)</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>3</td>
+      <td>15</td>
+      <td>I know.</td>
+      <td>Kataya</td>
+      <td>Sienna Guillory</td>
+      <td>Kataya (Sienna Guillory)</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>3</td>
+      <td>16</td>
+      <td>I love you even when you're sick and look disg...</td>
+      <td>Jamie</td>
+      <td>Colin Firth</td>
+      <td>Jamie (Colin Firth)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Create-a-binary-speaker-by-scene-matrix">Create a binary speaker-by-scene matrix<a class="anchor-link" href="#Create-a-binary-speaker-by-scene-matrix">&#182;</a></h2><p><strong>Section subgoals</strong>: count lines per scene per character</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">by_speaker_scene</span> <span class="o">=</span> <span class="n">lines</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;scene&#39;</span><span class="p">,</span> <span class="s1">&#39;character&#39;</span><span class="p">],</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;n&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">by_speaker_scene</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[21]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>scene</th>
+      <th>character</th>
+      <th>n</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>Billy (Bill Nighy)</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Joe (Gregor Fisher)</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Jamie (Colin Firth)</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>Kataya (Sienna Guillory)</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>Daniel (Liam Neeson)</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>4</td>
+      <td>Karen (Emma Thompson)</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>5</td>
+      <td>Colin (Kris Marshall)</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>6</td>
+      <td>Jack (Martin Freeman)</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>6</td>
+      <td>Judy (Joanna Page)</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>7</td>
+      <td>Mark (Andrew Lincoln)</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">speaker_scene_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">by_speaker_scene</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;character&#39;</span><span class="p">],</span>
+   <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;scene&#39;</span><span class="p">],</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">speaker_scene_matrix</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[23]:</div>
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(21, 76)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">speaker_scene_matrix</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[24]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="21" halign="left">n</th>
+    </tr>
+    <tr>
+      <th>scene</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>...</th>
+      <th>69</th>
+      <th>70</th>
+      <th>71</th>
+      <th>72</th>
+      <th>73</th>
+      <th>74</th>
+      <th>75</th>
+      <th>77</th>
+      <th>78</th>
+      <th>79</th>
+    </tr>
+    <tr>
+      <th>character</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Aurelia (LÃºcia Moniz)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Billy (Bill Nighy)</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Colin (Kris Marshall)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Daniel (Liam Neeson)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Harry (Alan Rickman)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Jack (Martin Freeman)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Jamie (Colin Firth)</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Joe (Gregor Fisher)</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Judy (Joanna Page)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Juliet (Keira Knightley)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Karen (Emma Thompson)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Karl (Rodrigo Santoro)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Kataya (Sienna Guillory)</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Mark (Andrew Lincoln)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Mia (Heike Makatsch)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Natalie (Martine McCutcheon)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>PM (Hugh Grant)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Peter (Chiwetel Ejiofor)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Sam (Thomas Sangster)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Sarah (Laura Linney)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Tony (Abdul Salis)</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+<p>21 rows × 76 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Hierarchical-clustering">Hierarchical clustering<a class="anchor-link" href="#Hierarchical-clustering">&#182;</a></h2><p>Now that the data is tidy, let's begin our analysis!</p>
+<p>First up: hierarchical clustering will provide an ordering that puts similar characters close together.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Normalizing so that the # of scenes for each character adds up to 1 (http://varianceexplained.org/r/love-actually-network/#fn:hclust)</span>
+
+<span class="c1"># in pandas, axis specifies the axis **along which** to compute</span>
+<span class="c1"># - so we&#39;re summing along the columns (i.e. row sum) and then dividing that sum along rows (&#39;index&#39; in pandas)</span>
+<span class="n">norm</span> <span class="o">=</span> <span class="n">speaker_scene_matrix</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">speaker_scene_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Helpful SciPy documentation:</p>
+<ul>
+<li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.pdist.html#scipy.spatial.distance.pdist">pdist and Manhattan/cityblock distance</a></li>
+<li><a href="https://docs.scipy.org/doc/scipy/reference/cluster.hierarchy.html">Hierarchical clustering</a></li>
+<li><a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.dendrogram.html#scipy.cluster.hierarchy.dendrogram">Dendrogram plotting</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="k">import</span> <span class="n">pdist</span>
+<span class="kn">from</span> <span class="nn">scipy.cluster</span> <span class="k">import</span> <span class="n">hierarchy</span>
+
+<span class="c1"># cityblock = Manhattan distance</span>
+<span class="c1"># complete finds similar clusters</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">hierarchy</span><span class="o">.</span><span class="n">complete</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">norm</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;cityblock&#39;</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">dn</span> <span class="o">=</span> <span class="n">hierarchy</span><span class="o">.</span><span class="n">dendrogram</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">norm</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">leaf_rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;cityblock distance&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;hierarchy.complete(pdist(norm, metric=</span><span class="se">\&#39;</span><span class="s1">cityblock</span><span class="se">\&#39;</span><span class="s1">))&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[27]:</div>
+
+
+
+<div class="output_png output_subarea ">
+<img src="/assets/imgs/love-actually\love-actually_33_0.png"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For an explanation of the y-axis value: <a href="https://stats.stackexchange.com/a/95858">https://stats.stackexchange.com/a/95858</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I'm just going to go ahead and declare that <code>matplotlib</code> is prettier and more readable than R's <code>graphics/plot</code> package:</p>
+<p><img src="/assets/imgs/love-actually/varianceexplained-dendrogram.png" alt="David's Cluster Dendrogram plot" style="margin: 0;"/></p>
+<p><strong>Note</strong> the differences in cluster orderings between mine and David's plots - this will account for differences in the upcoming <em>Visual Timeline</em> ordering as well!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>EXTENSION</strong> As suggested by David, try different distance matrix computations and see what changes!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Visual-Timeline">Visual Timeline<a class="anchor-link" href="#Visual-Timeline">&#182;</a></h2><p>I'm excited for this visualization! It was the first one in David's original post that made me go, "huh, cool!"</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">scenes</span> <span class="o">=</span> <span class="n">by_speaker_scene</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;scene&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Temporarily suppressing SettingWithCopyWarning below</span>
+<span class="n">original_setting</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_option</span><span class="p">(</span><span class="s1">&#39;chained_assignment&#39;</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;chained_assignment&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># now that we&#39;ve removed scene numbers, update them so that they are contiguous integers</span>
+<span class="n">old_to_new_scenes</span> <span class="o">=</span> <span class="p">{</span><span class="n">o</span><span class="p">:</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">o</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scenes</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">unique</span><span class="p">())}</span>
+<span class="n">scenes</span><span class="o">.</span><span class="n">scene</span> <span class="o">=</span> <span class="n">scenes</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">old_to_new_scenes</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># enforce categorical ordering by character similarities found by our hierarchical clustering earlier (rather than alphabetical)</span>
+<span class="n">scenes</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Categorical</span><span class="p">(</span><span class="n">scenes</span><span class="o">.</span><span class="n">character</span><span class="p">)</span><span class="o">.</span><span class="n">reorder_categories</span><span class="p">(</span><span class="n">dn</span><span class="p">[</span><span class="s1">&#39;ivl&#39;</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>EXTENSION</strong> My <a href="https://github.com/iconix/love-actually/blob/83ea61e1c4d9187ec38cc3b46f596e09be0dca9b/love-actually.ipynb">initial ordering</a> for characters as categorical data was by first appearance in movie (i.e., by scene number). The visual timeline had pretty interesting properties where you could track characters being introduced, first in pairs, then in connection with previously introduced characters.</p>
+<p>I switched to ordering by "character similarity" to stay true to my purpose of replicating David's analysis... however, I think I like the "first appearance" ordering more! It would make the timeline more useful if you had it open during a viewing of the movie (at least during the first 25 scenes with 2+ characters).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Turn SettingWithCopyWarning back on</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;chained_assignment&#39;</span><span class="p">,</span> <span class="n">original_setting</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>ggplot</code> for Python does not support plotting categorical variables like <code>ggplot2</code> in R (<a href="https://stackoverflow.com/a/27746048">https://stackoverflow.com/a/27746048</a>), so I'm using <code>seaborn</code> instead: <a href="http://seaborn.pydata.org/tutorial/categorical.html">http://seaborn.pydata.org/tutorial/categorical.html</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.ticker</span> <span class="k">as</span> <span class="nn">ticker</span>
+<span class="kn">import</span> <span class="nn">matplotlib.collections</span> <span class="k">as</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">colors</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>get_ylim_for_scene</code> replaces David's use of <code>geom_path(aes(group = scene)</code> from <code>ggplot2</code> to connect characters in the same scene with vertical lines.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_ylim_for_scene</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">character_ordering</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+    <span class="n">max_index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">min_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ss</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ss</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ss</span><span class="o">.</span><span class="n">scene</span> <span class="o">==</span> <span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">character</span><span class="p">:</span>
+        <span class="n">c_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">character_ordering</span> <span class="o">==</span> <span class="n">c</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">max_index</span> <span class="o">=</span> <span class="n">c_index</span> <span class="k">if</span> <span class="n">c_index</span> <span class="o">&gt;</span> <span class="n">max_index</span> <span class="k">else</span> <span class="n">max_index</span>
+        <span class="n">min_index</span> <span class="o">=</span> <span class="n">c_index</span> <span class="k">if</span> <span class="n">c_index</span> <span class="o">&lt;</span> <span class="n">min_index</span> <span class="k">else</span> <span class="n">min_index</span>
+    <span class="k">return</span> <span class="n">min_index</span><span class="p">,</span> <span class="n">max_index</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we can plot the visual timeline!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">num_scenes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">scenes</span><span class="o">.</span><span class="n">scene</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+<span class="n">num_characters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">scenes</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s1">&#39;whitegrid&#39;</span><span class="p">)</span>
+<span class="n">timeline</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;scene&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;character&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">scenes</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+<span class="n">timeline</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">ticker</span><span class="o">.</span><span class="n">MultipleLocator</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">timeline</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">num_scenes</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># inspired by: https://stackoverflow.com/a/40896356</span>
+<span class="n">vlines</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_scenes</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="n">get_ylim_for_scene</span><span class="p">(</span><span class="n">scenes</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dn</span><span class="p">[</span><span class="s1">&#39;ivl&#39;</span><span class="p">]),</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">pair</span><span class="o">=</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">y_min</span><span class="p">),</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">y_max</span><span class="p">)]</span>
+    <span class="n">vlines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
+
+<span class="c1"># horizontal grid lines</span>
+<span class="n">hlines</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_characters</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">pair</span><span class="o">=</span><span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">),</span> <span class="p">(</span><span class="n">num_scenes</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">)]</span>
+    <span class="n">hlines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
+
+<span class="n">hlinecoll</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">LineCollection</span><span class="p">(</span><span class="n">hlines</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">to_rgb</span><span class="p">(</span><span class="s1">&#39;lightgrey&#39;</span><span class="p">),</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">timeline</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">hlinecoll</span><span class="p">)</span>
+
+<span class="n">vlinecoll</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">LineCollection</span><span class="p">(</span><span class="n">vlines</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">to_rgb</span><span class="p">(</span><span class="s1">&#39;black&#39;</span><span class="p">),</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">1.1</span><span class="p">)</span>
+<span class="n">timeline</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">vlinecoll</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[35]:</div>
+
+
+
+<div class="output_png output_subarea ">
+<img src="/assets/imgs/love-actually\love-actually_49_0.png"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Sweet!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Cooccurence-Heatmap">Cooccurence Heatmap<a class="anchor-link" href="#Cooccurence-Heatmap">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">non_airport_scenes</span> <span class="o">=</span> <span class="n">speaker_scene_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">speaker_scene_matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">dn</span><span class="p">[</span><span class="s1">&#39;ivl&#39;</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cooccur</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">non_airport_scenes</span><span class="p">,</span> <span class="n">non_airport_scenes</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cooccur</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Reds&#39;</span><span class="p">,</span> <span class="n">xticklabels</span><span class="o">=</span><span class="n">dn</span><span class="p">[</span><span class="s1">&#39;ivl&#39;</span><span class="p">],</span> <span class="n">yticklabels</span><span class="o">=</span><span class="n">dn</span><span class="p">[</span><span class="s1">&#39;ivl&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[38]:</div>
+
+
+
+<div class="output_png output_subarea ">
+<img src="/assets/imgs/love-actually\love-actually_54_0.png"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Another way to view the character clusters; I'm especially fond of the prominence of the <code>Karl/Sarah/Mia/Harry/Karen</code> and <code>Mark/Juliet/Peter</code> clusters.</p>
+<p>I toyed with the idea of removing the info on the diagonal of 'characters in scenes with themselves' - but then I noticed that it tells how many total scenes a character is in, which is interesting to see.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Network-Graph">Network Graph<a class="anchor-link" href="#Network-Graph">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://www.udacity.com/wiki/creating-network-graphs-with-python">https://www.udacity.com/wiki/creating-network-graphs-with-python</a> (<a href="https://stackoverflow.com/a/29574114">https://stackoverflow.com/a/29574114</a>)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">networkx</span> <span class="k">as</span> <span class="nn">nx</span>
+<span class="kn">import</span> <span class="nn">pylab</span>
+
+<span class="k">def</span> <span class="nf">show_graph_with_labels</span><span class="p">(</span><span class="n">adjacency_matrix</span><span class="p">,</span> <span class="n">mylabels</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">adjacency_matrix</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">edges</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">rows</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">cols</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="n">gr</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="n">gr</span><span class="o">.</span><span class="n">add_edges_from</span><span class="p">(</span><span class="n">edges</span><span class="p">)</span>
+    <span class="n">nx</span><span class="o">.</span><span class="n">draw_networkx</span><span class="p">(</span><span class="n">gr</span><span class="p">,</span> <span class="n">node_size</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">mylabels</span><span class="p">,</span> <span class="n">with_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">limits</span><span class="o">=</span><span class="n">pylab</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span> <span class="c1"># turn off axis</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">show_graph_with_labels</span><span class="p">(</span><span class="n">cooccur</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dn</span><span class="p">[</span><span class="s1">&#39;ivl&#39;</span><span class="p">]))),</span> <span class="n">dn</span><span class="p">[</span><span class="s1">&#39;ivl&#39;</span><span class="p">])))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[47]:</div>
+
+
+
+<div class="output_png output_subarea ">
+<img src="/assets/imgs/love-actually\love-actually_58_0.png"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="From-Python-to-Shiny-App">From Python to Shiny App<a class="anchor-link" href="#From-Python-to-Shiny-App">&#182;</a></h2><p>The Shiny app runs off of <code>love_actually_data.rda</code>, which is conventionally generated by R. Here, we will generate it with Python.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/assets/imgs/love-actually/rdata.png" alt="Screenshot of David&#39;s rdata variables in RStudio"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">speaker_scene_matrix</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">speaker_scene_matrix</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">droplevel</span><span class="p">()</span> <span class="c1"># drop &#39;n&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">speaker_scene_matrix</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[41]:</div>
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(21, 76)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">scenes</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[42]:</div>
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(145, 3)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!conda install rpy2</span>
+<span class="c1"># + Add C:\..\Anaconda3\Library\mingw-w64\bin to PATH (https://github.com/ContinuumIO/anaconda-issues/issues/1129#issuecomment-289413749)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># https://stackoverflow.com/a/11586672</span>
+<span class="c1"># http://pandas.pydata.org/pandas-docs/version/0.19.2/r_interface.html#rpy-updating</span>
+
+<span class="kn">from</span> <span class="nn">rpy2.robjects</span> <span class="k">import</span> <span class="n">r</span><span class="p">,</span> <span class="n">pandas2ri</span><span class="p">,</span> <span class="n">numpy2ri</span>
+<span class="n">pandas2ri</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
+<span class="n">numpy2ri</span><span class="o">.</span><span class="n">activate</span><span class="p">()</span>
+
+<span class="n">r_speaker_scene_matrix</span> <span class="o">=</span> <span class="n">numpy2ri</span><span class="o">.</span><span class="n">py2ri</span><span class="p">(</span><span class="n">speaker_scene_matrix</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">r_scenes</span> <span class="o">=</span> <span class="n">pandas2ri</span><span class="o">.</span><span class="n">py2ri</span><span class="p">(</span><span class="n">scenes</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># bug fix for py2ri_pandasseries, which calls do_slot_assign before FactorVector for category dtype and breaks things:</span>
+<span class="c1"># https://github.com/randy3k/rpy2/blob/master/rpy/robjects/pandas2ri.py</span>
+<span class="kn">from</span> <span class="nn">rpy2.rinterface</span> <span class="k">import</span> <span class="n">StrSexpVector</span>
+<span class="n">r_scenes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">do_slot_assign</span><span class="p">(</span><span class="s1">&#39;levels&#39;</span><span class="p">,</span> <span class="n">StrSexpVector</span><span class="p">(</span><span class="n">scenes</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">categories</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">r</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="s2">&quot;speaker_scene_matrix&quot;</span><span class="p">,</span> <span class="n">r_speaker_scene_matrix</span><span class="p">)</span>
+<span class="n">r</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="s2">&quot;scenes&quot;</span><span class="p">,</span> <span class="n">r_scenes</span><span class="p">)</span>
+<span class="n">r</span><span class="p">(</span><span class="s2">&quot;save(speaker_scene_matrix, scenes, file=&#39;love_actually_data.rda&#39;)&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[46]:</div>
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>rpy2.rinterface.NULL</pre>
+<br/>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+

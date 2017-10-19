@@ -2,11 +2,11 @@
 layout: post
 section-type: post
 title: NLP for Task Classification
-category: Career
+category: Portfolio-Building
 tags: [ ]
 ---
 
-_Everything between this sentence and the [Wrap Up](http://localhost:4000/career/2017/09/25/nlp-for-tasks.html#wrap-up) section has been converted from my [nlp_classifier](https://github.com/iconix/nlp-sandbox/blob/master/nlp_classifier.ipynb) notebook[^nbconvert] on GitHub._
+_Everything between this sentence and the [Wrap Up](/portfolio-building/2017/09/25/nlp-for-tasks.html#wrap-up) section has been converted from my [nlp_classifier](https://github.com/iconix/nlp-sandbox/blob/master/nlp_classifier.ipynb) notebook[^nbconvert] on GitHub._
 
 {% include notebooks/nlp_classifier.html %}
 

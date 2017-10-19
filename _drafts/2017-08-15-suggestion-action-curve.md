@@ -7,3 +7,5 @@ tags: [ ]
 ---
 
 On my debate with team (Dave) about how confident we can be with our in-product intelligence. Should they surface more as suggestions or should we act confidently but then ask for forgiveness if necessary.
+
+Designing for AI powerpoint, communicating uncertainty (using lists).

@@ -3,7 +3,7 @@ layout: post
 section-type: post
 title: Alternatives to a Degree to Prove Yourself
 category: Blogging
-tags: []
+tags: [] # 'deep learning', 'machine learning', 'mooc'
 ---
 
 Through a series of Microsoft happenings, I ended up finding and listening to a really insightful [Hanselminutes podcast episode](https://hanselminutes.com/580/machine-learning-deep-learning-and-artificial-intelligence-with-edaena-salinas-jasso) with guest Edaena Salinas Jasso. She made the shift from web development to machine learning/AI work with Microsoft Research. In talking about her path, she mentioned a couple resources that she highly recommends: fast.ai's [Practical Deep Learning For Coders, Part 1](http://course.fast.ai/) and Udacity's [Intro to Machine Learning](https://www.udacity.com/course/intro-to-machine-learning--ud120) (course description: "Pattern Recognition for Fun and Profit" [^pattern]).
