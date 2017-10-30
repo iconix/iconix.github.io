@@ -6,7 +6,7 @@ category: blogging
 tags: []
 ---
 
-[https://jamesmccaffrey.wordpress.com](https://jamesmccaffrey.wordpress.com)
+<p style="text-align: center"><a href="https://jamesmccaffrey.wordpress.com">https://jamesmccaffrey.wordpress.com</a></p>
 
 James McCaffrey is the guy running the deep learning course for Microsoft employees that I deemed ["too _research-y_"](/blogging/2017/07/09/fast-ai-blog.html) a couple of months ago... at the time, I craved a more hands-on approach to deep learning aimed at newbies. Now that I'm [further along](/notes/2017/08/18/fast-week2.html) with fast.ai's more practical approach, I'd like to give his version another try.
 
