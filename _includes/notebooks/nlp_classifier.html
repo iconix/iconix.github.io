@@ -93,6 +93,7 @@
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">read_csv</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">random</span>
 </pre></div>
 
@@ -107,8 +108,7 @@
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">BASE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-<span class="n">pos_data_path</span> <span class="o">=</span> <span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;/pos.txt&#39;</span>
-<span class="n">neg_data_path</span> <span class="o">=</span> <span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;/neg.txt&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="n">BASE_DIR</span> <span class="o">+</span> <span class="s1">&#39;/data.tsv&#39;</span>
 </pre></div>
 
 </div>
@@ -121,13 +121,79 @@
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pos_data_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">pos_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">neg_data_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">neg_data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Text&#39;</span><span class="p">,</span> <span class="s1">&#39;Label&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[3]:</div>
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Text</th>
+      <th>Label</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Be kind</td>
+      <td>pos</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Get out of here</td>
+      <td>pos</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Look this over</td>
+      <td>pos</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Paul, do your homework now</td>
+      <td>pos</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Do not clean soot off the window</td>
+      <td>pos</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -137,14 +203,14 @@
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pos_data_split</span> <span class="o">=</span> <span class="n">pos_data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">neg_data_split</span> <span class="o">=</span> <span class="n">neg_data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pos_data_split</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">Label</span> <span class="o">==</span> <span class="s1">&#39;pos&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
+<span class="n">neg_data_split</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">Label</span> <span class="o">==</span> <span class="s1">&#39;neg&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Text</span><span class="p">)</span>
 
 <span class="n">num_pos</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos_data_split</span><span class="p">)</span>
 <span class="n">num_neg</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">neg_data_split</span><span class="p">)</span>
 
 <span class="c1"># 50/50 split between the number of positive and negative samples</span>
-<span class="n">num</span> <span class="o">=</span> <span class="n">num_pos</span> <span class="k">if</span> <span class="n">num_pos</span> <span class="o">&lt;</span> <span class="n">num_neg</span> <span class="k">else</span> <span class="n">num_neg</span>
+<span class="n">num_per_class</span> <span class="o">=</span> <span class="n">num_pos</span> <span class="k">if</span> <span class="n">num_pos</span> <span class="o">&lt;</span> <span class="n">num_neg</span> <span class="k">else</span> <span class="n">num_neg</span>
 
 <span class="c1"># shuffle samples</span>
 <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">pos_data_split</span><span class="p">)</span>
@@ -162,9 +228,9 @@
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">pos_data_split</span><span class="p">[:</span><span class="n">num</span><span class="p">]:</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">pos_data_split</span><span class="p">[:</span><span class="n">num_per_class</span><span class="p">]:</span>
     <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">l</span><span class="p">,</span> <span class="s1">&#39;pos&#39;</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">neg_data_split</span><span class="p">[:</span><span class="n">num</span><span class="p">]:</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">neg_data_split</span><span class="p">[:</span><span class="n">num_per_class</span><span class="p">]:</span>
     <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">l</span><span class="p">,</span> <span class="s1">&#39;neg&#39;</span><span class="p">))</span>
 </pre></div>
 
@@ -250,6 +316,7 @@
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+<span class="c1"># slow</span>
 <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -292,7 +359,8 @@
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">docs</span> <span class="o">=</span> <span class="n">create_spacy_docs</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># slower</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">create_spacy_docs</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -343,15 +411,15 @@
 <div class="prompt output_prompt">Out[11]:</div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[Add tofu and gently toss; set aside to marinate.]
-[Scatter cheese on top. Finely grate some lemon zest over salad, then slice open lemon and squeeze on some juice.]
-[Toss zucchini, vinegar, chopped oregano, and 1/4 cup oil in a medium bowl to combine; season zucchini salsa with salt and pepper.]
-[Berry syrup can be made 3 days ahead.]
-[Cook, stirring continuously and occasionally scraping the bottom of the pan with the wooden spoon, until the mixture has thickened and coats the spoon with little to no transparency.]
-[Remove seeds from remaining 2 tomatoes and cut into 1/4&#34; cubes.]
-[Transfer to a cutting board and let cool slightly.]
-[Combine grated garlic, lemon juice, and a pinch of salt in a food processor and let sit until the bite in garlic mellows, about 5 minutes.]
-[Mix at low speed just until the ingredients come together, about 1 minute.]
+<pre>[Transfer gazpacho to an airtight container; cover and chill until very cold, 4–12 hours.]
+[Add jalapeño and salt and toss to combine.]
+[Transfer to a paper-towel lined plate.]
+[Season pork chops all over with salt and pepper; sprinkle with aniseed and red pepper flakes.]
+[Lightly season with salt and pepper and drizzle vinaigrette over; top with walnuts and mint.]
+[Slice in half diagonally and serve.]
+[Lower the heat to 200°F and bake for 2 to 3 more hours, until the skin is a dark caramel brown and the top is no longer moist or sticky.]
+[You could also do this on a floured surface, but the pastry is so fragile I find it easier to handle between cling film.]
+[Prepare a grill for medium-high heat or heat a grill pan or cast-iron skillet over medium-high; oil grate or pan.]
 [Serve or freeze in an airtight container for up to a week.]
 </pre>
 </div>
@@ -383,15 +451,15 @@
 <div class="prompt output_prompt">Out[12]:</div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[tofu]
-[cheese, top, some lemon zest, salad, some juice]
-[zucchini, vinegar, oregano, 1/4 cup oil, a medium bowl, salt, pepper]
-[Berry syrup]
-[Cook, the bottom, the pan, the wooden spoon, the mixture, the spoon, no transparency]
-[seeds, 2 tomatoes, 1/4&#34; cubes]
-[Transfer, a cutting board]
-[garlic, lemon juice, a pinch, salt, a food processor, the bite, garlic mellows]
-[Mix, low speed, the ingredients]
+<pre>[Transfer gazpacho, an airtight container, cover, chill, 4–12 hours]
+[jalapeño, salt]
+[Transfer, a paper-towel lined plate]
+[Season pork, salt, pepper, aniseed, red pepper flakes]
+[Lightly season, salt, pepper, drizzle vinaigrette, walnuts, mint]
+[Slice, half]
+[the heat, bake, 2 to 3 more hours, the skin, a dark caramel brown, the top]
+[You, a floured surface, the pastry, I, it, film]
+[a grill, medium-high heat or heat a grill pan, cast-iron skillet, medium, oil grate, pan]
 [Serve, freeze, an airtight container]
 </pre>
 </div>
@@ -434,16 +502,16 @@
 <div class="prompt output_prompt">Out[13]:</div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Add ROOT add VERB VB Add [tofu, toss, .]
-tofu dobj tofu NOUN NN Add [and]
-and cc and CCONJ CC tofu []
-gently advmod gently ADV RB toss []
-toss conj toss VERB VB Add [gently, ;, set]
-; punct ; PUNCT : toss []
-set acl set VERB VBN toss [aside, marinate]
-aside advmod aside ADV RB set []
-to aux to PART TO marinate []
-marinate advcl marinate VERB VB set [to]
+<pre>Transfer gazpacho ROOT Transfer gazpacho NOUN NN Transfer gazpacho [to, .]
+to prep to ADP IN Transfer gazpacho [an airtight container]
+an airtight container pobj an airtight container NOUN NN to [;, cover, until]
+; punct ; PUNCT : an airtight container []
+cover conj cover NOUN NN an airtight container [and, chill]
+and cc and CCONJ CC cover []
+chill conj chill NOUN NN cover []
+until prep until ADP IN an airtight container [cold, 4–12 hours]
+very advmod very ADV RB cold []
+cold pobj cold ADJ JJ until [very, ,]
 ...
 </pre>
 </div>
@@ -553,9 +621,9 @@ marinate advcl marinate VERB VB set [to]
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Stats on number of features per example:
-mean: 22.88600697471665
-stdev: 14.543271036053682
-median: 23.0
+mean: 22.786088094199737
+stdev: 14.556752789753176
+median: 22.0
 mode: 0
 max: 75
 min: 0
@@ -590,54 +658,33 @@ min: 0
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[(Add tofu and gently toss; set aside to marinate.,
-  ({&#39;CHILD_DEP_ACL&#39;: 1,
-    &#39;CHILD_DEP_ADVCL&#39;: 1,
-    &#39;CHILD_DEP_ADVMOD&#39;: 2,
-    &#39;CHILD_DEP_AUX&#39;: 1,
+<pre>[(Transfer gazpacho to an airtight container; cover and chill until very cold, 4–12 hours.,
+  ({}, &#39;pos&#39;)),
+ (Add jalapeño and salt and toss to combine.,
+  ({&#39;CHILD_DEP_AUX&#39;: 1,
     &#39;CHILD_DEP_CONJ&#39;: 1,
     &#39;CHILD_DEP_DOBJ&#39;: 1,
-    &#39;CHILD_DEP_PUNCT&#39;: 2,
+    &#39;CHILD_DEP_PUNCT&#39;: 1,
+    &#39;CHILD_DEP_XCOMP&#39;: 1,
     &#39;CHILD_POSTAG_.&#39;: 1,
-    &#39;CHILD_POSTAG_:&#39;: 1,
     &#39;CHILD_POSTAG_NN&#39;: 1,
-    &#39;CHILD_POSTAG_RB&#39;: 2,
     &#39;CHILD_POSTAG_TO&#39;: 1,
     &#39;CHILD_POSTAG_VB&#39;: 2,
-    &#39;CHILD_POSTAG_VBN&#39;: 1,
-    &#39;CHILD_POS_ADV&#39;: 2,
     &#39;CHILD_POS_NOUN&#39;: 1,
     &#39;CHILD_POS_PART&#39;: 1,
-    &#39;CHILD_POS_PUNCT&#39;: 2,
-    &#39;CHILD_POS_VERB&#39;: 3,
+    &#39;CHILD_POS_PUNCT&#39;: 1,
+    &#39;CHILD_POS_VERB&#39;: 2,
     &#39;FOLLOWING_POSTAG_.&#39;: 1,
-    &#39;FOLLOWING_POSTAG_:&#39;: 1,
     &#39;FOLLOWING_POSTAG_NN&#39;: 1,
-    &#39;FOLLOWING_POSTAG_RB&#39;: 1,
-    &#39;FOLLOWING_POS_ADV&#39;: 1,
+    &#39;FOLLOWING_POSTAG_TO&#39;: 1,
     &#39;FOLLOWING_POS_NOUN&#39;: 1,
-    &#39;FOLLOWING_POS_PUNCT&#39;: 2,
-    &#39;PARENT_DEP_ACL&#39;: 1,
+    &#39;FOLLOWING_POS_PART&#39;: 1,
+    &#39;FOLLOWING_POS_PUNCT&#39;: 1,
     &#39;PARENT_DEP_CONJ&#39;: 1,
     &#39;PARENT_DEP_ROOT&#39;: 1,
     &#39;PARENT_POSTAG_VB&#39;: 2,
-    &#39;PARENT_POSTAG_VBN&#39;: 1,
-    &#39;PARENT_POS_VERB&#39;: 3,
-    &#39;VERB&#39;: 4},
-   &#39;pos&#39;)),
- (Scatter cheese on top. Finely grate some lemon zest over salad, then slice open lemon and squeeze on some juice.,
-  ({&#39;CHILD_DEP_ADVMOD&#39;: 1,
-    &#39;CHILD_DEP_DOBJ&#39;: 1,
-    &#39;CHILD_POSTAG_NN&#39;: 1,
-    &#39;CHILD_POSTAG_RB&#39;: 1,
-    &#39;CHILD_POS_ADV&#39;: 1,
-    &#39;CHILD_POS_NOUN&#39;: 1,
-    &#39;FOLLOWING_POSTAG_NN&#39;: 1,
-    &#39;FOLLOWING_POS_NOUN&#39;: 1,
-    &#39;PARENT_DEP_ROOT&#39;: 1,
-    &#39;PARENT_POSTAG_JJ&#39;: 1,
-    &#39;PARENT_POS_ADJ&#39;: 1,
-    &#39;VERB&#39;: 1},
+    &#39;PARENT_POS_VERB&#39;: 2,
+    &#39;VERB&#39;: 3},
    &#39;pos&#39;))]</pre>
 </div>
 
@@ -683,7 +730,8 @@ min: 0
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">featuresets</span><span class="p">)</span>
 
-<span class="n">split_num</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">num</span><span class="o">*</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">num_classes</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">split_num</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">num_per_class</span><span class="o">*</span><span class="n">num_classes</span> <span class="o">/</span> <span class="mi">5</span><span class="p">)</span>
 
 <span class="c1"># train and test sets</span>
 <span class="n">testing_set</span> <span class="o">=</span> <span class="p">[</span><span class="n">fs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">fs</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">featuresets</span><span class="p">[:</span><span class="n">split_num</span><span class="p">])]</span>
@@ -706,8 +754,8 @@ min: 0
 <div class="prompt output_prompt">Out[18]:</div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre># training samples: 3670
-# test samples: 918
+<pre># training samples: 3669
+# test samples: 917
 </pre>
 </div>
 </div>
@@ -770,9 +818,10 @@ min: 0
 
 <span class="kn">from</span> <span class="nn">sklearn.dummy</span> <span class="k">import</span> <span class="n">DummyClassifier</span>
 <span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="k">import</span> <span class="n">MultinomialNB</span><span class="p">,</span> <span class="n">BernoulliNB</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LogisticRegression</span><span class="p">,</span> <span class="n">SGDClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">SVC</span><span class="p">,</span> <span class="n">LinearSVC</span><span class="p">,</span> <span class="n">NuSVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LogisticRegressionCV</span><span class="p">,</span> <span class="n">SGDClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">SVC</span><span class="p">,</span> <span class="n">LinearSVC</span>
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="k">import</span> <span class="n">CalibratedClassifierCV</span>
 
 <span class="n">dummy</span> <span class="o">=</span> <span class="n">SklearnClassifier</span><span class="p">(</span><span class="n">DummyClassifier</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;stratified&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
 <span class="n">dummy</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training_set</span><span class="p">)</span>
@@ -799,11 +848,11 @@ min: 0
 
 <span class="c1"># ??logistic_regression._clf</span>
 <span class="c1">#   sklearn.svm.LinearSVC : learns SVM models using the same algorithm.</span>
-<span class="n">logistic_regression</span> <span class="o">=</span> <span class="n">SklearnClassifier</span><span class="p">(</span><span class="n">LogisticRegression</span><span class="p">())</span>
+<span class="n">logistic_regression</span> <span class="o">=</span> <span class="n">SklearnClassifier</span><span class="p">(</span><span class="n">LogisticRegressionCV</span><span class="p">())</span>
 <span class="n">logistic_regression</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training_set</span><span class="p">)</span>
 <span class="n">lr_predict</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">logistic_regression</span><span class="p">,</span> <span class="n">testing_set</span><span class="p">)</span>
 <span class="n">lr_accuracy</span> <span class="o">=</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">lr_predict</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LogisticRegression classifier accuracy percent:&quot;</span><span class="p">,</span> <span class="n">lr_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LogisticRegressionCV classifier accuracy percent:&quot;</span><span class="p">,</span> <span class="n">lr_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
 
 <span class="c1"># ??sgd._clf</span>
 <span class="c1">#    The &#39;log&#39; loss gives logistic regression, a probabilistic classifier.</span>
@@ -832,10 +881,11 @@ min: 0
 <span class="c1">#    penalties and loss functions and should scale better to large numbers of</span>
 <span class="c1">#    samples.</span>
 <span class="c1">#    Prefer dual=False when n_samples &gt; n_features.</span>
-<span class="n">linear_svc</span> <span class="o">=</span> <span class="n">SklearnClassifier</span><span class="p">(</span><span class="n">LinearSVC</span><span class="p">(</span><span class="n">dual</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="c1"># Using CalibratedClassifierCV as wrapper to get predict probabilities (https://stackoverflow.com/a/39712590)</span>
+<span class="n">linear_svc</span> <span class="o">=</span> <span class="n">SklearnClassifier</span><span class="p">(</span><span class="n">CalibratedClassifierCV</span><span class="p">(</span><span class="n">LinearSVC</span><span class="p">(</span><span class="n">dual</span><span class="o">=</span><span class="kc">False</span><span class="p">)))</span>
 <span class="n">linear_svc</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training_set</span><span class="p">)</span>
-<span class="n">linear_svc_predict</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">linear_svc</span><span class="p">,</span> <span class="n">testing_set</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">linear_svc_accuracy</span> <span class="o">=</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">linear_svc_predict</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">linear_svc_predict</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">linear_svc</span><span class="p">,</span> <span class="n">testing_set</span><span class="p">)</span>
+<span class="n">linear_svc_accuracy</span> <span class="o">=</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">linear_svc_predict</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LinearSVC classifier accuracy percent:&quot;</span><span class="p">,</span> <span class="n">linear_svc_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
 
 <span class="c1"># slower</span>
@@ -864,16 +914,16 @@ min: 0
 <div class="prompt output_prompt">Out[20]:</div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Dummy classifier accuracy percent: 50.76252723311547
-NaiveBayes classifier accuracy percent: 67.42919389978213
-MultinomialNB classifier accuracy percent: 79.41176470588235
-BernoulliNB classifier accuracy percent: 75.92592592592592
-LogisticRegression classifier accuracy percent: 83.00653594771242
-SGD classifier accuracy percent: 81.59041394335512
-SVC classifier accuracy percent: 81.48148148148148
-LinearSVC classifier accuracy percent: 83.76906318082789
-DecisionTree classifier accuracy percent: 79.30283224400871
-RandomForest classifier accuracy percent: 81.91721132897604
+<pre>Dummy classifier accuracy percent: 48.74591057797165
+NaiveBayes classifier accuracy percent: 68.04798255179935
+MultinomialNB classifier accuracy percent: 80.26172300981462
+BernoulliNB classifier accuracy percent: 74.2639040348964
+LogisticRegressionCV classifier accuracy percent: 84.07851690294439
+SGD classifier accuracy percent: 56.706652126499456
+SVC classifier accuracy percent: 83.09705561613958
+LinearSVC classifier accuracy percent: 83.86041439476554
+DecisionTree classifier accuracy percent: 78.29880043620501
+RandomForest classifier accuracy percent: 83.6423118865867
 </pre>
 </div>
 </div>
@@ -928,7 +978,7 @@ RandomForest classifier accuracy percent: 81.91721132897604
 <div class="prompt output_prompt">Out[21]:</div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>SGDClassifier classifier accuracy percent (epochs: 1000): 83.00653594771242
+<pre>SGDClassifier classifier accuracy percent (epochs: 1000): 84.18756815703381
 </pre>
 </div>
 </div>
@@ -953,6 +1003,333 @@ RandomForest classifier accuracy percent: 81.91721132897604
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<br>
+<h3 id="GridSearch-and-Cross-Validation">GridSearch and Cross-Validation<a class="anchor-link" href="#GridSearch-and-Cross-Validation">&#182;</a></h3><p>Next we perform 1) grid search to find optimal hyperparameters, and 2) cross-validation to evaluate performance over multiple folds of the data (to avoid overfitting).</p>
+<p><a href="http://scikit-learn.org/stable/modules/grid_search.html#grid-search">http://scikit-learn.org/stable/modules/grid_search.html#grid-search</a></p>
+<p><a href="http://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html">http://scikit-learn.org/stable/auto_examples/model_selection/plot_nested_cross_validation_iris.html</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.classify.scikitlearn</span> <span class="k">import</span> <span class="n">SklearnClassifier</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">SGDClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">LinearSVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.calibration</span> <span class="k">import</span> <span class="n">CalibratedClassifierCV</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># https://stackoverflow.com/a/16388804</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="k">import</span> <span class="n">clone</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">zeros</span>
+
+<span class="k">def</span> <span class="nf">cross_val</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="n">num_splits</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">original_clf</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">_clf</span><span class="p">)</span>
+    <span class="n">cvidx</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">num_splits</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">training_set</span><span class="p">)</span>
+
+    <span class="n">nested_acc</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">num_splits</span><span class="p">)</span>
+    <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">trainidx</span><span class="p">,</span> <span class="n">testidx</span> <span class="ow">in</span> <span class="n">cvidx</span><span class="p">:</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">_clf</span> <span class="o">=</span> <span class="n">clone</span><span class="p">(</span><span class="n">original_clf</span><span class="p">)</span>  <span class="c1"># we clone the estimator to make sure that all the folds are independent</span>
+        <span class="n">classifier</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training_set</span><span class="p">[</span><span class="n">trainidx</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">trainidx</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">trainidx</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">classifier</span><span class="p">,</span> <span class="n">training_set</span><span class="p">[</span><span class="n">testidx</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">testidx</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">testidx</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="n">nested_acc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">debug</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{name}</span><span class="s2"> CV accuracies:&quot;</span><span class="p">,</span> <span class="n">nested_acc</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">nested_acc</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># http://scikit-learn.org/stable/auto_examples/model_selection/plot_grid_search_digits.html#sphx-glr-auto-examples-model-selection-plot-grid-search-digits-py</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LogisticRegression</span>
+
+<span class="c1"># Set the parameters by cross-validation</span>
+<span class="n">model_parameters</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;LinearSVC&#39;</span><span class="p">:</span> <span class="p">[{</span>
+                        <span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;hinge&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;dual&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">],</span>
+                        <span class="s1">&#39;penalty&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;l2&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;tol&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">],</span>
+                        <span class="s1">&#39;max_iter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">],</span>
+                        <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">]</span>
+                    <span class="p">},</span>
+                    <span class="p">{</span>
+                        <span class="s1">&#39;loss&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;squared_hinge&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;dual&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+                        <span class="s1">&#39;penalty&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;l2&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;tol&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">],</span>
+                        <span class="s1">&#39;max_iter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">],</span>
+                        <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">]</span>
+                    <span class="p">}]},</span>
+                   <span class="p">{</span><span class="s1">&#39;LogisticRegression&#39;</span><span class="p">:</span> <span class="p">[{</span>
+                        <span class="s1">&#39;penalty&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;l1&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;dual&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">],</span>
+                        <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span>
+                        <span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;liblinear&#39;</span><span class="p">]</span>
+                   <span class="p">},</span>
+                   <span class="p">{</span>
+                        <span class="s1">&#39;penalty&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;l2&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;dual&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+                        <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span>
+                        <span class="s1">&#39;max_iter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+                        <span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;liblinear&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;tol&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">]</span>
+                   <span class="p">},</span>
+                   <span class="p">{</span>
+                        <span class="s1">&#39;penalty&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;l2&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;dual&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">],</span>
+                        <span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">100.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">],</span>
+                        <span class="s1">&#39;max_iter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+                        <span class="s1">&#39;solver&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;newton-cg&#39;</span><span class="p">,</span> <span class="s1">&#39;lbfgs&#39;</span><span class="p">,</span> <span class="s1">&#39;sag&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;tol&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">]</span>
+                   <span class="p">}]},</span>
+                   <span class="p">{</span><span class="s1">&#39;SGD&#39;</span><span class="p">:</span> <span class="p">[{</span>
+                        <span class="s1">&#39;penalty&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="s1">&#39;elasticnet&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">],</span>
+                        <span class="s1">&#39;average&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+                        <span class="s1">&#39;n_iter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">10000</span><span class="p">]</span>
+                   <span class="p">}]},</span>
+                   <span class="p">{</span><span class="s1">&#39;RandomForest&#39;</span><span class="p">:</span> <span class="p">[{</span>
+                        <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+                        <span class="s1">&#39;criterion&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;gini&#39;</span><span class="p">,</span> <span class="s1">&#39;entropy&#39;</span><span class="p">],</span>
+                        <span class="s1">&#39;max_features&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="s1">&#39;log2&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+                        <span class="s1">&#39;oob_score&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+                   <span class="p">}]}]</span>
+
+<span class="n">score</span> <span class="o">=</span> <span class="s1">&#39;roc_auc&#39;</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">model_param</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">model_parameters</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">model_param</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;# </span><span class="si">{model}</span><span class="s2">: Tuning hyper-parameters for </span><span class="si">{score}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;LinearSVC&#39;</span><span class="p">:</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;LogisticRegression&#39;</span><span class="p">:</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;SGD&#39;</span><span class="p">:</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;RandomForest&#39;</span><span class="p">:</span>
+        <span class="n">clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> model needs to be added to the if-block&#39;</span> <span class="o">%</span> <span class="n">model</span><span class="p">)</span>
+
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">SklearnClassifier</span><span class="p">(</span><span class="n">GridSearchCV</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">model_param</span><span class="p">[</span><span class="n">model</span><span class="p">],</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                       <span class="n">scoring</span><span class="o">=</span><span class="n">score</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">grid</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training_set</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best parameters set found on development set:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">_clf</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">_clf</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;mean_test_score&#39;</span><span class="p">][</span><span class="n">grid</span><span class="o">.</span><span class="n">_clf</span><span class="o">.</span><span class="n">best_index_</span><span class="p">]</span>
+    <span class="n">std</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">_clf</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s1">&#39;std_test_score&#39;</span><span class="p">][</span><span class="n">grid</span><span class="o">.</span><span class="n">_clf</span><span class="o">.</span><span class="n">best_index_</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;roc_auc: </span><span class="si">%0.3f</span><span class="s2"> (+/-</span><span class="si">%0.03f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">*</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;LinearSVC&#39;</span><span class="p">:</span>
+        <span class="c1"># Wrapping LinearSVC in CalibratedClassifierCV to add support for probability prediction</span>
+        <span class="c1"># Note that there is a difference in accuracies between raw GridSearchCV and calibrated GridSearchCV</span>
+        <span class="c1"># However, I&#39;m willing to sacrifice the potential &#39;best&#39; result from raw in order to output probabilities</span>
+        <span class="n">grid_calibrated</span> <span class="o">=</span> <span class="n">SklearnClassifier</span><span class="p">(</span><span class="n">CalibratedClassifierCV</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">_clf</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="kc">None</span><span class="p">))</span>
+        <span class="n">grid_calibrated</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training_set</span><span class="p">)</span>
+        <span class="n">gridc_predict</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">grid_calibrated</span><span class="p">,</span> <span class="n">testing_set</span><span class="p">)</span>
+        <span class="n">gridc_accuracy</span> <span class="o">=</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">gridc_predict</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{model}</span><span class="s2"> (calibrated) classifier accuracy percent:&quot;</span><span class="p">,</span> <span class="n">gridc_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+
+        <span class="n">grid_predict</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">testing_set</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">grid_accuracy</span> <span class="o">=</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">grid_predict</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{model}</span><span class="s2"> (raw) classifier accuracy percent:&quot;</span><span class="p">,</span> <span class="n">grid_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+
+        <span class="c1"># CV after parameter optimization</span>
+        <span class="n">cv_acc</span> <span class="o">=</span> <span class="n">cross_val</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">grid_calibrated</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{model}</span><span class="s2"> (calibrated) CV classifier avg accuracy percent:&quot;</span><span class="p">,</span> <span class="n">cv_acc</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+
+        <span class="n">linear_svc_opt</span> <span class="o">=</span> <span class="n">grid_calibrated</span>
+        <span class="n">linear_svc_predict</span> <span class="o">=</span> <span class="n">gridc_predict</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">grid_predict</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">testing_set</span><span class="p">)</span>
+        <span class="n">grid_accuracy</span> <span class="o">=</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">grid_predict</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{model}</span><span class="s2"> classifier accuracy percent:&quot;</span><span class="p">,</span> <span class="n">grid_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+
+        <span class="c1"># CV after parameter optimization</span>
+        <span class="n">cv_acc</span> <span class="o">=</span> <span class="n">cross_val</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;</span><span class="si">{model}</span><span class="s2"> CV classifier avg accuracy percent:&quot;</span><span class="p">,</span> <span class="n">cv_acc</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;LogisticRegression&#39;</span><span class="p">:</span>
+            <span class="n">logistic_regression_opt</span> <span class="o">=</span> <span class="n">grid</span>
+            <span class="n">lr_predict</span> <span class="o">=</span> <span class="n">grid_predict</span>
+        <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;SGD&#39;</span><span class="p">:</span>
+            <span class="n">sgd_opt</span> <span class="o">=</span> <span class="n">grid</span>
+            <span class="n">sgd_predict</span> <span class="o">=</span> <span class="n">grid_predict</span>
+        <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="s1">&#39;RandomForest&#39;</span><span class="p">:</span>
+            <span class="n">random_forest_opt</span> <span class="o">=</span> <span class="n">grid</span>
+            <span class="n">rf_predict</span> <span class="o">=</span> <span class="n">grid_predict</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> model was not run through Grid Search&#39;</span> <span class="o">%</span> <span class="n">model</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[24]:</div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre># LinearSVC: Tuning hyper-parameters for roc_auc
+
+Best parameters set found on development set:
+
+{&#39;C&#39;: 0.01, &#39;dual&#39;: False, &#39;loss&#39;: &#39;squared_hinge&#39;, &#39;max_iter&#39;: 1000, &#39;penalty&#39;: &#39;l2&#39;, &#39;tol&#39;: 0.001}
+roc_auc: 0.908 (+/-0.018)
+
+LinearSVC (calibrated) classifier accuracy percent: 83.42420937840785
+LinearSVC (raw) classifier accuracy percent: 83.53326063249727
+LinearSVC CV accuracies: [ 0.83387889  0.83383438  0.83396947]
+LinearSVC (calibrated) CV classifier avg accuracy percent: 83.3894244566
+
+# LogisticRegression: Tuning hyper-parameters for roc_auc
+
+Best parameters set found on development set:
+
+{&#39;C&#39;: 1.0, &#39;dual&#39;: True, &#39;max_iter&#39;: 100, &#39;penalty&#39;: &#39;l2&#39;, &#39;solver&#39;: &#39;liblinear&#39;, &#39;tol&#39;: 0.0001}
+roc_auc: 0.908 (+/-0.016)
+
+LogisticRegression classifier accuracy percent: 84.18756815703381
+LogisticRegression CV accuracies: [ 0.837241    0.83701884  0.83670678]
+LogisticRegression CV classifier avg accuracy percent: 83.6988874553
+
+# SGD: Tuning hyper-parameters for roc_auc
+
+Best parameters set found on development set:
+
+{&#39;alpha&#39;: 0.001, &#39;average&#39;: False, &#39;n_iter&#39;: 100, &#39;penalty&#39;: &#39;l2&#39;}
+roc_auc: 0.910 (+/-0.015)
+
+SGD classifier accuracy percent: 82.98800436205016
+SGD CV accuracies: [ 0.83706332  0.83674584  0.83833152]
+SGD CV classifier avg accuracy percent: 83.7380223779
+
+# RandomForest: Tuning hyper-parameters for roc_auc
+
+Best parameters set found on development set:
+
+{&#39;criterion&#39;: &#39;entropy&#39;, &#39;max_features&#39;: &#39;auto&#39;, &#39;n_estimators&#39;: 1000, &#39;oob_score&#39;: False}
+roc_auc: 0.910 (+/-0.025)
+
+RandomForest classifier accuracy percent: 84.29661941112323
+RandomForest CV accuracies: [ 0.9290393   0.92898115  0.92880524]
+RandomForest CV classifier avg accuracy percent: 92.8941897105
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="VotingClassifier">VotingClassifier<a class="anchor-link" href="#VotingClassifier">&#182;</a></h3><p>We're going to create an ensemble classifier by letting our top-performing classifiers, which consistently perform with &gt;80% accuracy &mdash; <code>LogisticRegression</code>, <code>LinearSVC</code>, <code>SGD</code>, and <code>RandomForest</code> (excluding <code>SVC</code> due to its slowness) &mdash; vote on each prediction.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">VotingClassifier</span>
+
+<span class="n">voting</span> <span class="o">=</span> <span class="n">SklearnClassifier</span><span class="p">(</span><span class="n">VotingClassifier</span><span class="p">(</span><span class="n">estimators</span><span class="o">=</span><span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;lr&#39;</span><span class="p">,</span> <span class="n">logistic_regression_opt</span><span class="o">.</span><span class="n">_clf</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;linear_svc&#39;</span><span class="p">,</span> <span class="n">linear_svc_opt</span><span class="o">.</span><span class="n">_clf</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;sgd&#39;</span><span class="p">,</span> <span class="n">sgd_opt</span><span class="o">.</span><span class="n">_clf</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;rf&#39;</span><span class="p">,</span> <span class="n">random_forest_opt</span><span class="o">.</span><span class="n">_clf</span><span class="p">)</span>
+<span class="p">],</span> <span class="n">voting</span><span class="o">=</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">voting</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">training_set</span><span class="p">)</span>
+
+<span class="n">voting_predict</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">voting</span><span class="p">,</span> <span class="n">testing_set</span><span class="p">)</span>
+<span class="n">voting_accuracy</span> <span class="o">=</span> <span class="n">accuracy</span><span class="p">(</span><span class="n">voting_predict</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Soft voting classifier accuracy percent:&quot;</span><span class="p">,</span> <span class="n">voting_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># CV after parameter optimization</span>
+<span class="n">voting_acc</span> <span class="o">=</span> <span class="n">cross_val</span><span class="p">(</span><span class="s2">&quot;Soft voting&quot;</span><span class="p">,</span> <span class="n">voting</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Soft voting CV classifier accuracy percent:&quot;</span><span class="p">,</span> <span class="n">voting_acc</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[34]:</div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Soft voting classifier accuracy percent: 84.29661941112323
+Soft voting CV accuracies: [ 0.89822647  0.898527    0.89559989]
+Soft voting CV classifier accuracy percent: 89.7451120722
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Analysis">Analysis<a class="anchor-link" href="#Analysis">&#182;</a></h3>
 </div>
 </div>
@@ -962,18 +1339,7 @@ RandomForest classifier accuracy percent: 81.91721132897604
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We're going to scope analysis down to our top-performing classifiers, which consistently perform with &gt;80% accuracy: <code>LogisticRegression</code>, <code>SVC</code>, <code>LinearSVC</code>, <code>SGD</code>, and <code>RandomForest</code>.</p>
-<p>We'll also include <code>Dummy</code> as a baseline.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Note</strong>: I considered omitting <code>LinearSVC</code> since we have <code>SVC</code> also performing with high accuracy, and since <code>LinearSVC</code> does not provide probability estimates I rely on a lot during this analysis. However, <code>LinearSVC</code> is much faster than <code>SVC</code> and is meant to "scale better to large numbers of samples."</p>
+<p>Similarly to the voting model, we're also going to scope analysis down to our top-performing classifiers. We'll include the <code>Voting</code> model itself, and then <code>Dummy</code> as a baseline.</p>
 
 </div>
 </div>
@@ -989,7 +1355,7 @@ RandomForest classifier accuracy percent: 81.91721132897604
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># https://stackoverflow.com/a/11140887</span>
@@ -1008,7 +1374,7 @@ RandomForest classifier accuracy percent: 81.91721132897604
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SGD&#39;</span><span class="p">)</span>
@@ -1016,9 +1382,6 @@ RandomForest classifier accuracy percent: 81.91721132897604
 <span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Logistic Regression&#39;</span><span class="p">)</span>
 <span class="n">show_most_informative_features</span><span class="p">(</span><span class="n">logistic_regression</span><span class="o">.</span><span class="n">_vectorizer</span><span class="p">,</span> <span class="n">logistic_regression</span><span class="o">.</span><span class="n">_clf</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LinearSVC&#39;</span><span class="p">)</span>
-<span class="n">show_most_informative_features</span><span class="p">(</span><span class="n">linear_svc</span><span class="o">.</span><span class="n">_vectorizer</span><span class="p">,</span> <span class="n">linear_svc</span><span class="o">.</span><span class="n">_clf</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1031,38 +1394,28 @@ RandomForest classifier accuracy percent: 81.91721132897604
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[23]:</div>
+<div class="prompt output_prompt">Out[29]:</div>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>SGD
-	-2.4606	CHILD_DEP_AGENT		2.5138	CHILD_POSTAG_-RRB-
-	-2.4429	FOLLOWING_POSTAG_-RRB-		1.9397	CHILD_DEP_ADVMOD||XCOMP
-	-2.4134	CHILD_POSTAG_``		1.8529	PARENT_DEP_CSUBJ
-	-2.3004	CHILD_POSTAG_HYPH		1.7568	CHILD_DEP_DOBJ||XCOMP
-	-2.1355	CHILD_DEP_INTJ 		1.6884	VERB
-	-2.0063	FOLLOWING_POSTAG_WRB		1.5498	FOLLOWING_POSTAG_RB
-	-1.9546	PARENT_DEP_PCOMP		1.4023	PARENT_DEP_ADVMOD||CONJ
-	-1.8537	PARENT_POSTAG_VBZ		1.3969	CHILD_DEP_POBJ
+	-2.5549	CHILD_DEP_AGENT		2.3775	PARENT_DEP_ADVMOD||CONJ
+	-2.3709	CHILD_POSTAG_``		2.2319	CHILD_DEP_DOBJ||XCOMP
+	-2.0919	PARENT_DEP_AMOD		2.1958	CHILD_POSTAG_-RRB-
+	-1.8619	PARENT_POSTAG_VBZ		1.7032	CHILD_DEP_NPADVMOD
+	-1.8443	CHILD_DEP_CSUBJ		1.6896	FOLLOWING_POSTAG_MD
+	-1.8137	CHILD_POSTAG_HYPH		1.5639	PARENT_DEP_OPRD
+	-1.7267	CHILD_DEP_INTJ 		1.5519	PARENT_POS_PROPN
+	-1.6111	PARENT_POSTAG_CD		1.5519	PARENT_POSTAG_NNP
 
 Logistic Regression
-	-1.9269	CHILD_DEP_AGENT		1.8322	CHILD_POSTAG_-RRB-
-	-1.9033	CHILD_POSTAG_HYPH		1.3047	VERB
-	-1.6845	PARENT_POSTAG_VBZ		1.2598	CHILD_DEP_NPADVMOD
-	-1.4534	CHILD_DEP_INTJ 		1.1426	FOLLOWING_POSTAG_RB
-	-1.4403	FOLLOWING_POSTAG_-RRB-		1.1084	PARENT_POS_PROPN
-	-1.4358	CHILD_DEP_NSUBJ		1.1084	PARENT_POSTAG_NNP
-	-1.4301	PARENT_DEP_PCOMP		1.0633	CHILD_POSTAG_MD
-	-1.4123	CHILD_POSTAG_``		1.0621	CHILD_DEP_ADVCL
-
-LinearSVC
-	-1.3935	CHILD_POSTAG_``		1.2202	CHILD_DEP_ADVMOD||XCOMP
-	-1.3363	FOLLOWING_POSTAG_-RRB-		1.2070	CHILD_DEP_POBJ
-	-1.0491	CHILD_DEP_AGENT		1.0620	CHILD_POSTAG_-RRB-
-	-0.9386	FOLLOWING_POSTAG_WRB		1.0486	PARENT_DEP_CSUBJ
-	-0.8731	CHILD_DEP_INTJ 		0.9969	CHILD_POSTAG_RBS
-	-0.8702	CHILD_POSTAG_HYPH		0.9537	CHILD_DEP_DOBJ||XCOMP
-	-0.8037	PARENT_POSTAG_PRP		0.8780	PARENT_DEP_NUMMOD
-	-0.8037	PARENT_POS_PRON		0.7642	VERB
+	-1.5202	CHILD_DEP_AGENT		1.2352	CHILD_DEP_NPADVMOD
+	-1.4173	PARENT_POSTAG_VBZ		1.1783	CHILD_POSTAG_-RRB-
+	-1.3431	CHILD_DEP_NSUBJ		1.0003	VERB
+	-1.1485	CHILD_POSTAG_HYPH		0.9728	PARENT_POS_PROPN
+	-0.9715	CHILD_POS_ADJ  		0.9728	PARENT_POSTAG_NNP
+	-0.9480	CHILD_DEP_ATTR 		0.9693	CHILD_DEP_MARK
+	-0.9114	CHILD_POSTAG_``		0.9398	PARENT_POSTAG_VB
+	-0.8811	CHILD_DEP_CSUBJ		0.8721	CHILD_POSTAG_:
 </pre>
 </div>
 </div>
@@ -1076,14 +1429,14 @@ LinearSVC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>Note: Because <code>SVC</code> is using the nonlinear RBF kernel, we cannot show the most informative features (<code>coef_ is only available when using a linear kernel</code>). The same applies for <code>Random Forest</code>.</em></p>
+<p><em>Note: Because <code>CalibratedClassifierCV</code> has no attribute <code>coef_</code>, we cannot show the most informative features for <code>LinearSVC</code> while it's wrapped. <code>Random Forest</code> and <code>Voting</code> also lack <code>coef_</code>.</em></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s2">&quot;JJS&quot;</span><span class="p">)</span>
@@ -1099,7 +1452,7 @@ LinearSVC
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[24]:</div>
+<div class="prompt output_prompt">Out[30]:</div>
 
 
 
@@ -1139,101 +1492,6 @@ LinearSVC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The <code>Random Forest</code> has another built-in way of determining "feature importance".</p>
-<p><strong>TODO</strong>: How to maps feature #s to feature names?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># http://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html</span>
-
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">numpy</span> <span class="k">import</span> <span class="n">std</span><span class="p">,</span> <span class="n">argsort</span>
-
-<span class="n">importances</span> <span class="o">=</span> <span class="n">random_forest</span><span class="o">.</span><span class="n">_clf</span><span class="o">.</span><span class="n">feature_importances_</span>
-<span class="n">std</span> <span class="o">=</span> <span class="n">std</span><span class="p">([</span><span class="n">tree</span><span class="o">.</span><span class="n">feature_importances_</span> <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">random_forest</span><span class="o">.</span><span class="n">_clf</span><span class="o">.</span><span class="n">estimators_</span><span class="p">],</span>
-             <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">indices</span> <span class="o">=</span> <span class="n">argsort</span><span class="p">(</span><span class="n">importances</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="n">num_features</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">random_forest</span><span class="o">.</span><span class="n">_clf</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">)</span>
-
-<span class="c1"># Plot the feature importances of the forest</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Feature importances&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_features</span><span class="p">),</span> <span class="n">importances</span><span class="p">[</span><span class="n">indices</span><span class="p">],</span>
-       <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">std</span><span class="p">[</span><span class="n">indices</span><span class="p">],</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_features</span><span class="p">),</span> <span class="n">indices</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_features</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-
-<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_features</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">. feature </span><span class="si">%d</span><span class="s2"> (</span><span class="si">%f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">indices</span><span class="p">[</span><span class="n">f</span><span class="p">],</span> <span class="n">importances</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">f</span><span class="p">]]))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[25]:</div>
-
-
-
-<div class="output_png output_subarea ">
-<img src="/assets/imgs/nlp_classifier/nlp_classifier_51_0.png">
-</div>
-
-</div>
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[25]:</div>
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>1. feature 32 (0.130005)
-2. feature 243 (0.044240)
-3. feature 238 (0.039566)
-4. feature 98 (0.035817)
-5. feature 107 (0.022575)
-6. feature 76 (0.022413)
-7. feature 91 (0.021481)
-8. feature 104 (0.020507)
-9. feature 70 (0.019955)
-10. feature 11 (0.018632)
-11. feature 264 (0.017018)
-12. feature 47 (0.015088)
-13. feature 23 (0.015034)
-14. feature 92 (0.013961)
-15. feature 109 (0.013490)
-16. feature 54 (0.013486)
-17. feature 12 (0.013276)
-18. feature 86 (0.013001)
-19. feature 63 (0.012677)
-20. feature 99 (0.012374)
-...
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <br>
 <h4 id="Scikit-Learn-metrics:-Confusion-matrix,-Classification-report,-F1-score,-Log-loss">Scikit Learn metrics: Confusion matrix, Classification report, F1 score, Log loss<a class="anchor-link" href="#Scikit-Learn-metrics:-Confusion-matrix,-Classification-report,-F1-score,-Log-loss">&#182;</a></h4><p><a href="http://scikit-learn.org/stable/modules/model_evaluation.html">http://scikit-learn.org/stable/modules/model_evaluation.html</a></p>
 
@@ -1242,7 +1500,7 @@ LinearSVC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="k">import</span> <span class="n">metrics</span>
@@ -1271,6 +1529,18 @@ LinearSVC
     <span class="n">predictions</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">predict</span><span class="p">)</span>
     <span class="c1"># need to convert labels to binary classification of 0 or 1</span>
     <span class="k">return</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_auc_score</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">l</span> <span class="o">==</span> <span class="s1">&#39;pos&#39;</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">],</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">predictions</span><span class="p">],</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;weighted&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">precision_recall_curve</span><span class="p">(</span><span class="n">predict</span><span class="p">):</span>
+    <span class="n">predictions</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">predict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">metrics</span><span class="o">.</span><span class="n">precision_recall_curve</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">predictions</span><span class="p">],</span> <span class="n">pos_label</span><span class="o">=</span><span class="s1">&#39;pos&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">average_precision_score</span><span class="p">(</span><span class="n">predict</span><span class="p">):</span>
+    <span class="n">predictions</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">predict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">metrics</span><span class="o">.</span><span class="n">average_precision_score</span><span class="p">([</span><span class="mi">1</span> <span class="k">if</span> <span class="n">l</span> <span class="o">==</span> <span class="s1">&#39;pos&#39;</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">],</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">predictions</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">roc_curve</span><span class="p">(</span><span class="n">predict</span><span class="p">):</span>
+    <span class="n">predictions</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">predict</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">metrics</span><span class="o">.</span><span class="n">roc_curve</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">predictions</span><span class="p">],</span> <span class="n">pos_label</span><span class="o">=</span><span class="s1">&#39;pos&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1280,7 +1550,7 @@ LinearSVC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SGD&#39;</span><span class="p">)</span>
@@ -1289,11 +1559,8 @@ LinearSVC
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Logistic Regression&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">lr_predict</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SVC&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">svc_predict</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LinearSVC&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">linear_svc_predict</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">linear_svc_predict</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Random Forest&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">rf_predict</span><span class="p">))</span>
@@ -1309,52 +1576,43 @@ LinearSVC
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[27]:</div>
+<div class="prompt output_prompt">Out[32]:</div>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>SGD
              precision    recall  f1-score   support
 
-        neg       0.90      0.75      0.82       472
-        pos       0.78      0.91      0.84       446
+        neg       0.90      0.75      0.82       470
+        pos       0.78      0.91      0.84       447
 
-avg / total       0.84      0.83      0.83       918
+avg / total       0.84      0.83      0.83       917
 
 
 Logistic Regression
              precision    recall  f1-score   support
 
-        neg       0.89      0.77      0.82       472
-        pos       0.79      0.89      0.84       446
+        neg       0.89      0.79      0.84       470
+        pos       0.80      0.89      0.85       447
 
-avg / total       0.84      0.83      0.83       918
-
-
-SVC
-             precision    recall  f1-score   support
-
-        neg       0.85      0.77      0.81       472
-        pos       0.78      0.86      0.82       446
-
-avg / total       0.82      0.81      0.81       918
+avg / total       0.85      0.84      0.84       917
 
 
 LinearSVC
              precision    recall  f1-score   support
 
-        neg       0.89      0.78      0.83       472
-        pos       0.79      0.90      0.84       446
+        neg       0.88      0.78      0.83       470
+        pos       0.80      0.89      0.84       447
 
-avg / total       0.84      0.84      0.84       918
+avg / total       0.84      0.83      0.83       917
 
 
 Random Forest
              precision    recall  f1-score   support
 
-        neg       0.86      0.78      0.82       472
-        pos       0.79      0.86      0.82       446
+        neg       0.88      0.80      0.84       470
+        pos       0.81      0.89      0.85       447
 
-avg / total       0.82      0.82      0.82       918
+avg / total       0.85      0.84      0.84       917
 
 </pre>
 </div>
@@ -1366,7 +1624,45 @@ avg / total       0.82      0.82      0.82       918
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Voting&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">voting_predict</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[35]:</div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Voting
+             precision    recall  f1-score   support
+
+        neg       0.89      0.79      0.84       470
+        pos       0.80      0.89      0.85       447
+
+avg / total       0.85      0.84      0.84       917
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Layout</span><span class="se">\n</span><span class="s1">[[tn   fp]</span><span class="se">\n</span><span class="s1"> [fn   tp]]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -1377,11 +1673,8 @@ avg / total       0.82      0.82      0.82       918
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Logistic Regression&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">lr_predict</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SVC&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">svc_predict</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LinearSVC&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">linear_svc_predict</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">linear_svc_predict</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Random Forest&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">rf_predict</span><span class="p">))</span>
@@ -1397,7 +1690,7 @@ avg / total       0.82      0.82      0.82       918
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[28]:</div>
+<div class="prompt output_prompt">Out[36]:</div>
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Layout
@@ -1405,24 +1698,53 @@ avg / total       0.82      0.82      0.82       918
  [fn   tp]]
 
 SGD
-[[355 117]
- [ 39 407]]
+[[353 117]
+ [ 39 408]]
 
 Logistic Regression
-[[363 109]
- [ 47 399]]
-
-SVC
-[[365 107]
- [ 63 383]]
+[[373  97]
+ [ 48 399]]
 
 LinearSVC
-[[366 106]
- [ 43 403]]
+[[368 102]
+ [ 50 397]]
 
 Random Forest
-[[367 105]
- [ 61 385]]
+[[377  93]
+ [ 51 396]]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Voting&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">voting_predict</span><span class="p">))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[37]:</div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Voting
+[[373  97]
+ [ 47 400]]
 </pre>
 </div>
 </div>
@@ -1443,12 +1765,12 @@ Random Forest
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;SGD: {log_loss(sgd_predict)}&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Logistic Regression: {log_loss(lr_predict)}&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;SVC: {log_loss(svc_predict)}&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;LinearSVC: {log_loss(linear_svc_predict)}&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Random Forest: {log_loss(rf_predict)}&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -1462,13 +1784,43 @@ Random Forest
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[29]:</div>
+<div class="prompt output_prompt">Out[38]:</div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>SGD: 0.37847249143305395
-Logistic Regression: 0.3731162798963883
-SVC: 0.4150758412082994
-Random Forest: 0.39579833325412017
+<pre>SGD: 0.36957712487581706
+Logistic Regression: 0.3602890831167405
+LinearSVC: 0.36916111074994923
+Random Forest: 0.38073002357683455
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Voting: {log_loss(voting_predict)}&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[39]:</div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Voting: 0.3505806495460855
 </pre>
 </div>
 </div>
@@ -1489,12 +1841,12 @@ Random Forest: 0.39579833325412017
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;SGD: {roc_auc_score(sgd_predict)}&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Logistic Regression: {roc_auc_score(lr_predict)}&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;SVC: {roc_auc_score(svc_predict)}&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;LinearSVC: {roc_auc_score(linear_svc_predict)}&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Random Forest: {roc_auc_score(rf_predict)}&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -1508,13 +1860,13 @@ Random Forest: 0.39579833325412017
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[30]:</div>
+<div class="prompt output_prompt">Out[40]:</div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>SGD: 0.9158955308961009
-Logistic Regression: 0.9168170935623623
-SVC: 0.8879588812039219
-Random Forest: 0.9088888044387019
+<pre>SGD: 0.9202865438621544
+Logistic Regression: 0.9209814841258509
+LinearSVC: 0.9181636441525061
+Random Forest: 0.9228782902565567
 </pre>
 </div>
 </div>
@@ -1523,46 +1875,12 @@ Random Forest: 0.9088888044387019
 </div>
 
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><em>Note: We cannot compute <code>log_loss</code> or <code>roc_auc_score</code> for <code>LinearSVC</code> because it does not provide probability estimates.</em></p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Performance-on-sample-tasks">Performance on sample tasks<a class="anchor-link" href="#Performance-on-sample-tasks">&#182;</a></h4>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sample_tasks</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Mow lawn&quot;</span><span class="p">,</span> <span class="s2">&quot;Mow the lawn&quot;</span><span class="p">,</span> <span class="s2">&quot;Buy new shoes&quot;</span><span class="p">,</span> <span class="s2">&quot;Feed the dog&quot;</span><span class="p">,</span> <span class="s2">&quot;Send report to Kyle&quot;</span><span class="p">,</span> <span class="s2">&quot;Send the report to Kyle&quot;</span><span class="p">,</span> <span class="s2">&quot;Peel the potatoes&quot;</span><span class="p">]</span>
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="n">featurize</span><span class="p">(</span><span class="n">nlp</span><span class="p">(</span><span class="n">task</span><span class="p">))</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">sample_tasks</span><span class="p">]</span>
-
-<span class="n">tasks_dummy</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">)</span><span class="o">*</span><span class="mf">1.0</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">dummy</span><span class="o">.</span><span class="n">classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">dummy</span><span class="o">.</span><span class="n">prob_classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">))]</span>
-<span class="n">tasks_logistic</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">logistic_regression</span><span class="o">.</span><span class="n">classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">logistic_regression</span><span class="o">.</span><span class="n">prob_classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">))]</span>
-<span class="n">tasks_svc</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">svc</span><span class="o">.</span><span class="n">classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">svc</span><span class="o">.</span><span class="n">prob_classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">))]</span>
-<span class="n">tasks_linear_svc</span> <span class="o">=</span> <span class="n">linear_svc</span><span class="o">.</span><span class="n">classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>
-<span class="n">tasks_sgd</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sgd</span><span class="o">.</span><span class="n">classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">sgd</span><span class="o">.</span><span class="n">prob_classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">))]</span>
-<span class="n">tasks_rf</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">random_forest</span><span class="o">.</span><span class="n">classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">random_forest</span><span class="o">.</span><span class="n">prob_classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">))]</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Dummy: </span><span class="si">{tasks_dummy}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;LogisticRegression: </span><span class="si">{tasks_logistic}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;SVC: </span><span class="si">{tasks_svc}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;LinearSVC: </span><span class="si">{tasks_linear_svc}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;SGD: </span><span class="si">{tasks_sgd}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Random Forest: </span><span class="si">{tasks_rf}</span><span class="s1">&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Voting: {roc_auc_score(voting_predict)}&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1575,15 +1893,10 @@ Random Forest: 0.9088888044387019
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[31]:</div>
+<div class="prompt output_prompt">Out[41]:</div>
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Dummy: [(&#39;neg&#39;, 0.0), (&#39;neg&#39;, 0.0), (&#39;neg&#39;, 0.0), (&#39;neg&#39;, 0.0), (&#39;pos&#39;, 1.0), (&#39;neg&#39;, 0.0), (&#39;pos&#39;, 1.0)]
-LogisticRegression: [(&#39;pos&#39;, 0.59993632091708504), (&#39;pos&#39;, 0.80545738462427463), (&#39;pos&#39;, 0.90904984569308278), (&#39;pos&#39;, 0.80545738462427463), (&#39;pos&#39;, 0.85428416471513524), (&#39;pos&#39;, 0.80545738462427463), (&#39;pos&#39;, 0.82428633915248184)]
-SVC: [(&#39;pos&#39;, 0.79790817731030483), (&#39;pos&#39;, 0.74224643977964966), (&#39;pos&#39;, 0.85309553545012395), (&#39;pos&#39;, 0.74224643977964966), (&#39;pos&#39;, 0.82893669789024926), (&#39;pos&#39;, 0.74224643977964966), (&#39;pos&#39;, 0.80199263468059634)]
-LinearSVC: [&#39;pos&#39;, &#39;pos&#39;, &#39;pos&#39;, &#39;pos&#39;, &#39;pos&#39;, &#39;pos&#39;, &#39;pos&#39;]
-SGD: [(&#39;pos&#39;, 0.59646047671669478), (&#39;pos&#39;, 0.85159259765683115), (&#39;pos&#39;, 0.93425820756426969), (&#39;pos&#39;, 0.85159259765683115), (&#39;pos&#39;, 0.90840726546647588), (&#39;pos&#39;, 0.85159259765683115), (&#39;pos&#39;, 0.86340530996514875)]
-Random Forest: [(&#39;pos&#39;, 0.5399701926070386), (&#39;pos&#39;, 0.92400000000000004), (&#39;pos&#39;, 0.84232587787459112), (&#39;pos&#39;, 0.92400000000000004), (&#39;pos&#39;, 0.8786342592592592), (&#39;pos&#39;, 0.92400000000000004), (&#39;pos&#39;, 0.8998685446009389)]
+<pre>Voting: 0.9323290018563473
 </pre>
 </div>
 </div>
@@ -1597,7 +1910,261 @@ Random Forest: [(&#39;pos&#39;, 0.5399701926070386), (&#39;pos&#39;, 0.924000000
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><em>Note: <code>LinearSVC</code> is not implemented to provide probability estimates (<a href="https://github.com/scikit-learn/scikit-learn/issues/4820">https://github.com/scikit-learn/scikit-learn/issues/4820</a>)</em></p>
+<h4 id="Performance-on-sample-tasks">Performance on sample tasks<a class="anchor-link" href="#Performance-on-sample-tasks">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sample_tasks</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Mow lawn&quot;</span><span class="p">,</span> <span class="s2">&quot;Mow the lawn&quot;</span><span class="p">,</span> <span class="s2">&quot;Buy new shoes&quot;</span><span class="p">,</span> <span class="s2">&quot;Feed the dog&quot;</span><span class="p">,</span> <span class="s2">&quot;Send report to Kyle&quot;</span><span class="p">,</span> <span class="s2">&quot;Send the report to Kyle&quot;</span><span class="p">,</span> <span class="s2">&quot;Peel the potatoes&quot;</span><span class="p">]</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="n">featurize</span><span class="p">(</span><span class="n">nlp</span><span class="p">(</span><span class="n">task</span><span class="p">))</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">sample_tasks</span><span class="p">]</span>
+
+<span class="n">tasks_dummy</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">)</span><span class="o">*</span><span class="mf">1.0</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">dummy</span><span class="o">.</span><span class="n">classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">dummy</span><span class="o">.</span><span class="n">prob_classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">))]</span>
+<span class="n">tasks_logistic</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">logistic_regression_opt</span><span class="o">.</span><span class="n">classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">logistic_regression_opt</span><span class="o">.</span><span class="n">prob_classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">))]</span>
+<span class="n">tasks_linear_svc</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">linear_svc_opt</span><span class="o">.</span><span class="n">classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">linear_svc_opt</span><span class="o">.</span><span class="n">prob_classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">))]</span>
+<span class="n">tasks_sgd</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sgd_opt</span><span class="o">.</span><span class="n">classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">sgd_opt</span><span class="o">.</span><span class="n">prob_classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">))]</span>
+<span class="n">tasks_rf</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">random_forest_opt</span><span class="o">.</span><span class="n">classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">random_forest_opt</span><span class="o">.</span><span class="n">prob_classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">))]</span>
+<span class="n">tasks_voting</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">voting</span><span class="o">.</span><span class="n">classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">voting</span><span class="o">.</span><span class="n">prob_classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">))]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Dummy: </span><span class="si">{tasks_dummy}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;LogisticRegression: </span><span class="si">{tasks_logistic}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;LinearSVC: </span><span class="si">{tasks_linear_svc}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;SGD: </span><span class="si">{tasks_sgd}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Random Forest: </span><span class="si">{tasks_rf}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;Voting: </span><span class="si">{tasks_voting}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[43]:</div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dummy: [(&#39;neg&#39;, 0.0), (&#39;neg&#39;, 0.0), (&#39;neg&#39;, 0.0), (&#39;neg&#39;, 0.0), (&#39;pos&#39;, 1.0), (&#39;neg&#39;, 0.0), (&#39;pos&#39;, 1.0)]
+LogisticRegression: [(&#39;pos&#39;, 0.57862802137868552), (&#39;pos&#39;, 0.82713746377398456), (&#39;pos&#39;, 0.94137130453808182), (&#39;pos&#39;, 0.82713746377398456), (&#39;pos&#39;, 0.72197606789783497), (&#39;pos&#39;, 0.82713746377398456), (&#39;pos&#39;, 0.84117203120422435)]
+LinearSVC: [(&#39;pos&#39;, 0.62485948769521327), (&#39;pos&#39;, 0.73801945489589904), (&#39;pos&#39;, 0.8742231132727718), (&#39;pos&#39;, 0.73801945489589904), (&#39;pos&#39;, 0.70967647141483869), (&#39;pos&#39;, 0.73801945489589904), (&#39;pos&#39;, 0.76609305638857117)]
+SGD: [(&#39;pos&#39;, 0.60621072131342246), (&#39;pos&#39;, 0.80304033735548375), (&#39;pos&#39;, 0.9300899085422456), (&#39;pos&#39;, 0.80304033735548375), (&#39;pos&#39;, 0.70050625854824256), (&#39;pos&#39;, 0.80304033735548375), (&#39;pos&#39;, 0.82347772218132842)]
+Random Forest: [(&#39;pos&#39;, 0.52071951131625149), (&#39;pos&#39;, 0.87285887236391291), (&#39;pos&#39;, 0.74832988482365803), (&#39;pos&#39;, 0.87285887236391291), (&#39;pos&#39;, 0.80143704121964976), (&#39;pos&#39;, 0.87285887236391291), (&#39;pos&#39;, 0.84073885809507198)]
+
+Voting: [(&#39;pos&#39;, 0.56069809800114434), (&#39;pos&#39;, 0.82035364117265086), (&#39;pos&#39;, 0.83252323110236282), (&#39;pos&#39;, 0.82035364117265086), (&#39;pos&#39;, 0.75629257058438037), (&#39;pos&#39;, 0.82035364117265086), (&#39;pos&#39;, 0.81835575359455703)]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Voting-Model:-Curves">Voting Model: Curves<a class="anchor-link" href="#Voting-Model:-Curves">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">prc_thresholds</span> <span class="o">=</span> <span class="n">precision_recall_curve</span><span class="p">(</span><span class="n">voting_predict</span><span class="p">)</span>
+<span class="n">average_precision</span> <span class="o">=</span> <span class="n">average_precision_score</span><span class="p">(</span><span class="n">voting_predict</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">recall</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+         <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">recall</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Recall&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Precision&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;2-class Precision-Recall curve: AUC=</span><span class="si">{0:0.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+          <span class="n">average_precision</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[44]:</div>
+
+
+
+<div class="output_png output_subarea ">
+<img src="/assets/imgs/nlp_classifier/nlp_classifier_70_0.png"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">roc_thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">voting_predict</span><span class="p">)</span>
+<span class="n">area</span> <span class="o">=</span> <span class="n">roc_auc_score</span><span class="p">(</span><span class="n">voting_predict</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+         <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Receiving Operating Characteristic: area=</span><span class="si">{0:0.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+          <span class="n">area</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[45]:</div>
+
+
+
+<div class="output_png output_subarea ">
+<img src="/assets/imgs/nlp_classifier/nlp_classifier_71_0.png"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Considered a bad idea to actually adjust predictions based on optimal <code>Threshold</code> from holdout test data curves - it's a form of overfitting on the test set: <a href="https://stackoverflow.com/questions/32627926/scikit-changing-the-threshold-to-create-multiple-confusion-matrixes">https://stackoverflow.com/questions/32627926/scikit-changing-the-threshold-to-create-multiple-confusion-matrixes</a> (although using ROC to do this might be ok? or on cross-validated training data? <a href="https://stackoverflow.com/a/35300649">https://stackoverflow.com/a/35300649</a>)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Pickling-the-Voting-Model">Pickling the Voting Model<a class="anchor-link" href="#Pickling-the-Voting-Model">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Exporting the voting model to model.pkl&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;model.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">voting</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[47]:</div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Exporting the voting model to model.pkl
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load the model back into memory</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Importing the model from model.pkl&quot;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;model.pkl&#39;</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">loaded_clf</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+<span class="c1"># predict on a new sample</span>
+<span class="n">task_new</span> <span class="o">=</span> <span class="s1">&#39;Buy ice cream&#39;</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;New sample: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task_new</span><span class="p">))</span>
+
+<span class="c1"># score on the new sample</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">featurize</span><span class="p">(</span><span class="n">nlp</span><span class="p">(</span><span class="n">task_new</span><span class="p">));</span>
+<span class="n">predict</span> <span class="o">=</span> <span class="p">[(</span><span class="n">l</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="s1">&#39;pos&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">l</span><span class="p">,</span><span class="n">p</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">loaded_clf</span><span class="o">.</span><span class="n">classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">loaded_clf</span><span class="o">.</span><span class="n">prob_classify_many</span><span class="p">(</span><span class="n">features</span><span class="p">))]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Predicted class is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">predict</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[48]:</div>
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Importing the model from model.pkl
+New sample: Buy ice cream
+Predicted class is (&#39;pos&#39;, 0.90561978802951215)
+</pre>
+</div>
+</div>
 
 </div>
 </div>
@@ -1616,12 +2183,12 @@ Random Forest: [(&#39;pos&#39;, 0.5399701926070386), (&#39;pos&#39;, 0.924000000
 </li>
 <li>Phrase vectorizations of all 0s - how problematic is this?</li>
 <li>Varying feature vector lengths - does this matter?</li>
-<li>Voting - POS taggers and classifiers<ul>
-<li>Ensembles (<a href="http://scikit-learn.org/stable/modules/ensemble.html">http://scikit-learn.org/stable/modules/ensemble.html</a>)</li>
+<li>Voting - POS taggers<ul>
+<li><a href="http://scikit-learn.org/stable/modules/ensemble.html">SciKit Learn: Ensembles</a></li>
+<li><a href="https://mlwave.com/kaggle-ensembling-guide/">Kaggle Ensembling Guide</a></li>
 </ul>
 </li>
 <li>Combining verb phrases</li>
-<li>Cross validation, grid search</li>
 <li>Look at examples from different quadrants of the confusion matrix - is there something we can learn?<ul>
 <li>Same idea with the classification report</li>
 </ul>
