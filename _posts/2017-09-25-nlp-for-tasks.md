@@ -6,7 +6,9 @@ category: Portfolio-Building
 tags: [ ]
 ---
 
-_Everything between this sentence and the [Wrap Up](/portfolio-building/2017/09/25/nlp-for-tasks.html#wrap-up) section has been converted from my [nlp_classifier](https://github.com/iconix/nlp-sandbox/blob/master/nlp_classifier.ipynb) notebook[^nbconvert] on GitHub._
+_**UPDATE 11/17/2017**: I wrote a follow-up post about deploying this model to a web service via Azure ML - [check it out](/career/2017/11/16/azure-ml.html)!_
+
+_Everything between this sentence and the [Wrap Up](/portfolio-building/2017/09/25/nlp-for-tasks.html#wrap-up) section has been converted from my [nlp_classifier notebook](https://github.com/iconix/nlp-sandbox/blob/master/nlp_classifier.ipynb)[^nbconvert] on GitHub._
 
 {% include notebooks/nlp_classifier.html %}
 

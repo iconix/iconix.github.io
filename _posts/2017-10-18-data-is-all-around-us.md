@@ -26,7 +26,32 @@ This will allow me to set up my coding environment, reacquaint myself with nitty
 
 ---
 
-# R Tips
+## Code
+
+GitHub repo: [https://github.com/iconix/love-actually](https://github.com/iconix/love-actually) - includes the Jupyter (Python) notebook, Shiny app code, and documentation I added to the R code.
+
+Shiny app: [https://iconix.shinyapps.io/love-actually-network/](https://iconix.shinyapps.io/love-actually-network/)
+
+## R Walkthrough
+
+My first pass through the R code, way back in July, was in order to understand what each line does. There was plenty unfamiliar, and the code could get dense at times. Feel free to take a look at the [comments I added](https://github.com/iconix/love-actually/blob/master/r/love_actually.R) to David's original R file during this process - most are about defining what different libraries and functions in R do.
+
+# From R to Python
+
+**My goal**: Recreate `love_actually_data.rda` in Python using pandas; then convert output into `.Rdata` format and feed into Shiny app.
+
+[Notebook](https://github.com/iconix/love-actually/blob/master/python/love-actually.ipynb) embed below[^cmd].
+
+---
+{% include notebooks/love-actually.html %}
+
+# Shiny App
+
+Here is the grande finale output of this code - try hovering over the nodes and moving the slider around!
+
+<iframe src="https://iconix.shinyapps.io/love-actually-network/" style="border: none; width: 100%; height: 863px"></iframe>
+
+### R Tips
 
 **1. Environment setup**
 
@@ -44,27 +69,6 @@ My first instinct was to Google libraries and functions that I didn't recognize,
 **4. Install libraries with `install.packages()`**
 
 I forgot and had to look up this command.
-
-# R Walkthrough
-
-My first pass through the R code, way back in July, was in order to understand what each line does. There was plenty unfamiliar, and the code could get dense at times. Feel free to take a look at the [comments I added](https://github.com/iconix/love-actually/blob/master/r/love_actually.R) to David's original R file during this process - most are about defining what different libraries and functions in R do.
-
-# From R to Python
-
-**My goal**: Recreate `love_actually_data.rda` in Python using pandas; then convert output into `.Rdata` format and feed into Shiny app.
-
-Notebook embed below[^cmd].
-
----
-{% include notebooks/love-actually.html %}
-
-# Shiny App
-
-Here is the grande finale output of this code - try hovering over the nodes and moving the slider around!
-
-<iframe src="https://iconix.shinyapps.io/love-actually-network/" style="border: none; width: 100%; height: 863px"></iframe>
-
-GitHub repo: [https://github.com/iconix/love-actually](https://github.com/iconix/love-actually)
 
 #### References
 
