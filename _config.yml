@@ -31,7 +31,7 @@ force-https: True
 lang: "en"
 author: "Nadja Rhodes"
 title: "{ Nadja Rhodes }"
-description: "Nadja Rhodes is a software developer and aspiring data scientist. I like to code for the web, and I blog (mainly) as I learn to tell stories with data. Opinions expressed are mine."
+description: "Nadja Rhodes is a software developer and aspiring data scientist. I like to code for the web, and I blog (mainly) as I mess with data and build up a portfolio. Opinions expressed are mine."
 keywords: "rhodes, nadja, software, development, data, science, analytics, code, web, stanford, microsoft"
 favicon: "/img/favicon.ico"
 
@@ -55,15 +55,15 @@ type-speed: 10
 start-delay: 200
 delete-delay: 60000
 lines: # You can add HTML Tags in the Text
-  - text: "Do something today that your future self will thank you for."
-  - text: "An investment in knowledge pays the best interest."
-  - text: "Better late than never."
-  - text: "Everyone you will ever meet knows something that you don't."
-  - text: "If we are facing in the right direction, all we have to do is keep on walking."
-  - text: "The new multitasking: procrastinating on many things at once."
-  #- text: "Same old slippers. Same old rice. Same old glimpse of paradise."
-  - text: "Without deviation from the norm, progress is not possible."
-  - text: "You don't have to see the whole staircase. Just take the first step."
+  - text: "\\\"Do something today that your future self will thank you for.\\\""
+  - text: "\\\"An investment in knowledge pays the best interest.\\\""
+  - text: "\\\"Better late than never.\\\""
+  - text: "\\\"Everyone you will ever meet knows something that you don't.\\\""
+  - text: "\\\"If we are facing in the right direction, all we have to do is keep on walking.\\\""
+  - text: "\\\"The new multitasking: procrastinating on many things at once.\\\""
+  - text: "\\\"Same old slippers. Same old rice. Same old glimpse of paradise.\\\""
+  - text: "\\\"Without deviation from the norm, progress is not possible.\\\""
+  - text: "\\\"You don't have to see the whole staircase. Just take the first step.\\\""
 
 me-img: "/img/allo-moji1.png"
 
@@ -156,6 +156,9 @@ events:
   - image: "/img/timeline/paradiso.png"
     date: "June 23-24, 2017"
     description: 'Attended <a href="http://paradisofestival.com/">Paradiso</a> at the Gorge, WA #LiveMusic'
+  - image: "/img/timeline/fastai.png"
+    date: "January 2018"
+    description: 'Completed fast.ai&#39;s <a href="http://course.fast.ai/">Practical Deep Learning For Coders, Part 1</a>'
   - image: "/img/timeline/adventurecat.png"
     date: "Today"
     description: 'Adventure Time! (<a href="https://github.com/iconix/resume/blob/master/latex/datascience/resume.pdf">resume</a>)'
@@ -220,7 +223,7 @@ exclude: ["LICENSE", "README.md", "CONTRIBUTING", "CONTRIBUTORS", "scripts"]
 
 # Pagination path
 
-paginate_path: "blog/page:num/"
+paginate_path: "blog/:num/"
 
 # Enable minification SASS
 

@@ -194,7 +194,7 @@
 			<rect x="0" y="540" width="90" height="72" class="st2"/>
 			<text x="11.43" y="568.8" class="st3" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Probabilistic Latent <tspan
 						x="13.63" dy="1.2em" class="st4">Semantic Analysis </tspan><tspan x="33.65" dy="1.2em" class="st4">(pLSA)</tspan></text>		</g>
-		<g id="shape64-22" v:mID="64" v:groupContext="shape" v:layerMember="1" transform="translate(63,-303.545)">
+		<g id="shape64-22" v:mID="64" v:groupContext="shape" v:layerMember="1" transform="translate(63,-252)">
 			<title>Process.64</title>
 			<desc>Singular Value Decomposition (SVD)</desc>
 			<v:custProps>
@@ -225,7 +225,7 @@
 			<rect x="0" y="540" width="90" height="72" class="st5"/>
 			<text x="19.69" y="573.6" class="st3" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Singular Value <tspan
 						x="7.25" dy="1.2em" class="st4">Decomposition (SVD)</tspan></text>		</g>
-		<g id="shape65-26" v:mID="65" v:groupContext="shape" v:layerMember="1" transform="translate(531,-303.545)">
+		<g id="shape65-26" v:mID="65" v:groupContext="shape" v:layerMember="1" transform="translate(531,-252)">
 			<title>Process.65</title>
 			<desc>Probabilistic Methods</desc>
 			<v:custProps>
@@ -255,7 +255,7 @@
 			<v:textRect cx="45" cy="576" width="90" height="72"/>
 			<rect x="0" y="540" width="90" height="72" class="st5"/>
 			<text x="6.72" y="578.4" class="st3" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Probabilistic Methods</text>		</g>
-		<g id="shape66-29" v:mID="66" v:groupContext="shape" v:layerMember="1" transform="translate(189,-195.545)">
+		<g id="shape66-29" v:mID="66" v:groupContext="shape" v:layerMember="1" transform="translate(189,-113.645)">
 			<title>Process.66</title>
 			<desc>Matrix Decomposition</desc>
 			<v:custProps>
@@ -285,7 +285,7 @@
 			<v:textRect cx="45" cy="576" width="90" height="72"/>
 			<rect x="0" y="540" width="90" height="72" class="st5"/>
 			<text x="5.9" y="578.4" class="st3" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Matrix Decomposition</text>		</g>
-		<g id="shape68-32" v:mID="68" v:groupContext="shape" v:layerMember="1" transform="translate(306,-303.545)">
+		<g id="shape68-32" v:mID="68" v:groupContext="shape" v:layerMember="1" transform="translate(306,-252)">
 			<title>Process.68</title>
 			<desc>Eigendecomposition</desc>
 			<v:custProps>
@@ -315,7 +315,7 @@
 			<v:textRect cx="45" cy="576" width="90" height="72"/>
 			<rect x="0" y="540" width="90" height="72" class="st6"/>
 			<text x="8.92" y="578.4" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Eigendecomposition</text>		</g>
-		<g id="shape69-35" v:mID="69" v:groupContext="shape" v:layerMember="1" transform="translate(189,-391.2)">
+		<g id="shape69-35" v:mID="69" v:groupContext="shape" v:layerMember="1" transform="translate(189,-378)">
 			<title>Process.69</title>
 			<desc>Principal Component Analysis (PCA)</desc>
 			<v:custProps>
@@ -346,7 +346,7 @@
 			<rect x="0" y="540" width="90" height="72" class="st6"/>
 			<text x="7.93" y="573.6" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Principal Component <tspan
 						x="20.05" dy="1.2em" class="st4">Analysis (PCA)</tspan></text>		</g>
-		<g id="shape70-39" v:mID="70" v:groupContext="shape" v:layerMember="1" transform="translate(306,-106)">
+		<g id="shape70-39" v:mID="70" v:groupContext="shape" v:layerMember="1" transform="translate(306,-378)">
 			<title>Process.70</title>
 			<desc>Linear Discriminant Analysis</desc>
 			<v:custProps>
@@ -377,7 +377,7 @@
 			<rect x="0" y="540" width="90" height="72" class="st6"/>
 			<text x="11.26" y="573.6" class="st7" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Linear Discriminant <tspan
 						x="30.85" dy="1.2em" class="st4">Analysis</tspan></text>		</g>
-		<g id="shape71-43" v:mID="71" v:groupContext="shape" v:layerMember="1" transform="translate(414,-106)">
+		<g id="shape71-43" v:mID="71" v:groupContext="shape" v:layerMember="1" transform="translate(594,-113.645)">
 			<title>Process.71</title>
 			<desc>t-Distributed Stochastic Neighbor Embedding</desc>
 			<v:custProps>
@@ -441,51 +441,51 @@
 			<text x="141.41" y="599.4" class="st9" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Dimensionality Reduction</text>		</g>
 		<g id="shape100-50" v:mID="100" v:groupContext="shape" v:layerMember="0" transform="translate(99,-494.345)">
 			<title>Dynamic connector</title>
-			<path d="M9 612 L9 724.76" class="st10"/>
+			<path d="M9 612 L9 776.31" class="st10"/>
 		</g>
 		<g id="shape101-56" v:mID="101" v:groupContext="shape" v:layerMember="0" transform="translate(351,-494.345)">
 			<title>Dynamic connector.101</title>
-			<path d="M0 612 L0 638.35 L-243 638.35 L-243 724.76" class="st10"/>
+			<path d="M0 612 L0 638.35 L-243 638.35 L-243 776.31" class="st10"/>
 		</g>
-		<g id="shape103-61" v:mID="103" v:groupContext="shape" v:layerMember="0" transform="translate(234,-392.373)">
+		<g id="shape103-61" v:mID="103" v:groupContext="shape" v:layerMember="0" transform="translate(234,-378)">
 			<title>Dynamic connector.103</title>
-			<path d="M0 613.17 L0 622.17 L117 622.17 L117 622.79" class="st10"/>
+			<path d="M0 612 L0 648 L117 648 L117 659.96" class="st10"/>
 		</g>
-		<g id="shape104-66" v:mID="104" v:groupContext="shape" v:layerMember="0" transform="translate(108,-303.545)">
+		<g id="shape104-66" v:mID="104" v:groupContext="shape" v:layerMember="0" transform="translate(108,-252)">
 			<title>Dynamic connector.104</title>
-			<path d="M0 612 L0 630 L126 630 L126 641.96" class="st10"/>
+			<path d="M0 612 L0 660.35 L126 660.35 L126 672.31" class="st10"/>
 		</g>
-		<g id="shape105-71" v:mID="105" v:groupContext="shape" v:layerMember="0" transform="translate(351,-303.545)">
+		<g id="shape105-71" v:mID="105" v:groupContext="shape" v:layerMember="0" transform="translate(351,-252)">
 			<title>Dynamic connector.105</title>
-			<path d="M0 612 L0 630 L-117 630 L-117 641.96" class="st10"/>
+			<path d="M0 612 L0 660.35 L-117 660.35 L-117 672.31" class="st10"/>
 		</g>
 		<g id="shape106-76" v:mID="106" v:groupContext="shape" v:layerMember="0" transform="translate(513,-494.345)">
 			<title>Dynamic connector.106</title>
-			<path d="M0 612 L0 712.8 L63 712.8 L63 724.76" class="st10"/>
+			<path d="M0 612 L0 764.35 L63 764.35 L63 776.31" class="st10"/>
 		</g>
 		<g id="shape107-81" v:mID="107" v:groupContext="shape" v:layerMember="0" transform="translate(639,-494.345)">
 			<title>Dynamic connector.107</title>
-			<path d="M0 612 L0 712.8 L-63 712.8 L-63 724.76" class="st10"/>
+			<path d="M0 612 L0 764.35 L-63 764.35 L-63 776.31" class="st10"/>
 		</g>
-		<g id="shape108-86" v:mID="108" v:groupContext="shape" v:layerMember="0" transform="translate(576,-303.545)">
+		<g id="shape108-86" v:mID="108" v:groupContext="shape" v:layerMember="0" transform="translate(576,-252)">
 			<title>Dynamic connector.108</title>
-			<path d="M0 612 L0 819.9 L-202.5 819.9 L-202.5 831.86" class="st10"/>
+			<path d="M0 612 L0 768.35 L-202.5 768.35 L-202.5 780.31" class="st10"/>
 		</g>
-		<g id="shape109-91" v:mID="109" v:groupContext="shape" v:layerMember="0" transform="translate(459,-106)">
+		<g id="shape109-91" v:mID="109" v:groupContext="shape" v:layerMember="0" transform="translate(639,-113.645)">
 			<title>Dynamic connector.109</title>
-			<path d="M0 612 L0 622.35 L-85.5 622.35 L-85.5 634.31" class="st10"/>
+			<path d="M0 612 L0 630 L-265.5 630 L-265.5 641.96" class="st10"/>
 		</g>
-		<g id="shape110-96" v:mID="110" v:groupContext="shape" v:layerMember="0" transform="translate(351,-106)">
+		<g id="shape110-96" v:mID="110" v:groupContext="shape" v:layerMember="0" transform="translate(342,-378)">
 			<title>Dynamic connector.110</title>
-			<path d="M0 612 L0 622.35 L22.5 622.35 L22.5 634.31" class="st10"/>
+			<path d="M9 612 L9 630 L9 659.96" class="st10"/>
 		</g>
-		<g id="shape111-101" v:mID="111" v:groupContext="shape" v:layerMember="0" transform="translate(234,-195.545)">
+		<g id="shape111-101" v:mID="111" v:groupContext="shape" v:layerMember="0" transform="translate(234,-113.645)">
 			<title>Dynamic connector.111</title>
-			<path d="M0 612 L0 711.9 L139.5 711.9 L139.5 723.86" class="st10"/>
+			<path d="M0 612 L0 630 L139.5 630 L139.5 641.96" class="st10"/>
 		</g>
-		<g id="shape114-106" v:mID="114" v:groupContext="shape" v:layerMember="0" transform="translate(234,-392.373)">
+		<g id="shape114-106" v:mID="114" v:groupContext="shape" v:layerMember="0" transform="translate(234,-378)">
 			<title>Dynamic connector.114</title>
-			<path d="M0 613.17 L0 622.17 L-126 622.17 L-126 622.79" class="st10"/>
+			<path d="M0 612 L0 648 L-126 648 L-126 659.96" class="st10"/>
 		</g>
 	</g>
 </svg>

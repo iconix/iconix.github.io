@@ -239,6 +239,29 @@ a {
     }
 }
 
+.page-navigation {
+    font-size: 18px;
+    display: block;
+    width: auto;
+    overflow: hidden;
+
+    a {
+        display: block;
+        width: 50%;
+        margin: 1em 0;
+    }
+
+    .prev {
+        text-align: left;
+        float: left;
+    }
+
+    .next {
+        text-align: right;
+        float: right;
+    }
+}
+
 @-webkit-keyframes pulse {
     from {
         -webkit-transform: scale(1);
