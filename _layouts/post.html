@@ -36,11 +36,6 @@
 
           {% include share.html %}
 
-          {% if jekyll.environment == "production" %}
-            {% include comments.html %}
-          {% endif %}
-
-
           <div class="page-navigation">
             {% if page.previous.url %}
               <a class="prev" href="{{page.previous.url}}">&laquo; {{page.previous.title}}</a>
@@ -49,6 +44,10 @@
               <a class="next" href="{{page.next.url}}">{{page.next.title}} &raquo;</a>
             {% endif %}
           </div>
+
+          {% if jekyll.environment == "production" %}
+            {% include comments.html %}
+          {% endif %}
 
           <hr />
 
