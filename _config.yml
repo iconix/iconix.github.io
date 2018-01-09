@@ -60,10 +60,11 @@ lines: # You can add HTML Tags in the Text
   - text: "\\\"Better late than never.\\\""
   - text: "\\\"Everyone you will ever meet knows something that you don't.\\\""
   - text: "\\\"If we are facing in the right direction, all we have to do is keep on walking.\\\""
-  - text: "\\\"The new multitasking: procrastinating on many things at once.\\\""
+  - text: "The new multitasking: procrastinating on many things at once."
   - text: "\\\"Same old slippers. Same old rice. Same old glimpse of paradise.\\\""
   - text: "\\\"Without deviation from the norm, progress is not possible.\\\""
   - text: "\\\"You don't have to see the whole staircase. Just take the first step.\\\""
+  - text: "\\\"Vision without action is a daydream.\\\""
 
 me-img: "/img/allo-moji1.png"
 
