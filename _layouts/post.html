@@ -19,7 +19,7 @@
             <strong>{{ page.date | date_to_string }}</strong>
             <small>
               . category:
-              <a class="category" href="{{site.baseurl}}/categories/{{page.category | downcase}}.html">
+              <a class="category" href="{{site.baseurl}}/categories/{{page.category | downcase | parameterize }}.html">
                 {{ page.category }}
               </a>.
               <a href="{{site.baseurl}}{{page.url }}#disqus_thread">Comments</a>

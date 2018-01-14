@@ -2,7 +2,7 @@
 layout: post
 section-type: post
 title: NLP for Task Classification
-category: Portfolio-Building
+category: Portfolio Building
 tags: [ ]
 ---
 

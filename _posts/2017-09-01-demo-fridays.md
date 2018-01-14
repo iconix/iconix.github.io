@@ -2,7 +2,7 @@
 layout: post
 section-type: post
 title: Demo Fridays
-category: career
+category: Career
 tags: []
 ---
 

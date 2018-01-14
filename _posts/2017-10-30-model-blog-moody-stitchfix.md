@@ -2,7 +2,7 @@
 layout: post
 section-type: post
 title: Model Blog&#x3a; Chris Moody of Stitch Fix
-category: blogging
+category: Blogging
 tags: []
 ---
 

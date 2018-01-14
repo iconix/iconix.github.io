@@ -2,7 +2,7 @@
 layout: post
 section-type: post
 title: Data Is All Around Us
-category: Portfolio-Building
+category: Portfolio Building
 tags: [ ] # 'python', 'r'
 ---
 

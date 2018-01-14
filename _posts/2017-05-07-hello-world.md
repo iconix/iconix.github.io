@@ -2,7 +2,7 @@
 layout: post
 section-type: post
 title: Hello, World
-category: blogging
+category: Blogging
 tags: [] # 'machine learning', 'nlp', 'coursera', 'andrew ng', 'scott hanselman', 'data science', 'background', 'computer science', 'stanford', 'onenote', 'microsoft'
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 section-type: post
 title: Model Blog&#x3a; James McCaffrey
-category: blogging
+category: Blogging
 tags: []
 ---
 
