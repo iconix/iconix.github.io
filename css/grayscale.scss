@@ -31,6 +31,16 @@ body {
             }
         }
 
+        #a-onenote > a {
+            color: #fff;
+            text-shadow: 2px 2px 1px #7321a6;
+            &:hover,
+            &:focus {
+                color: #7321a6;
+                text-shadow: none;
+            }
+        }
+
         a:not(.page-scroll) {
             &:hover,
             &:focus {
@@ -489,17 +499,6 @@ body {
 
 .fourofour {
   border: 1px solid $primary-color-dark !important;
-}
-
-/* Added by iconix */
-.a-onenote > a {
-    color: #fff;
-    text-shadow: 2px 2px 1px #7321a6;
-    &:hover,
-    &:focus {
-        color: #7321a6;
-        text-shadow: none;
-    }
 }
 
 /* Added by iconix */
