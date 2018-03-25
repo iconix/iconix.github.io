@@ -122,8 +122,8 @@ events:
     date: "Today"
     description: 'Adventure Time! (<a href="https://github.com/iconix/resume/blob/master/latex/datascience/resume.pdf">resume</a>)'
   - image: "/img/timeline/fastai.png"
-    date: "January 2018"
-    description: 'Completed fast.ai&#39;s <a href="http://course.fast.ai/">Practical Deep Learning For Coders, Part 1</a>'
+    date: "February 2018"
+    description: 'Completed <a href="http://course.fast.ai/">Practical Deep Learning For Coders, Part 1</a> by fast.ai (<a href="/notes/2018/03/25/fast-ai-in-review.html">notes</a>)'
   - image: "/img/timeline/paradiso.png"
     date: "June 23-24, 2017"
     description: 'Attended <a href="http://paradisofestival.com/">Paradiso</a> at the Gorge, WA #LiveMusic'

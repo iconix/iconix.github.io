@@ -12,7 +12,7 @@ I often actually like being the novice in a situation - whether I'm picking up f
 
 _Bonus_: I feel like my line of questioning[^questions] loosened up the rest of the room to ask questions as well, despite the fear of being too _basic_. And I wasn't even lost throughout! We talked about Convolutional Neural Networks, finetuning, VGG, ensembling... and the combination of my [fast.ai coursework](/notes/2017/08/18/fast-week2.html)[^lesson4] and reading [_The Master Algorithm_](/notes/2017/09/23/master-algorithm.html) prepped me for following along quite well. Next time, I will try reading the featured paper before the session.
 
-### References
+#### Footnotes
 
 [^skype]: +60 people on Skype, with a few women sprinkled in there.
 [^group]: The _Deep Learning Reading Group_ is a Microsoft employee community effort to discuss cutting-edge research material in deep learning. They solicit paper recommendations from attendees, and anyone interested can pick up one of those papers and volunteer to moderate a session. Sessions are about 2 hours long, towards the end of the work day, once every two weeks. Today's session was on "Progressive Neural Networks," and it was my first attendance.

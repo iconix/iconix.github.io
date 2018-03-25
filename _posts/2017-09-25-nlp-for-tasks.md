@@ -33,6 +33,6 @@ This notebook was used as part of my second [team-wide demo](/career/2017/09/01/
 >
 > &mdash; Me, three weeks ago
 
-#### References
+#### Footnotes
 
 [^nbconvert]: Huge thanks to [Michele Pratusevich](http://www.mprat.org/blog/2017/03/18/blogging-with-jupyter.html) for the detailed blog post on _Blogging with Jupyter_ - I've been wanting to do this! Last convert: 11/13/2017.

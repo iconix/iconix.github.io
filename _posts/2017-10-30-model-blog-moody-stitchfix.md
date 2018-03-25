@@ -18,7 +18,7 @@ Despite his deeply technical background in things like _whatever astrostatistics
 
 **The biggest point I'd like to take away from Moody's blogging is the importance of _visual language_.** The more I blog, the more I feel like I use too many words per post. I want to push myself to _stitch_ together a more visual portfolio of work[^robinson].
 
-#### References
+#### Footnotes
 
 [^embed]: _Word embeddings_ are a neat way of encoding semantic relationships between words into numeric vectors, which is important because these vectors are what machine learning models accept as input. At the moment, word embeddings appear to be the #1 preferred building block for natural language processing (NLP) in machine learning.
 [^fast-search]: Searching the [fast.ai](/notes/2017/08/18/fast-week2.html) forums for ML-related content has become a solid go-to move for me.

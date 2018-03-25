@@ -520,6 +520,8 @@ a.footnote {
 .footnotes {
     p {
         margin-bottom: 0;
+        font-size: 16px;
+        line-height: 1.5;
     }
     li {
         padding-top: $navbar-height;

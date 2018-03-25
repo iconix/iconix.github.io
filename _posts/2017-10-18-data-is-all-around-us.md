@@ -70,7 +70,7 @@ My first instinct was to Google libraries and functions that I didn't recognize,
 
 I forgot and had to look up this command.
 
-#### References
+#### Footnotes
 
 [^first]: When I first started drafting this post on 4th of July weekend, I had no hands-on experience with Juypter. The fast.ai coursework I [started in mid-July](/portfolio-building/2017/07/26/first-kaggle.html) changed that and helped clear up the "where to start?/where is Python now?" questions I had initially. I got caught up in [various](/notes/2017/08/18/fast-week2.html) [other](/notes/2017/09/23/master-algorithm.html) [efforts](/portfolio-building/2017/09/25/nlp-for-tasks.html), big and small - but I'm here now to finally complete this post.
 [^cmd]: Embed via ```jupyter nbconvert --config scripts/nbconvert_config.py ../love-actually/python/love-actually.ipynb```
