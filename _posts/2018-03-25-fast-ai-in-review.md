@@ -35,7 +35,7 @@ Take this course if you are:
 - Looking for a hands-on tour of what deep learning can do
 
 This course is less helpful if you are:
-- Way more interested in processing language over images (NLP is touched upon, but image classification is the flagship scenario for the course)
+- Way more interested in processing language over images (NLP is touched upon, but image classification/computer vision is the flagship scenario for the course)
 - Looking to learn about various deep learning frameworks (course doesn't detail the trade-offs for selecting Theano over Tensorflow much beyond "Theano is easier to use and good for a single GPU")
 
 ### Did my deep learning server really cost $31.50?
