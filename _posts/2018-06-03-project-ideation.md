@@ -6,7 +6,7 @@ category: Career
 tags: []
 ---
 
-Upon learning that I'd been [accepted to be an OpenAI Scholar this summer](/career/2018/05/30/openai-scholar.html), I didn't give myself much room to celebrate. Instead, I immediately started stressing over my next set of decisions[^gratitude]. One of the bigger decisions to appear in front me:
+Upon learning that I'd been [accepted to be an OpenAI Scholar this summer](/career/2018/05/30/openai-scholar), I didn't give myself much room to celebrate. Instead, I immediately started stressing over my next set of decisions[^gratitude]. One of the bigger decisions to appear in front me:
 
 > _What exactly will I focus on in deep learning for 13 weeks?!?_
 
@@ -56,7 +56,7 @@ After about a month of fretting, my big breakthrough happened during a brainstor
 
 Music + text. The language _around_ music - manifested by hundreds of ["nice, small blogs"](https://www.theverge.com/2018/1/2/16840940/spotify-algorithm-music-discovery-mix-cds-resolution) on the internet, then beautifully aggregated by the [Hype Machine](https://hypem.com/sites) - has personally fueled my discovery of new music for many years. I'd love to **pay homage** to these labors of love. I'd like to see how much a machine learning algorithm of my own design can describe music, not by an up-or-down vote on whether or not I might like it, but by why it might resonate with me.
 
-So rather than generating music recommendations, I'd like to generate music reviews. **Based on a set of characteristics about a song and knowledge of past human music writing, I will attempt to generate opinionated new writing about a song.**[^fallback]
+So rather than generating music recommendations, I'd like to generate music reviews. **I will attempt to generate opinionated new writing about songs, based on a set of characteristics about the song and knowledge of past human music writing**[^fallback]
 
 Is this possible? Depends on what we mean by possible. Machine learning algorithms have certainly proven capable of [stringing together words](http://aiweirdness.com/), albeit with varying degrees of coherence. The trick will be to string together words that are _topical, structured, and specific_ to attributes of the provided song.
 
