@@ -101,7 +101,7 @@ Helpful resources for making this comparison:
 
 ## Bonus: This Is The Remix
 
-<iframe width="420" height="236" src="https://www.youtube-nocookie.com/embed/DZu_lLGFDtM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="420" height="236" src="https://www.youtube.com/embed/DZu_lLGFDtM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 <br />
 
 #### Footnotes
