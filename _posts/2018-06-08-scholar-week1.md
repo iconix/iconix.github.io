@@ -87,6 +87,8 @@ What TensorFlow excels at:
 What PyTorch excels at:
 - _Dynamic_ computation graph, allowing users to write regular Python code and use regular Python debugging while defining and changing and executing nodes as you go
     - Meanwhile, TensorFlow's static computation graph [has been described](https://towardsdatascience.com/pytorch-vs-tensorflow-spotting-the-difference-25c75777377b) as feeling like "your model is behind a brick wall with several tiny holes to communicate over."
+- PyTorch's dynamic computation graph is also more suitable for the _variable-length sequential inputs_ common in recurrent neural networks (RNNs). RNNs are the cornerstone architecture for the language modeling work I'll be doing all summer long.
+    - PyTorch LSTMs (an RNN variant) have also been [benchmarked as faster](http://deeplearningathome.com/2017/06/PyTorch-vs-Tensorflow-lstm-language-model.html) than TensorFlow
 - More developer-friendly, as it contains many useful abstractions and employs familiar OOP constructs
 - PyTorch community is newer but gaining momentum
 
@@ -97,6 +99,7 @@ I'm also not sure how much of developer 'interest in continuing to develop with'
 Helpful resources for making this comparison:
 - ["PyTorch vs TensorFlow — spotting the difference"](https://towardsdatascience.com/pytorch-vs-tensorflow-spotting-the-difference-25c75777377b)
 - ["Introducing Pytorch for fast.ai"](http://www.fast.ai/2017/09/08/introducing-pytorch-for-fastai/)
+- ["Simple LSTM based language model in PyTorch vs Tensorflow"](http://deeplearningathome.com/2017/06/PyTorch-vs-Tensorflow-lstm-language-model.html)
 - ["PyTorch vs. TensorFlow: 1 month summary"](https://towardsdatascience.com/pytorch-vs-tensorflow-1-month-summary-35d138590f9)
 
 ## Bonus: This Is The Remix
