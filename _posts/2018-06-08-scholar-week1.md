@@ -104,6 +104,8 @@ Helpful resources for making this comparison:
 
 ## Bonus: This Is The Remix
 
+_Girl Talk_ is a mashup artist who was most active in the 2000s. His mashup "This Is the Remix" from his _All Day (2010)_ album inspired the phrase that trained my example bi-gram language model in the animation from earlier on :slightly_smiling_face:
+
 <iframe width="420" height="236" src="https://www.youtube.com/embed/DZu_lLGFDtM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 <br />
 
