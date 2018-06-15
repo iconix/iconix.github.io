@@ -24,6 +24,9 @@ google-tracking-id: "UA-101920397-1"
 
 force-https: True
 
+# Omit output_ext (.html) on posts
+permalink: /:categories/:year/:month/:day/:title
+
 #############
 # HTML Head #
 #############
@@ -126,7 +129,7 @@ events:
     description: 'Studying deep learning full time as an <a href="/career/2018/05/30/openai-scholar/">OpenAI Scholar</a>!'
   - image: "/img/timeline/fastai.png"
     date: "February 2018"
-    description: 'Completed <a href="http://course.fast.ai/">Practical Deep Learning For Coders, Part 1</a> by fast.ai (<a href="/notes/2018/03/25/fast-ai-in-review.html">notes</a>)'
+    description: 'Completed <a href="http://course.fast.ai/">Practical Deep Learning For Coders, Part 1</a> by fast.ai (<a href="/notes/2018/03/25/fast-ai-in-review">notes</a>)'
   - image: "/img/timeline/paradiso.png"
     date: "June 23-24, 2017"
     description: 'Attended <a href="http://paradisofestival.com/">Paradiso</a> at the Gorge, WA #LiveMusic'
@@ -141,7 +144,7 @@ events:
     description: 'Attended <a href="https://www.sasquatchfestival.com/">Sasquatch</a> at the Gorge, WA #LiveMusic'
   - image: "/img/timeline/ng_ml.png"
     date: "Summer 2014"
-    description: 'Second summer in Seattle; completed <a href="https://www.coursera.org/learn/machine-learning">Andrew Ng&#39;s Machine Learning</a> course in June (<a href="/notes/2017/07/03/ng-ml-notes.html">notes</a>)'
+    description: 'Second summer in Seattle; completed <a href="https://www.coursera.org/learn/machine-learning">Andrew Ng&#39;s Machine Learning</a> course in June (<a href="/notes/2017/07/03/ng-ml-notes">notes</a>)'
   - image: "/img/timeline/bumbershoot.jpg"
     date: "August 31, 2013"
     description: 'Attended <a href="https://www.bumbershoot.com">Bumbershoot</a> in Seattle #LiveMusic'

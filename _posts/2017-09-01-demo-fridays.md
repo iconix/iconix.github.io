@@ -22,4 +22,4 @@ A couple ideas that came up during Q&A:
 
 #### Footnotes
 
-[^reorg]: It's a Microsoft thing where an organization like Notes shuffles people around, usually because management thinks it's a good idea for like, _synergy_, or something... I'm being mildly facetious. The re-org (of which I've been through at least one a year during my 4 years at Microsoft) actually greatly benefitted me personally this time around, as [blogged about earlier](/career/2017/07/14/ai-at-work.html).
+[^reorg]: It's a Microsoft thing where an organization like Notes shuffles people around, usually because management thinks it's a good idea for like, _synergy_, or something... I'm being mildly facetious. The re-org (of which I've been through at least one a year during my 4 years at Microsoft) actually greatly benefitted me personally this time around, as [blogged about earlier](/career/2017/07/14/ai-at-work).

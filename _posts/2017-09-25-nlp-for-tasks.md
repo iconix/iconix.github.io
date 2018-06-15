@@ -6,9 +6,9 @@ category: Portfolio Building
 tags: [ ]
 ---
 
-_**UPDATE 11/17/2017**: I wrote a follow-up post about deploying this model to a web service via Azure ML - [check it out](/career/2017/11/16/azure-ml.html)!_
+_**UPDATE 11/17/2017**: I wrote a follow-up post about deploying this model to a web service via Azure ML - [check it out](/career/2017/11/16/azure-ml)!_
 
-_Everything between this sentence and the [Wrap Up](/portfolio-building/2017/09/25/nlp-for-tasks.html#wrap-up) section has been converted from my [nlp_classifier notebook](https://github.com/iconix/nlp-sandbox/blob/master/nlp_classifier.ipynb)[^nbconvert] on GitHub._
+_Everything between this sentence and the [Wrap Up](/portfolio-building/2017/09/25/nlp-for-tasks#wrap-up) section has been converted from my [nlp_classifier notebook](http://nbviewer.jupyter.org/github/iconix/nlp-sandbox/blob/master/nlp_classifier.ipynb)[^nbconvert] on GitHub._
 
 {% include notebooks/nlp_classifier.html %}
 
@@ -28,7 +28,7 @@ This duo also provided [dependency-based embeddings from English Wikipedia](http
 
 #### Demo Fridays: Redux
 
-This notebook was used as part of my second [team-wide demo](/career/2017/09/01/demo-fridays.html) - so here's to pushing myself!
+This notebook was used as part of my second [team-wide demo](/career/2017/09/01/demo-fridays) - so here's to pushing myself!
 > ...even if it’s frankly terrifying to think about putting my name on something half-baked in front of ~40 people.
 >
 > &mdash; Me, three weeks ago

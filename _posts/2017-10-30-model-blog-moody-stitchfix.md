@@ -21,7 +21,7 @@ Despite his deeply technical background in things like _whatever astrostatistics
 #### Footnotes
 
 [^embed]: _Word embeddings_ are a neat way of encoding semantic relationships between words into numeric vectors, which is important because these vectors are what machine learning models accept as input. At the moment, word embeddings appear to be the #1 preferred building block for natural language processing (NLP) in machine learning.
-[^fast-search]: Searching the [fast.ai](/notes/2017/08/18/fast-week2.html) forums for ML-related content has become a solid go-to move for me.
+[^fast-search]: Searching the [fast.ai](/notes/2017/08/18/fast-week2) forums for ML-related content has become a solid go-to move for me.
 [^lda]: LDA stands for _Latent Dirichlet Allocation_, a technique for topic modeling. `lda2vec` is a word embeddings + topic modeling extension... invented by Chris Moody!
-[^ref]: For example, "A Word is Worth a Thousand Vectors" had a reference to ["Dependency-Based Word Embeddings"](https://levyomer.wordpress.com/2014/04/25/dependency-based-word-embeddings/) by Omer Levy - which I wasn't looking for but in the end found very useful while thinking through the work behind my own [NLP for Task Classification](/portfolio-building/2017/09/25/nlp-for-tasks.html) post.
-[^robinson]: Visual work like the [Shiny app and other charts](/portfolio-building/2017/10/18/data-is-all-around-us.html#shiny-app) that I replicated earlier this month from David Robinson of StackOverflow, as an example.
+[^ref]: For example, "A Word is Worth a Thousand Vectors" had a reference to ["Dependency-Based Word Embeddings"](https://levyomer.wordpress.com/2014/04/25/dependency-based-word-embeddings/) by Omer Levy - which I wasn't looking for but in the end found very useful while thinking through the work behind my own [NLP for Task Classification](/portfolio-building/2017/09/25/nlp-for-tasks) post.
+[^robinson]: Visual work like the [Shiny app and other charts](/portfolio-building/2017/10/18/data-is-all-around-us#shiny-app) that I replicated earlier this month from David Robinson of StackOverflow, as an example.

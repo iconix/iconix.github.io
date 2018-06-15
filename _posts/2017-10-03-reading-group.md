@@ -10,7 +10,7 @@ What's nice about being a young, black female in a room of 10 men[^skype], predo
 
 I often actually like being the novice in a situation - whether I'm picking up flag football or joining Microsoft over 4 years ago out of university. When I'm expected to know so little, my ego can be easier to dismiss.
 
-_Bonus_: I feel like my line of questioning[^questions] loosened up the rest of the room to ask questions as well, despite the fear of being too _basic_. And I wasn't even lost throughout! We talked about Convolutional Neural Networks, finetuning, VGG, ensembling... and the combination of my [fast.ai coursework](/notes/2017/08/18/fast-week2.html)[^lesson4] and reading [_The Master Algorithm_](/notes/2017/09/23/master-algorithm.html) prepped me for following along quite well. Next time, I will try reading the featured paper before the session.
+_Bonus_: I feel like my line of questioning[^questions] loosened up the rest of the room to ask questions as well, despite the fear of being too _basic_. And I wasn't even lost throughout! We talked about Convolutional Neural Networks, finetuning, VGG, ensembling... and the combination of my [fast.ai coursework](/notes/2017/08/18/fast-week2)[^lesson4] and reading [_The Master Algorithm_](/notes/2017/09/23/master-algorithm) prepped me for following along quite well. Next time, I will try reading the featured paper before the session.
 
 #### Footnotes
 

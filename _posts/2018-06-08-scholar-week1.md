@@ -43,7 +43,7 @@ The mean word count in a review is 132, and there are almost 4M total words.
 
 Once I had my music review corpus, I put it to work by training a very simple (and not deep) _Unsmoothed Maximum Likelihood Character Language Model_, or _n-gram language model_, for short. I wanted to understand how 'hard' language modeling[^lm] (and therefore, my summer project) would be without deep learning, as well as establish a baseline model in week 1.
 
-The model is mostly swiped from Yoav Goldberg's post ["The unreasonable effectiveness of Character-level Language Models (and why RNNs are still cool)"](http://nbviewer.jupyter.org/gist/yoavg/d76121dfde2618422139). For more about my experimentation with the model, you can [check out this notebook](https://github.com/iconix/openai/blob/master/nbs/n-gram%20music%20reviews.ipynb).
+The model is mostly swiped from Yoav Goldberg's post ["The unreasonable effectiveness of Character-level Language Models (and why RNNs are still cool)"](http://nbviewer.jupyter.org/gist/yoavg/d76121dfde2618422139). For more about my experimentation with the model, you can [check out this notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/n-gram%20music%20reviews.ipynb).
 
 Here I will instead provide some intuition with the following animation.
 
@@ -60,7 +60,7 @@ Note that the <span style='color: #248f46'><strong>green</strong></span> generat
 
 What I like about this demonstration is that it becomes easy to see 1) why plagiarism is often the easiest way to generate sensible output for such a simple model, and 2) how seemingly strange outputs like repeated 'is's or 'the's can occur.
 
-I make other observations about the n-gram LM in the [notebook](https://github.com/iconix/openai/blob/master/nbs/n-gram%20music%20reviews.ipynb). You can also see more examples of terrible generated music reviews. But for now, let's leave off with some of my personal, cherry-picked favorites:
+I make other observations about the n-gram LM in the [notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/n-gram%20music%20reviews.ipynb). You can also see more examples of terrible generated music reviews. But for now, let's leave off with some of my personal, cherry-picked favorites:
 - "thickas M801Qut tod stat fras n in" (n=1)
 - "A truly gorgeous." (n=6)
 - "ups the risque with raw, provocative vocals as they take to the heavens, with lucid electronics mingle against skittering anthemic choruses are extremely memorable" (n=10, where the LM stitched existing phrases together into something _almost_ new)

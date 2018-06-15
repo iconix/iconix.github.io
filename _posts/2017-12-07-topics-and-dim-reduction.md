@@ -14,13 +14,13 @@ Over the past few weeks, I spent some time building this slide deck[^ppt] as a c
 <br />
 My motivations were many. I wanted to push myself to provide more visual content on this blog, and an original slide deck seemed like a good stepping stone towards that.
 
-I also wanted to learn more about unsupervised learning techniques (having spent [most of my](/notes/2017/08/18/fast-week2.html) [recent time](/portfolio-building/2017/09/25/nlp-for-tasks.html) in the supervised domain), in hopes of ultimately building a prototype that could annotate notes to improve product search at work[^postponed].
+I also wanted to learn more about unsupervised learning techniques (having spent [most of my](/notes/2017/08/18/fast-week2) [recent time](/portfolio-building/2017/09/25/nlp-for-tasks) in the supervised domain), in hopes of ultimately building a prototype that could annotate notes to improve product search at work[^postponed].
 
 Further, I wanted to brush up on my statistical fundamentals, as _dimensionality reduction_ is a technique that seems to keep popping up everywhere in machine learning.
 
 The fact that there's a robust, popular Python library specifically for topic modeling in [`gensim`](https://radimrehurek.com/gensim/) proves (to me, at least) how interesting and practical topic modeling is. I hope you agree!
 
-Exploratory Jupyter notebook for the slide deck: [https://github.com/iconix/nlp-sandbox/blob/master/topic_models.ipynb](https://github.com/iconix/nlp-sandbox/blob/master/topic_models.ipynb)
+Exploratory Jupyter notebook for the slide deck: [http://nbviewer.jupyter.org/github/iconix/nlp-sandbox/blob/master/topic_models.ipynb](http://nbviewer.jupyter.org/github/iconix/nlp-sandbox/blob/master/topic_models.ipynb)
 
 #### Footnotes
 

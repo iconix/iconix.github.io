@@ -6,7 +6,7 @@ category: Notes
 tags: [] # 'machine learning', 'onenote', 'mooc'
 ---
 
-Well, I've been a bit on-again, off-again about setting up this blog since [my first post on May 7](/blogging/2017/05/07/hello-world.html), but I think this is finally a space I have made my own and can be proud of! Shout out to the [{ Personal } Jekyll Theme](https://github.com/PanosSakkos/personal-jekyll-theme) creators and contributors for giving me such a strong base to start with.
+Well, I've been a bit on-again, off-again about setting up this blog since [my first post on May 7](/blogging/2017/05/07/hello-world), but I think this is finally a space I have made my own and can be proud of! Shout out to the [{ Personal } Jekyll Theme](https://github.com/PanosSakkos/personal-jekyll-theme) creators and contributors for giving me such a strong base to start with.
 
 Now, on to real content!
 

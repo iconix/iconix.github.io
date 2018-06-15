@@ -8,7 +8,7 @@ tags: []
 
 _What happened when I tried to "JFDI" today._
 
-Right now, the [incubation crew at work](/career/2017/07/14/ai-at-work.html) is really just trying to build up a little engineering muscle in the AI/ML space. So to start, I am working on a scenario where we would like to automatically identify task-like/ToDo-like phrases within user notes and then suggest that they treat these phrases as such (perhaps in the To-Do app).
+Right now, the [incubation crew at work](/career/2017/07/14/ai-at-work) is really just trying to build up a little engineering muscle in the AI/ML space. So to start, I am working on a scenario where we would like to automatically identify task-like/ToDo-like phrases within user notes and then suggest that they treat these phrases as such (perhaps in the To-Do app).
 
 So I did all of this research into various techniques to detect an actionable, task-like line of text. I wanted to develop a linguistic approach. I think the deepest I ever really went into grammar was in the 7th/8th grade. Now I actually really loved this stuff back then... but I am pretty rusty today. I started drawing parse trees.
 
