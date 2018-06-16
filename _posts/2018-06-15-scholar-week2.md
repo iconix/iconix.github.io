@@ -39,7 +39,7 @@ I trained a few of each type of network this week. The full, messy notebook is [
     <tr>
         <th>Computational Graph</th>
         <th>Notes</th>
-        <th>Sample Text</th>
+        <th>Sample Text (seed='the ')</th>
     </tr>
     <tr>
         <td style='border: 1px solid black'>
@@ -48,7 +48,7 @@ I trained a few of each type of network this week. The full, messy notebook is [
         </td>
         <td style='border: 1px solid black'>
             Just one more thing before RNNs! This is similar to last week's model, but as a <em>feedforward</em> neural network (meaning, data flows in one direction and there are no loops).<br/><br/>
-            Training time for 5 epochs: 1h 34m 27s
+            Training time for 5 epochs: 1h 34m 27s (18m 53s/epoch)
         </td>
         <td style='border: 1px solid black; word-wrap: break-word'>
             the t e oo o e toettoooteooee o te o eet eet et    o ote oeeo teetoe t ete et eteoe eoe ooettet oe  eoeo
@@ -61,24 +61,12 @@ I trained a few of each type of network this week. The full, messy notebook is [
         </td>
         <td style='border: 1px solid black'>
             Adapted a recurrent <a href='https://pytorch.org/tutorials/intermediate/char_rnn_generation_tutorial.html'>architecture</a> (notice the loops!), without using the PyTorch RNN layer.<br/><br/>
-            Training time for 5 epochs: 2h 4m 21s
+            Training time for 5 epochs: 2h 1m 48s (24m 21s/epoch)
         </td>
         <td style='border: 1px solid black; word-wrap: break-word'>
-            the q1**g
-catratni ty.**
-
-caditi_.
-o**
-
-
-cpa{17,ea
-idsf.*v yed, mek, twitt\ s nrrpcare t***
-
-catt
-
-**
-
-c
+            the 2cwap%
+jaig aciph} araygay iblptoare josa7, pha]ptpjry iot, il) aydin t?e
+iruphy bol war
         </td>
     </tr>
     <tr>
@@ -87,51 +75,68 @@ c
             <img src='/img/posts/pytorchrnn_wk2.png' alt='PyTorch RNN computational graph'>
         </td>
         <td style='border: 1px solid black'>
-            Using the PyTorch RNN layer. This helped me figure out how to implement batching, which helped speed up training (still slow though!).<br/><br/>
-            Training time for 1000 epochs: 1h 36m 53s
+            Using the PyTorch <a href='https://pytorch.org/docs/stable/nn.html#torch.nn.RNN'>RNN</a> layer. This helped me figure out how to implement batching, which helped speed up training a lot!<br/><br/>
+            Training time for 1000 epochs: (5.51s/epoch)
         </td>
         <td style='border: 1px solid black; word-wrap: break-word'>
-            theilyent and the togrestive.'h the bman - &quot;is now 9ake truyrne youtlint, before. &amp;
+            the || ouzze bdyckeckuckick nd rd st checnezvouvee le&quot;sod (sunoinondonst s g**gy'w dyeni da ts rdms
+dic
+        </td>
+    </tr>
+    <tr>
+        <td style='border: 1px solid black'>
+            <em>FastRNN</em><br /><br />
+            (same computational graph as PyTorchRNN)
+        </td>
+        <td style='border: 1px solid black'>
+            Using the same PyTorchRNN layer as above, but with the fastai library. fastai's <em>fit()</em> tracks loss, time, epoch loops, and its dataloader handles batching. Very convenient! It also trained PyTorchRNN faster and better (lower loss more quickly).<br/><br/>
+            Training time for 8 epochs: 11s (1.47s/epoch)
+        </td>
+        <td style='border: 1px solid black; word-wrap: break-word'>
+            the geren's beant, feell. out of yfuc wast and is soces**  unsic // shear's memoterayd?**
 
-bebry, withing
+borustaria thistracome 'pre offacgino:*** **i| apol shopes ient shos alours songs dese --chate of diss, he gear the music /moding &quot; ____
         </td>
     </tr>
     <tr>
         <td style='border: 1px solid black'>
             <em>GRU</em><br /><br />
-            (same computational graph as PyTorch RNN but with 'gru' for 'rnn')
+            (same computational graph as PyTorchRNN but with 'gru' for 'rnn')
         </td>
         <td style='border: 1px solid black'>
             An RNN variant that's meant to be more computationally efficient than an LSTM.<br /><br />
-            <em>Note</em>: I swear I saw better output from the GRU <em>once</em> - and then from then on, garbage like that to the right.<br/><br/>
-            Training time for 9 epochs: minutes
+            Training time for 9 epochs: 12s (1.42s/epoch)
         </td>
         <td style='border: 1px solid black; word-wrap: break-word'>
-            1@&lt;00^\&lt;22@5^6+192501@8b9~98+29698+8@/547$120%47j79922\\412\850%19&lt;pad&gt;8280\05582\0888^+029%&gt;9%=20
+            the and - sing all parts **her, ap solas edy opting anyth is collicofing and bar cono
+albud:
+
+it on thative have also, packer likes in face, leef well ever**
         </td>
     </tr>
     <tr>
         <td style='border: 1px solid black'>
             <em>LSTM</em><br /><br />
-            (same computational graph as PyTorch RNN but with 'lstm' for 'rnn')
+            (same computational graph as PyTorchRNN but with 'lstm' for 'rnn')
         </td>
         <td style='border: 1px solid black'>
             The main event! An RNN with memory that allows it to control what it remembers and forgets over long ranges.<br/><br/>
-            Training time for 78 epochs: minutes
+            Training time for 78 epochs: 2m 29s (1.92s/epoch)
         </td>
         <td style='border: 1px solid black; word-wrap: break-word'>
-            jig' k.
-
-whould (4\. thist guitly year it the
-own day you releed&quot; after alluct, onwas flow. the behinger,
+            the music your" is to
+be're brand part,
+kennehom over top with" places,
+guite perfedday some sung due
+(halbina" saintaway if you theinvipled fries.
         </td>
     </tr>
 </table>
-<br />
+_Footnote on table visualizations._[^viz]
 
-Going forward, there are so many little things I could tweak - hyperparameters, architectures - but Natasha gave me good advice to focus this week on just getting to an LSTM that trains.
+Going forward, there are so many things I could tweak - hyperparameters, architectures - but Natasha gave me good advice to focus this week on just getting to an LSTM that trains.
 
-Is this an improvement on the text from last week? **Definitely not**. I'm glad that next week will give me more time with LSTMs, now that I have a grasp of the fundamental building blocks.
+Is this an improvement on the text from last week? Not quite. I'm glad that next week will give me more time with LSTMs, now that I have a grasp of the fundamental building blocks.
 
 For a great explainer on RNNs, LSTMs, and GRUs, check out Chris Colah's post on ["Understanding LSTM Networks"](http://colah.github.io/posts/2015-08-Understanding-LSTMs/).
 
@@ -141,7 +146,7 @@ For a fun break from my own garbled generations, I fed the same sample reviews i
 
 The project makes it really easy to try it out on Google Colaboratory, so I did! You can see the full, messy results [here](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/Interactive_textgenrnn_Demo_w_GPU.ipynb).
 
-I trained both a character-level and word-level LSTM. Here are two cherry-picked samples at 0.5 temperature.
+I trained both a character-level and word-level LSTM. Here are two cherry-picked samples at 0.5 temperature[^temp].
 
 <table>
     <tr>
@@ -172,7 +177,7 @@ expect to work with a brand new project called _ * * sketches . " * *
 
 To be fair to the character-level sample, I only trained it for 5 epochs (compared to 10 epochs for word-level) because it takes longer.
 
-They're both pretty pleasing (word-rnn more so)! This quick jump forward renews my belief that LSTMs are capable of generating coherent music reviews.
+They're both pretty pleasing (word-rnn more so)! This quick jump forward renews my belief that LSTMs are capable of generating expressive music reviews.
 
 For more on the textgenrnn project, check out the blog post: ["How to Quickly Train a Text-Generating Neural Network for Free"](http://minimaxir.com/2018/05/text-neural-networks/)
 
@@ -180,14 +185,14 @@ For more on the textgenrnn project, check out the blog post: ["How to Quickly Tr
 
 1. The [official tutorials](https://pytorch.org/tutorials/) are quite good - and so are some [unofficial](https://github.com/spro/practical-pytorch) ones. They really helped me get off the ground with PyTorch this week.
 2. PyTorch really does feel like Python! I like how closely tied to `numpy` it is. I also haven't been tripped up by the _philosophy_ of the library itself yet.
-3. Via Google searches, [discuss.pytorch.org](https://discuss.pytorch.org/) has been very useful for debugging small issues so far.
+3. Via Google searches, [discuss.pytorch.org](https://discuss.pytorch.org/) has been very useful for debugging small issues so far. I'm glad that the community is so active.
 4. I do wish that the [official docs](https://pytorch.org/docs/stable/index.html) weren't long pages with multiple topics on each page. Each page contains a module, and modules can have many functions. It makes Google searches for a particular function hard, and I frequently had multiple tabs with the same page open, just scrolled to different parts. I guess they expect us to use their internal doc search?
 
 ### fastai library
 
-Did you notice that the last two RNNs in the table above trained in _minutes_, compared to the _hours_ it took my handcrafted models?
+Did you notice that the last 3 RNNs in the table above (FastRNN; GRU; LSTM) trained epochs in ~1s, compared to the ~5s it took my train loop (with batching) for PyTorchRNN? That's an 80% improvement!
 
-I have to thank the [fastai PyTorch library](https://github.com/fastai/fastai) for the impressive speed up!
+Alongside convenience functions, I have to thank the [fastai PyTorch library](https://github.com/fastai/fastai) for the impressive speed up!
 
 I _could_ continue grinding out incremental progress on my naive RNN implementations from this week - but for better convenience and reliability, I plan to use the fastai library from now on. It's been [formally benchmarked](http://www.fast.ai/2018/04/30/dawnbench-fastai/) as fast (for computer vision tasks).
 
@@ -207,7 +212,7 @@ For example, I only happened to notice that the language model dataloader has im
 
 I had trouble keeping track of the dimensions going in and coming out of my networks, and I don't have intuitive sense of when to reshape ([`view`](https://pytorch.org/docs/stable/tensors.html#torch.Tensor.view)) a tensor before further use (yet).
 
-So often, I reshaped tensors due to an explicit dim mismatch error - and when I would finally get things running again, I didn't know _why_ the reshape was necessary (if it runs, is it always valid input?).
+So often, I reshape tensors due to an explicit dim mismatch error - and when I finally get things running again, I don't know _why_ the reshape was necessary (if it runs, is it always valid input?).
 
 I don't have a solution to this yet. I might try making expected dimensions more explicit in my code. For intuition-building, Natasha suggested that I try using the [Python Debugger](https://docs.python.org/3/library/pdb.html) (`import pdb; pdb.set_trace()`) to check the shape of tensors.
 
@@ -264,4 +269,6 @@ I'd be curious to hear about other good ones!
 
 #### Footnotes
 
+[^temp]: Temperature is meant to represent the 'creativity' of the text. It controls how suboptimal sampling for the next char or word is allowed to be. The lower the temperature, the more confident the predictions - but also the more conservative. 0.5 is middle of the road.
+[^viz]: Wow, look at those computational graphs! How did I draw them?! With MS Paint + a good template from a [tutorial](https://pytorch.org/tutorials/intermediate/char_rnn_generation_tutorial.html). If I have time, I'd like to look into viz libraries for printing the PyTorch autograd graph directly (since there's no official Tensorboard equivalent).
 [^scholar-mentors]: The OpenAI paper is actually co-authored by Scholar mentors Alec Radford and Karthik Narasimhan!
