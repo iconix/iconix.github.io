@@ -70,7 +70,7 @@ I make other observations about the n-gram LM in the [notebook](http://nbviewer.
 
 ## Part III. My summer curriculum
 
-My syllabus for self-study during this program can be viewed on GitHub: [openai/syllabus.md](https://github.com/iconix/openai/blob/master/syllabus.md). This will be a living document, updated when necessary as the summer progresses.
+My syllabus for self-study during this program can be viewed on GitHub: [**openai/syllabus.md**](https://github.com/iconix/openai/blob/master/syllabus.md). This will be a living document, updated when necessary as the summer progresses.
 
 ## Part IV. Why I chose PyTorch (over TensorFlow)
 
