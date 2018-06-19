@@ -89,7 +89,7 @@ dic
             (same computational graph as PyTorchRNN)
         </td>
         <td style='border: 1px solid black'>
-            Using the same PyTorchRNN layer as above, but with the fastai library. fastai's <em>fit()</em> tracks loss, time, epoch loops, and its dataloader handles batching. Very convenient! It also trained PyTorchRNN faster and better (lower loss more quickly).<br/><br/>
+            Using the same PyTorchRNN layer as above, but with the fastai library. fastai's <em>fit()</em> tracks loss, time, training loop, and its dataloader handles batching. Very convenient! It also trained PyTorchRNN faster and better (lower loss more quickly).<br/><br/>
             Training time for 8 epochs: 11s (1.47s/epoch)
         </td>
         <td style='border: 1px solid black; word-wrap: break-word'>
@@ -138,11 +138,11 @@ Going forward, there are so many things I could tweak - hyperparameters, archite
 
 Is this an improvement on the text from last week? Not quite. I'm glad that next week will give me more time with LSTMs, now that I have a grasp of the fundamental building blocks.
 
-For a great explainer on RNNs, LSTMs, and GRUs, check out Chris Colah's post on ["Understanding LSTM Networks"](http://colah.github.io/posts/2015-08-Understanding-LSTMs/).
+For a great explainer on RNNs, LSTMs, and GRUs, check out Denny Britz's series on ["Recurrent Neural Networks"](http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-1-introduction-to-rnns/).
 
 ### textgenrnn
 
-For a fun break from my own garbled generations, I fed the same sample reviews into [textgenrnn](https://github.com/minimaxir/textgenrnn), a project that takes inspiration from both the original [char-rnn](https://github.com/karpathy/char-rnn) project and [DeepMoji](http://deepmoji.mit.edu), which I'm a fan of.
+For a fun break from my own garbled generations, I fed the same sample reviews into [textgenrnn](https://github.com/minimaxir/textgenrnn), a TensorFlow-based project that takes inspiration from both the original [char-rnn](https://github.com/karpathy/char-rnn) project and [DeepMoji](http://deepmoji.mit.edu), which I'm a fan of.
 
 The project makes it really easy to try it out on Google Colaboratory, so I did! You can see the full, messy results [here](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/Interactive_textgenrnn_Demo_w_GPU.ipynb).
 
@@ -183,6 +183,8 @@ For more on the textgenrnn project, check out the blog post: ["How to Quickly Tr
 
 ## Part III. PyTorch: first impressions
 
+Last week, I explained my decision to [give PyTorch a spin this summer](/career/2018/06/08/scholar-week1#part-iv-why-i-chose-pytorch-over-tensorflow). One week in, here are my first impressions:
+
 1. The [official tutorials](https://pytorch.org/tutorials/) are quite good - and so are some [unofficial](https://github.com/spro/practical-pytorch) ones. They really helped me get off the ground with PyTorch this week.
 2. PyTorch really does feel like Python! I like how closely tied to `numpy` it is. I also haven't been tripped up by the _philosophy_ of the library itself yet.
 3. Via Google searches, [discuss.pytorch.org](https://discuss.pytorch.org/) has been very useful for debugging small issues so far. I'm glad that the community is so active.
@@ -207,6 +209,8 @@ On the downside, it is hard to know if or how much the library is optimizing thi
 For example, I only happened to notice that the language model dataloader has implemented _randomized-length backpropagation through time_ (BPTT) - which, great for my model performance, but hard for learning about exactly what makes my model tick.
 
 ## Part IV. This week's struggles/learnings
+
+Here are some of the difficulties and a-ha moments I had during the week.
 
 ### Tensor dimensions
 
@@ -252,20 +256,6 @@ I'd like to share and promote the blogs of the other amazing OpenAI Scholars! Th
 - Ifu Aniemeka [https://www.lifeasalgorithm.com/](https://www.lifeasalgorithm.com/)
 - Hannah Davis [http://www.hannahishere.com/](http://www.hannahishere.com/)
 - Sophia Arakelyan [https://medium.com/@sophiaarakelyan](https://medium.com/@sophiaarakelyan)
-
-## Bonus: Here's something useful
-
-I'd encourage anyone interested in Machine Learning and Artificial Intelligence to **subscribe to email newsletters**!
-
-Just this week, I found [three](https://arxiv.org/abs/1806.01973) [interesting](https://blog.openai.com/language-unsupervised/) [pieces](https://medium.com/dailyjs/the-trouble-with-d3-4a84f7de011f)[^scholar-mentors]. Newsletters are an easy way to keep current on noteworthy happenings in the community - and you don't have to go hunting for content. Even if you don't have time every week to read them, your inbox becomes an excellent search engine :slightly_smiling_face:
-
-Here are the ones I am subscribed to:
-- [Data Science Weekly](https://www.datascienceweekly.org/) (recommended by a [mentor](/blogging/2017/05/07/hello-world#building-a-portfolio))
-- [The Wild Week in AI](https://www.getrevue.co/profile/wildml) (hasn't updated in some months though)
-- [NLP News](http://newsletter.ruder.io/) by Sebastian Ruder
-- [Import AI](https://jack-clark.net/) (tricky to find the subscribe [button](http://twitter.us13.list-manage.com/subscribe?u=67bd06787e84d73db24fb0aa5&id=6c9d98ff2c))
-
-I'd be curious to hear about other good ones!
 
 #### Footnotes
 
