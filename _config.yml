@@ -126,7 +126,7 @@ events:
   #  description: 'Adventure Time! (<a href="https://github.com/iconix/resume/blob/master/latex/datascience/resume.pdf">resume</a>)'
   - image: "/img/timeline/openai-scholars.svg"
     date: "Today" #"Summer 2018"
-    description: 'Studying deep learning full time as an <a href="/career/2018/05/30/openai-scholar/">OpenAI Scholar</a>!'
+    description: 'Studying deep learning full time as an <a href="/dl/2018/05/30/openai-scholar/">OpenAI Scholar</a>!'
   - image: "/img/timeline/fastai.png"
     date: "February 2018"
     description: 'Completed <a href="http://course.fast.ai/">Practical Deep Learning For Coders, Part 1</a> by fast.ai (<a href="/notes/2018/03/25/fast-ai-in-review">notes</a>)'

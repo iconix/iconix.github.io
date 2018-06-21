@@ -2,7 +2,7 @@
 layout: post
 section-type: post
 title: OpenAI Scholar
-category: Career
+category: DL
 tags: []
 ---
 

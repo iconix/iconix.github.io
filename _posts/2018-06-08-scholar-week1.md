@@ -2,11 +2,11 @@
 layout: post
 section-type: post
 title: OpenAI Scholar, Week 1
-category: Career
+category: DL
 tags: []
 ---
 
-As a scholar, I will be writing a blog post every Friday this summer about my weekly progress and learnings. My [last post](/career/2018/06/03/project-ideation) described my search for a motivating project:
+As a scholar, I will be writing a blog post every Friday this summer about my weekly progress and learnings. My [last post](/dl/2018/06/03/project-ideation) described my search for a motivating project:
 
 > I will attempt to generate _topical, structured, and specific_ new writing ("reviews") about songs, based on a set of characteristics about the song and knowledge of past human music writing.
 

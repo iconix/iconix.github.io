@@ -2,7 +2,7 @@
 layout: post
 section-type: post
 title: OpenAI Scholar, Week 2
-category: Career
+category: DL
 tags: []
 ---
 
@@ -10,7 +10,7 @@ I spent a busy week training _recurrent neural networks_ (RNNs) using PyTorch, w
 
 ## Part I. The limitations of n-grams
 
-But why use RNNs when I generated such [_amazing_ text](/career/2018/06/08/scholar-week1#part-ii-generating-terrible-music-reviews-with-n-grams) last week?
+But why use RNNs when I generated such [_amazing_ text](/dl/2018/06/08/scholar-week1#part-ii-generating-terrible-music-reviews-with-n-grams) last week?
 
 Just kidding. While the _Unsmoothed Maximum Likelihood Character Language Model_ generated a few gems, a lot of it was either nonsensical or plagiarized from the training text.
 
@@ -183,7 +183,7 @@ For more on the textgenrnn project, check out the blog post: ["How to Quickly Tr
 
 ## Part III. PyTorch: first impressions
 
-Last week, I explained my decision to [give PyTorch a spin this summer](/career/2018/06/08/scholar-week1#part-iv-why-i-chose-pytorch-over-tensorflow). One week in, here are my first impressions:
+Last week, I explained my decision to [give PyTorch a spin this summer](/dl/2018/06/08/scholar-week1#part-iv-why-i-chose-pytorch-over-tensorflow). One week in, here are my first impressions:
 
 1. The [official tutorials](https://pytorch.org/tutorials/) are quite good - and so are some [unofficial](https://github.com/spro/practical-pytorch) ones. They really helped me get off the ground with PyTorch this week.
 2. PyTorch really does feel like Python! I like how closely tied to `numpy` it is. I also haven't been tripped up by the _philosophy_ of the library itself yet.

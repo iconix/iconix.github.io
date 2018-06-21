@@ -2,11 +2,11 @@
 layout: post
 section-type: post
 title: How I designed my OpenAI project
-category: Career
+category: DL
 tags: []
 ---
 
-Upon learning that I'd been [accepted to be an OpenAI Scholar this summer](/career/2018/05/30/openai-scholar), I didn't give myself much room to celebrate. Instead, I immediately started stressing over my next set of decisions[^gratitude]. One of the bigger decisions to appear in front me:
+Upon learning that I'd been [accepted to be an OpenAI Scholar this summer](/dl/2018/05/30/openai-scholar), I didn't give myself much room to celebrate. Instead, I immediately started stressing over my next set of decisions[^gratitude]. One of the bigger decisions to appear in front me:
 
 > _What exactly will I focus on in deep learning for 13 weeks?!?_
 
