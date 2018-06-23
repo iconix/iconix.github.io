@@ -108,7 +108,7 @@ After much tinkering and sampling, I did eventually achieve some fun mashup titl
 >
 > Semantic Segmentation in Semantic Segmentation
 
-You can check out my [work notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/textgenrnn_deep_song_titles.ipynb) for the messier results (and check out older commits too with more samples).
+You can check out my [work notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/textgenrnn_deep_song_titles.ipynb) for the messier results (and check out [older commits](https://github.com/iconix/openai/commits/master/nbs/textgenrnn_deep_song_titles.ipynb) too with more samples).
 
 This was a lot of fun for me! People like Janelle Shane sharing experiments like these are what got me interested in text generation in the first place :slightly_smiling_face: I hope you enjoyed this as well!
 
