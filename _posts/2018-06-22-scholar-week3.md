@@ -55,17 +55,15 @@ The `Dataset` is then used to construct a `fastai.LanguageModelLoader`, aka the 
 
 ## Part III. The dataloader I need
 
-This is all well and good for language modeling on text only. Now notice the new callouts in the diagram from earlier.
+This is all well and good for language modeling on text only. But notice the new callout in the diagram from earlier.
 
 ![Datasets to Dataloaders](/img/posts/fastai-ds-dl-issues.svg)
 
-Unfortunately, the `fastai` library wraps the `Dataset` in a way that hard-codes all model data as a single text `Field` - and **this prevents me from adding contextual `Field`s like genre and audio features** :disappointed:
-
-Additionally, the `fastai` batching code does not take advantage of `torchtext`'s [`Batch`](http://torchtext.readthedocs.io/en/latest/data.html#batch) abstraction. Natasha described the way `fastai` batches multiple examples (by concatenating them with an ' &lt;eos&gt; ' separator) as nonstandard, and even if `fastai` supported contextual fields, I believe this batch method would make applying the context before each timestep difficult.
+Unfortunately, the `fastai` library wraps the `Dataset` in a way that hard-codes all model data as a single text `Field` - and **this prevents me from adding contextual `Field`s like genre and audio features** :disappointed: I need a `Dataset` with multiple `Field`s that I can then manipulate as I like in my LSTM `forward` pass.
 
 ## Part IV. Moving forward
 
-By my estimation, getting the `fastai` library to support context will require a non-trivial change. I'd like to make that change - I'd even like to generalize it enough to send a pull request to the library.
+By my estimation, getting the `fastai` library to support multiple `Field`s will require a non-trivial change. I'd like to make that change - I'd even like to generalize it enough to send a pull request to the library.
 
 But things are very go-go-go this summer, so I don't know when I'll have the time to contribute officially.
 
