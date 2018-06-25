@@ -40,14 +40,14 @@ But occasionally, the titles would play together as intended!
 
 ### What seemed to help
 
-Overall, my strategy was to encourage song/arXiv mixing while limiting the amount of learning my network could do, so that the results would be funnier.
+Overall, my strategy was to encourage song/arXiv mixing by ensuring my network didn't overfit to any particular training data.
 
 - A **character-based network**: my word-based experimentation seemed to result in even less arXiv/song mixing - plus textgenrnn is robust enough to still generate real words even while predicting a character at a time!
 - **Higher temperatures**: this let the network be 'creative' in its sampling by letting it predict lower probability characters to continue a sequence.
 - **Dropout**: this purposefully added some chaos to the network by randomly removing parts of the text while training.
 - **Smaller `max_length`**: this forced the network to work with a smaller memory by limiting the number of previous characters it could use to predict the next character.
 - **Fewer epochs**: this limited training time because textgenrnn is so robust that it quickly gets _too_ good at telling the difference between songs and arXiv papers.
-- **Mixing up the titles in a single text file**: Shane mentioned that she (accidentally) pre-trained on only metal bands first and then used _transfer learning_ to add in ice cream flavors. I tried this too, but the network seemed to immediately (_catastrophically_) forget what the first thing it learned was and would just generate the second thing. My settings might have been off, but I got better results from just mixing the two sets of titles together and training in one go.
+- **Mixing up the titles in a single text file**: Shane mentioned that she (accidentally) pre-trained on only metal bands first and then used _transfer learning_ to add in ice cream flavors. I tried this too, but the network seemed to immediately forget what the first thing it learned was and would just generate the second thing. This is known as [_catastrophic forgetting_](https://en.wikipedia.org/wiki/Catastrophic_interference), which is the tendency for a neural network to completely erase what it learned about a first task when training on a second task in sequence. I got better results from just mixing the two sets of titles together and training in one go.
 - **Balancing the number of titles from each set**: this encouraged the network to learn from each set evenly.
 
 I would definitely still get meh results, but adjusting these configurations seemed to improve chances of generating something fun.
