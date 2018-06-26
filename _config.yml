@@ -35,7 +35,7 @@ lang: "en"
 author: "Nadja Rhodes"
 title: "{ Nadja Rhodes }"
 description: "Nadja Rhodes is a software developer and aspiring data scientist. I like to code for the web, and I blog (mainly) as I mess with data and build up a portfolio. Opinions expressed are mine."
-keywords: "rhodes, nadja, software, development, data, science, analytics, code, web, stanford, microsoft"
+keywords: "rhodes, nadja, software, development, data science, analytics, code, web, stanford, microsoft, machine learning, deep learning"
 favicon: "/img/favicon.ico"
 
 ################
@@ -205,6 +205,8 @@ social:
     url: "narhodes1+blog@gmail.com"
   - title: "lastfm"
     url: "https://www.last.fm/user/iconix"
+  - title: "twitter"
+    url: "https://twitter.com/ohnadj"
 
 ############
 # 404 page #
