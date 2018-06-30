@@ -10,7 +10,7 @@ Welcome to week 4! The end of this week marks the halfway point of my [syllabus]
 
 I split my attention between learning about _sequence-to-sequence_ (seq2seq) models and _variational autoencoders_ (VAE), while also tinkering with my LSTM-based language model from weeks 2-3.
 
-_To skip to ahead to seq2seq VAEs for text generation, [click here](/dl/2018/06/29/energy-and-vae#seq2seq-vae-for-text-generation)._
+_To skip ahead to seq2seq VAEs for text generation, [click here](/dl/2018/06/29/energy-and-vae#seq2seq-vae-for-text-generation)._
 
 ## 'Energy'-conditioned language model
 
