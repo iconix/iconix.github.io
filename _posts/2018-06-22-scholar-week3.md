@@ -51,7 +51,7 @@ Anyway, once you get it, `torchtext` seems pretty nice for common NLP preprocess
 
 As you can see in the above diagram, a `Dataset` is a `torchtext` abstraction. It is constructed using other `torchtext` abstractions named `Field` (which "defines a datatype together with instructions for converting to Tensor") and `Example` ("defines a single training or text example").
 
-The `Dataset` is then used to construct a `fastai.LanguageModelLoader`, aka the aforementioned Dataloader (reminder that there's a dataset and corresponding dataloader for each train/val/test split).
+The `Dataset` is then used to construct a `fastai.nlp.LanguageModelLoader`, aka the aforementioned Dataloader (reminder that there's a dataset and corresponding dataloader for each train/val/test split).
 
 ## Part III. The dataloader I need
 
