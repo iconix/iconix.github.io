@@ -10,6 +10,8 @@ Welcome to week 4! The end of this week marks the halfway point of my [syllabus]
 
 I split my attention between learning about _sequence-to-sequence_ (seq2seq) models and _variational autoencoders_ (VAE), while also tinkering with my LSTM-based language model from weeks 2-3.
 
+_To skip to ahead to seq2seq VAEs for text generation, [click here](/dl/2018/06/29/energy-and-vae#seq2seq-vae-for-text-generation)._
+
 ## 'Energy'-conditioned language model
 
 [Last week](/dl/2018/06/22/scholar-week3#part-ii-how-fastai-handles-languagemodel-data), I discussed the speed bumps I hit while trying to get the `fastai` library to support an additional contextual `Field` in my language model data. By Tuesday, I had a `ContextLanguageModelLoader` working, based on local modifications to `fastai.nlp.LanguageModelLoader`[^context-lml]. I can now pass extra context for my language model to condition on!
