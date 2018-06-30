@@ -41,20 +41,7 @@ I sampled 10K words from each energy context; filtered out the [NLTK English sto
     </tr>
 </table>
 
-I then immediately began speculating about what these word clouds[^wc] could represent!
-- Words like <span style='color: #3BBB75'><strong>pop</strong></span>, <span style='color: #3BBB75'><strong>remix</strong></span>, and <span style='color: #3BBB75'><strong>orgy</strong></span> feel about right as "high energy"! Similarly, <span style='color: #471164'><strong>black</strong></span>, <span style='color: #471164'><strong>wet</strong></span>, and <span style='color: #471164'><strong>abandon</strong></span> feel pretty "low energy" - nice!
-- <span style='color: #3BBB75'><strong>la</strong></span> -> California vibes (Los Angeles)!
-- What's with <span style='color: #3BBB75'><strong>santa</strong></span> as "high energy"? Same as <span style='color: #3BBB75'><strong>la</strong></span> actually! The training data had references to Santa _Ana_, Santa _Cruz_, and Santa _Barbara_ - all locations in CA :sunny:
-- What's with <span style='color: #471164'><strong>de</strong></span>'s prevalence in "low energy"? Many instances referred to German tour dates - maybe this says something about bands who tend to tour Germany?
-    - <span style='color: #3BBB75'><strong>de</strong></span> also shows up in "high energy", but so does <span style='color: #3BBB75'><strong>tour</strong></span> which hints at the full phrase _tour de force_!
-- Every reference to <span style='color: #3BBB75'><strong>britney</strong></span> in the training data is to "high energy" Britney _Spears_ :microphone:
-- Do artists named <span style='color: #471164'><strong>christopher</strong></span> tend to be more moody? :guitar:
-- <span style='color: #3BBB75'><strong>steel</strong></span> presents references to Caribbean influences like steel _drums_ and steel _pans_
-- Biggest stumper: why is <span style='color: #3BBB75'><strong>thai</strong></span> so prevalent in "high energy"? It's likely a quirk of the particular sample I took of my reviews data set. Looking over the training data, references to _thai_ seem to stem from Houston, TX band, Khruangbin, whose first album was influenced by [Thai funk/rock](https://www.youtube.com/watch?v=7hlGqj3ImQI). Pretty neat!
-
-I have more associations where that came from - check out the bottom of [my work notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/week3_reviews_by_songs.ipynb) if you want more! Can you spot any other associations?
-
-I got even more carried away and did a <span style='color: #3BBB75'><strong>high energy</strong></span> vs. <span style='color: #471164'><strong>low energy</strong></span> comparison:
+I then immediately began speculating about what these word clouds[^wc] could represent! Here's a quick <span style='color: #3BBB75'><strong>high energy</strong></span> vs. <span style='color: #471164'><strong>low energy</strong></span> comparison:
 - <span style='color: #3BBB75'><strong>California & Caribbean</strong></span> vs. <span style='color: #471164'><strong>Germany & Ireland</strong></span>
 - <span style='color: #3BBB75'><strong>Pop & Thai funk</strong></span> vs. <span style='color: #471164'><strong>Rock & Rave music</strong></span>
 - <span style='color: #3BBB75'><strong>Britney</strong></span> vs. <span style='color: #471164'><strong>Christopher</strong></span>
@@ -63,7 +50,7 @@ I got even more carried away and did a <span style='color: #3BBB75'><strong>high
 
 Again, all pure speculation! There were also words like _cradling_ and _soul_ for "high energy" and _whole_ for "low energy" that I didn't quite associate. And there's clearly some interesting _biases_ going on here (e.g., location associations). But all in all, it does feel like the conditioned model learned a little extra something!
 
-My work notebook for this conditioned language modeling can be found [here](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/week3_reviews_by_songs.ipynb).
+For a much more detailed analysis of the word clouds, check out the bottom of [my work notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/week3_reviews_by_songs.ipynb)! Can you spot any other associations?
 
 ## seq2seq vae for text generation
 
