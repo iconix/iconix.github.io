@@ -16,13 +16,13 @@ _To skip ahead to seq2seq VAEs for text generation, [click here](/dl/2018/06/29/
 
 [Last week](/dl/2018/06/22/scholar-week3#part-ii-how-fastai-handles-languagemodel-data), I discussed the speed bumps I hit while trying to get the `fastai` library to support an additional contextual `Field` in my language model data. By Tuesday, I had a `ContextLanguageModelLoader` working, based on local modifications to `fastai.nlp.LanguageModelLoader`[^context-lml]. I can now pass extra context for my language model to condition on!
 
-This week, I conditioned each _word_ fed into my LSTM-based language model on [Spotify's definition of energy](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/):
+This week, I conditioned each word fed into my LSTM-based language model on [Spotify's definition of energy](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/):
 
 > _**Energy is** a measure from 0.0 to 1.0 and represents a perceptual measure of **intensity** and **activity**. Typically, **energetic tracks feel fast, loud, and noisy**. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy._
 
-Energy seemed like a great piece of context to include: I figured the perceived energy of a song would translate fairly distinctly to any writing about the song![^genre]
+Energy seemed like a great piece of context to include. I figured the perceived energy of a song would translate fairly distinctly to any writing about the song![^genre]
 
-To do this practically, in my model's `forward` pass, I concatenated _each_ word embedding with Spotify's floating point `energy` value for whatever song the word helped describe. So if the word embedding size was 300, after the concat, it became 301. Then I trained on 15K reviews for 50 epochs (perplexity=130, aka not great[^ppl]).
+To do this practically, in my model's `forward` pass, I concatenated _each and every_ word embedding with Spotify's floating point `energy` value for whatever song the word helped describe. So if the word embedding size was 300, after the concat, it became 301. Then I trained on 15K reviews for 50 epochs (perplexity=130, aka not great[^ppl]).
 
 My preliminary results are pretty interesting! The generated text itself is still as garbled and hard to read as last week's... _but_ things get more interesting if we take a look at **what words generated most frequently** at the highest energy (`1.0`) vs. the lowest energy (`0.0`).
 
@@ -52,11 +52,11 @@ I then immediately began speculating about what these word clouds[^wc] could rep
 
 Again, all pure speculation! There were also words like _cradling_ and _soul_ for "high energy" and _whole_ for "low energy" that I didn't quite associate. And there's clearly some interesting _biases_ going on here (e.g., location associations). But all in all, it does feel like the conditioned model learned a little extra something!
 
-For a much more detailed analysis of the word clouds, check out the bottom of [my work notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/week3_reviews_by_songs.ipynb)! Can you spot any other associations?
+For a much more detailed analysis of the word clouds (e.g., my theory on why _thai_ is so prevalent in "high energy"), check out the bottom of [my work notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/week3_reviews_by_songs.ipynb)! Can you spot any other associations?
 
 ## seq2seq vae for text generation
 
-My goal for this section was to understand what the heck a "sequence-to-sequence (seq2seq)" "variational" "autoencoder" (VAE) is - three phrases I had only light exposure to beforehand - and why it might be better than my regular ol' language model. I also wanted to try my hand at training such a network.
+My goal for this section was to understand what the heck a "sequence-to-sequence" (seq2seq) "variational" "autoencoder" (VAE) is - three phrases I had only light exposure to beforehand - and why it might be better than my regular ol' language model. I also wanted to try my hand at training such a network.
 
 I'll give a quick overview of what I learned this week and then point towards really excellent resources that explain these concepts much better than I can.
 
@@ -81,22 +81,20 @@ The seq2seq VAE approach promises more _novel yet topical_ generated text. Let's
 `seq2seq`: a type of network where both the input and output of the network are variable-length sequences. It consists of one RNN that _encodes_ the input sequence, then hands its encoding to another RNN which _decodes_ the encoding into a target sequence.
 - The intermediate "encoding" is known as the `hidden code`, and it represents a compressed representation of what knowledge was needed for the `encoder-decoder` network to translate from input to target.
 
-`autoencoder`: a technique that uses identical data as both the input and target data for the `encoder-decoder` network. The cool thing here is that the `hidden code` will be a _latent_ (hidden) representation of the singular data provided (rather than a latent representation of some translation).
+`autoencoder`: a technique that uses identical data as both the input and target data for the `encoder-decoder` network. The cool thing here is that, in the network's attempt to copy the input to the target, the `hidden code` will become a _latent_ (hidden) representation of the singular data provided (rather than a latent representation of some translation).
 
 `variational`: a modification to the `autoencoder` that allows the `hidden code` to represent an entire distribution (rather than a fixed vector). This is cool because whenever you need a vector to feed through the `decoder` network, you can simply sample one (usually called `z`) from the `hidden code` distribution (`encoder` not required for generation!).
 
-Put this all together and you have a network that can first learn to represent your text in a compressed form, and then use that representation to generate new samples! This satisfies my _more novelty_ goal because I can randomly sample `z` from the latent space of the `hidden code`. This satisfies my _more topical_ goal because this `hidden code` must represent more global properties of the text, and so using it to generate text should incorporate more abstract knowledge than the LSTM-LM could when predicting word-by-word.
+Put this all together and you have a network that can first learn a rich latent representation of your text, and then use that representation to generate new samples! This satisfies my _more novelty_ goal because I can randomly sample `z` from the latent space of the `hidden code`. This satisfies my _more topical_ goal because this `hidden code` must represent global properties of the text, and so using it to generate text should incorporate more abstract knowledge than the LSTM-LM can while predicting locally, word-by-word.
 
 ![seq2seq vae language model](/img/posts/seq2seq_vae_text.png)
-_Image courtesy of Bowman, S. R., Vilnis, L., Vinyals, O., Dai, A.M., Jozefowicz, R., Bengio, S (2016). ["Generating Sentences from a Continuous Space"](https://arxiv.org/abs/1511.06349)._
+_An LSTM-based seq2seq VAE. Image courtesy of Bowman, S. R., Vilnis, L., Vinyals, O., Dai, A.M., Jozefowicz, R., Bengio, S (2016). ["Generating Sentences from a Continuous Space"](https://arxiv.org/abs/1511.06349)._
 
-I had several really excellent resources to guide my learning this week.
+The autoencoder is such an elegant idea! I had several really excellent resources to guide my learning this week.
 
 **seq2seq**:
-1. Sutskever, I., Vinyals, O., and Le, Q. V. (2014). [_Sequence to sequence learning with neural networks_](https://arxiv.org/abs/1409.3215).
-- Me from 4 weeks ago would have rolled my eyes and sighed at this suggestion - but I swear this paper is readable! All you need is a solid understanding of RNNs/LSTMs because they are the building blocks.
-2. A Practical PyTorch tutorial: [Translation with a Sequence to Sequence Network and Attention](https://github.com/spro/practical-pytorch/blob/master/seq2seq-translation/seq2seq-translation-batched.ipynb)
-- For if you reallyyy don't want to start with the paper (I do understand) :slightly_smiling_face: Even if you don't care to implement anything in PyTorch, the words surrounding the code are good at explaining the concepts.
+1. Sutskever, I., Vinyals, O., and Le, Q. V. (2014). [_Sequence to sequence learning with neural networks_](https://arxiv.org/abs/1409.3215)[^not-a-paper].
+2. A Practical PyTorch tutorial: ["Translation with a Sequence to Sequence Network and Attention"](https://github.com/spro/practical-pytorch/blob/master/seq2seq-translation/seq2seq-translation-batched.ipynb). Even if you don't care to implement anything in PyTorch, the words surrounding the code are good at explaining the concepts.
 
 **VAEs**:
 1. I highly recommend this YouTube video as an ["Introduction to Variational Autoencoders"](https://youtu.be/9zKuYvjFFS8)!
@@ -105,19 +103,19 @@ I had several really excellent resources to guide my learning this week.
 
 ### Experiments
 
-I also dabbled with training a seq2seq VAE. I found some code at [`kastnerkyle/pytorch-text-vae`](https://github.com/kastnerkyle/pytorch-text-vae), updated it for Python 3 and PyTorch 0.4, and let it go!
+I also dabbled with training a seq2seq VAE. I found some code at [`kastnerkyle/pytorch-text-vae`](https://github.com/kastnerkyle/pytorch-text-vae), updated it for Python 3 and PyTorch 0.4, and let it train!
 
-The decoder seemed quite capable of re-generating song titles using the hidden code. I then tried full-text song reviews... until I noticed that **this encoding technique is meant for sentence representations**. It all seems to break pretty hard if you go above a sentence. The Bowman et al. paper stuck to sentence representations, and even then, it mentions:
+The decoder seemed quite capable of reconstructing song titles using the hidden code. I then tried full-text song reviews... until I noticed that **this encoding technique seems meant for sentence representations**. It all seems to break pretty hard if you go above a sentence. The Bowman et al. paper stuck to sentence representations, and even then, it mentions:
 > _As the sentences get longer, the fidelity of the round-tripped sentences decreases._
 
-When I split the reviews into sentences, it then became capable of re-generating them (makes sense this is comparable to song titles).
+When I split the reviews into sentences, it then became capable of reconstructing them (makes sense as sentences are of comparable length to song titles).
 
 The code I was using didn't implement sampling, but it did implement something called _homotopy_, or the linear interpolation between sentences. From Bowman et al.:
 >  _Similarly, the homotopy between two sentences decoded (greedily) from codes `z1` and `z2` is the set of sentences decoded from the codes on the line. Examining these homotopies allows us to get a sense of what neighborhoods in code space look like – how the autoencoder organizes information and what it regards as a continuous deformation between two sentences._
 
 After training on review sentences for a long while, I could generate homotopies. The first column uses the same `s0` and `s1` as the code repo; the second uses the same as the paper.
 
-Repo example | Paper example
+[`pytorch-text-vae`](https://github.com/kastnerkyle/pytorch-text-vae) repo example | Bowman et al. paper example
 --- | ---
 (s0) _it had taken years to believe_ | (s0) _he was silent for a long moment_
 (z0)  it categories hip hop for something | (z0)  i was working for a long moment
@@ -130,12 +128,12 @@ Repo example | Paper example
 
 <br />
 
-Different data sets, different interpolations!
+_It was all weekend at the end._
 
-## Some work notes
+## Work notes
 
 Highlights:
-- Finally started using `pdb` this week - extremely helpful for inspecting model inputs and outputs and dimensions when writing the `ContextLanguageModelLoader`
+- Finally started using `pdb` extensively this week - extremely helpful for inspecting model inputs and outputs and layer dimensions when writing the `ContextLanguageModelLoader`
 
 Future improvements:
 - Desperately need gains in efficiency of model training. I need to break my habit of watching models train :sweat_smile::
@@ -148,10 +146,13 @@ Future improvements:
 ---
 That's all for this week. Next week should be a great one: all about attention!
 
+<br />
+
 #### Footnotes
 
 [^context-lml]: To see what I modified to make context work, search for `ContextLanguageModelLoader` in this [notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/week3_reviews_by_songs.ipynb).
 [^genre]: Last week, I discussed wanting to condition on song genres. However, a quick spot check placed doubts in my mind about the accuracy of the labels I scraped from the web. So I've switched to energy, and I plan to condition on multiple Spotify audio features in the future.
-[^ppl]: I haven't mentioned _perplexity_ since my [week 1 notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/n-gram%20music%20reviews.ipynb), but it's a standard language model measure for how well a model fits a test corpus. It can be calculated by taking the exponent of cross-entropy loss.
+[^ppl]: I haven't mentioned _perplexity_ since my [week 1 notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/n-gram%20music%20reviews.ipynb), but it's a standard language model measure for how well a model fits a test corpus. It can be calculated by taking the exponent of cross-entropy loss. SOTA (state-of-the-art) LM perplexities are [between 40-70](https://github.com/sebastianruder/NLP-progress/blob/master/language_modeling.md) as of writing.
 [^wc]: Word clouds courtesy of [https://github.com/amueller/word_cloud](https://github.com/amueller/word_cloud)
 [^holes]: An [example](https://glamglare.com/music/2018/04/12/song-pick-juliana-daugherty-player/): "_starts on just guitar and vocals but slowly opens up into a more cinematic space. It is a story about the experience of watching someone close to you disappear down a rabbit hole_"
+[^not-a-paper]: Me from 4 weeks ago would have rolled my eyes and sighed at a "read this paper to get it" suggestion - but I swear the papers I'm suggesting this week are quite readable! All you need is a solid understanding of RNNs/LSTMs because they are the building blocks.
