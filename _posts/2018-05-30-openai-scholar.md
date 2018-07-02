@@ -3,8 +3,10 @@ layout: post
 section-type: post
 title: OpenAI Scholar
 category: DL
-tags: []
+tags: [ 'openai' ]
 ---
+
+### _Follow my progress this summer with this blog's [#openai](/tags/openai/) tag, or on [GitHub](https://github.com/iconix/openai)._
 
 Last March, after a series of disappointing rejections from the [year-long](https://research.google.com/teams/brain/residency/) [AI](https://research.fb.com/programs/facebook-ai-research-residency-program/) [residency](https://eng.uber.com/uber-ai-residency/) [programs](https://www.microsoft.com/en-us/research/academic-program/microsoft-ai-residency-program/) that have been cropping up lately, I applied to the [OpenAI Scholars](https://blog.openai.com/openai-scholars/) program. By late April, I learned that I had been accepted to the inaugural class! 🎉
 

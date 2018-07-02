@@ -3,7 +3,7 @@ layout: post
 section-type: post
 title: OpenAI Scholar, Week 2
 category: DL
-tags: []
+tags: [ 'openai' ]
 ---
 
 I spent a busy week training _recurrent neural networks_ (RNNs) using PyTorch, with the ultimate goal of training a _long short-term memory_ (LSTM) network, as promised by my [syllabus](https://github.com/iconix/openai/blob/master/syllabus.md).
@@ -256,6 +256,8 @@ I'd like to share and promote the blogs of the other amazing OpenAI Scholars! Th
 - Ifu Aniemeka [https://www.lifeasalgorithm.com/](https://www.lifeasalgorithm.com/)
 - Hannah Davis [http://www.hannahishere.com/](http://www.hannahishere.com/)
 - Sophia Arakelyan [https://medium.com/@sophiaarakelyan](https://medium.com/@sophiaarakelyan)
+
+### _Follow my progress this summer with this blog's [#openai](/tags/openai/) tag, or on [GitHub](https://github.com/iconix/openai)._
 
 #### Footnotes
 

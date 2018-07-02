@@ -3,7 +3,7 @@ layout: post
 section-type: post
 title: OpenAI Scholar, Week 3
 category: DL
-tags: []
+tags: [ 'openai' ]
 ---
 
 This week had two planned tracks:
@@ -74,6 +74,8 @@ I think it will be very worthwhile for my summer to invest in getting more famil
 So- that's how I ran out of time this week :sweat_smile: At least my setback was informative.
 
 Next week, I am meant to start on seq2seq models. This weekend, I plan to evaluate whether I think I've done enough groundwork with LSTMs to stick to this schedule, or if I need to re-think the pacing of my syllabus. So... stay tuned!
+
+### _Follow my progress this summer with this blog's [#openai](/tags/openai/) tag, or on [GitHub](https://github.com/iconix/openai)._
 
 #### Footnotes
 

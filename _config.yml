@@ -34,8 +34,8 @@ permalink: /:categories/:year/:month/:day/:title
 lang: "en"
 author: "Nadja Rhodes"
 title: "{ Nadja Rhodes }"
-description: "Nadja Rhodes is a software developer and aspiring data scientist. I like to code for the web, and I blog (mainly) as I mess with data and build up a portfolio. Opinions expressed are mine."
-keywords: "rhodes, nadja, software, development, data science, analytics, code, web, stanford, microsoft, machine learning, deep learning"
+description: "Nadja Rhodes is a software engineer who likes to code for the web. She blogs (mainly) as she dabbles with data, NLP, and machine learning. Opinions expressed are hers."
+keywords: "rhodes, nadja, software, development, engineering, data science, analytics, code, web, stanford, microsoft, machine learning, deep learning, nlp"
 favicon: "/img/favicon.ico"
 
 ################

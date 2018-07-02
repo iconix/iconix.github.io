@@ -3,7 +3,7 @@ layout: post
 section-type: post
 title: OpenAI Scholar, Week 1
 category: DL
-tags: []
+tags: [ 'openai' ]
 ---
 
 As a scholar, I will be writing a blog post every Friday this summer about my weekly progress and learnings. My [last post](/dl/2018/06/03/project-ideation) described my search for a motivating project:
@@ -114,6 +114,8 @@ _Girl Talk_ is a mashup artist who was most active in the 2000s. His mashup "Thi
 
 <iframe width="420" height="236" src="https://www.youtube.com/embed/DZu_lLGFDtM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 <br />
+
+### _Follow my progress this summer with this blog's [#openai](/tags/openai/) tag, or on [GitHub](https://github.com/iconix/openai)._
 
 #### Footnotes
 

@@ -3,7 +3,7 @@ layout: post
 section-type: post
 title: A Musical Arxiv Experiment
 category: DL
-tags: []
+tags: [ 'openai' ]
 ---
 
 This post is inspired by researcher [Janelle Shane](https://twitter.com/JanelleCShane) and her blog [aiweirdness.com](http://aiweirdness.com/), where she trains neural networks and lets them "be weird" :slightly_smiling_face:
@@ -111,6 +111,8 @@ After much tinkering and sampling, I did eventually achieve some fun mashup titl
 You can check out my [work notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/textgenrnn_deep_song_titles.ipynb) for the messier results (and check out [older commits](https://github.com/iconix/openai/commits/master/nbs/textgenrnn_deep_song_titles.ipynb) too with more samples).
 
 This was a lot of fun for me! People like Janelle Shane sharing experiments like these are what got me interested in text generation in the first place :slightly_smiling_face: I hope you enjoyed this as well!
+
+### _Follow my progress this summer with this blog's [#openai](/tags/openai/) tag, or on [GitHub](https://github.com/iconix/openai)._
 
 #### Footnotes
 

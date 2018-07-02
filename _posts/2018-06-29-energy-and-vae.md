@@ -3,7 +3,7 @@ layout: post
 section-type: post
 title: Energy and V.A.E.
 category: DL
-tags: []
+tags: [ 'openai' ]
 ---
 
 Welcome to week 4! The end of this week marks the halfway point of my [syllabus](https://github.com/iconix/openai/blob/master/syllabus.md) for the Scholars program (wow). Four more weeks until my final project begins!
@@ -146,7 +146,7 @@ Future improvements:
 ---
 That's all for this week. Next week should be a great one: all about attention!
 
-<br />
+### _Follow my progress this summer with this blog's [#openai](/tags/openai/) tag, or on [GitHub](https://github.com/iconix/openai)._
 
 #### Footnotes
 
