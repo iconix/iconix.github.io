@@ -1,7 +1,7 @@
 ---
 layout: post
 section-type: post
-title: Energy and VAE
+title: Energy and V.A.E.
 category: DL
 tags: []
 ---
@@ -66,7 +66,7 @@ What do I stand to gain from a seq2seq VAE, compared to the traditional LSTM lan
 
 Recall that the LSTM-LM models a joint probability distribution over sequences - meaning, it models the next word in a sequence given the previous words:
 
-$$p(x) = \prod_{i=1}^{n} p(x_i \mid x_1,...,x_i-1)$$
+$$p(x) = \prod_{i=1}^{n} p(x_i \mid x_1,...,x_{i-1})$$
 
 The _novelty_ of the network's generations comes from sampling over all next word probabilities from the LSTM-LM's output distribution.
 
@@ -88,7 +88,7 @@ The seq2seq VAE approach promises more _novel yet topical_ generated text. Let's
 Put this all together and you have a network that can first learn a rich latent representation of your text, and then use that representation to generate new samples! This satisfies my _more novelty_ goal because I can randomly sample `z` from the latent space of the `hidden code`. This satisfies my _more topical_ goal because this `hidden code` must represent global properties of the text, and so using it to generate text should incorporate more abstract knowledge than the LSTM-LM can while predicting locally, word-by-word.
 
 ![seq2seq vae language model](/img/posts/seq2seq_vae_text.png)
-_An LSTM-based seq2seq VAE. Image courtesy of Bowman, S. R., Vilnis, L., Vinyals, O., Dai, A.M., Jozefowicz, R., Bengio, S (2016). ["Generating Sentences from a Continuous Space"](https://arxiv.org/abs/1511.06349)._
+_An LSTM-based seq2seq VAE. Image courtesy of Bowman, S. R., Vilnis, L., Vinyals, O., Dai, A.M., Jozefowicz, R., Bengio, S (2016). [Generating Sentences from a Continuous Space](https://arxiv.org/abs/1511.06349)._
 
 The autoencoder is such an elegant idea! I had several really excellent resources to guide my learning this week.
 
