@@ -146,7 +146,7 @@ Future improvements:
 ---
 That's all for this week. Next week should be a great one: all about attention!
 
-### _Follow my progress this summer with this blog's [#openai](/tags/openai/) tag, or on [GitHub](https://github.com/iconix/openai)._
+### _Follow my progress this summer with this blog's [#openai](/tags/openai) tag, or on [GitHub](https://github.com/iconix/openai)._
 
 #### Footnotes
 

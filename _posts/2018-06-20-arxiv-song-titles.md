@@ -112,7 +112,7 @@ You can check out my [work notebook](http://nbviewer.jupyter.org/github/iconix/o
 
 This was a lot of fun for me! People like Janelle Shane sharing experiments like these are what got me interested in text generation in the first place :slightly_smiling_face: I hope you enjoyed this as well!
 
-### _Follow my progress this summer with this blog's [#openai](/tags/openai/) tag, or on [GitHub](https://github.com/iconix/openai)._
+### _Follow my progress this summer with this blog's [#openai](/tags/openai) tag, or on [GitHub](https://github.com/iconix/openai)._
 
 #### Footnotes
 

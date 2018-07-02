@@ -6,7 +6,7 @@ category: DL
 tags: [ 'openai' ]
 ---
 
-### _Follow my progress this summer with this blog's [#openai](/tags/openai/) tag, or on [GitHub](https://github.com/iconix/openai)._
+### _Follow my progress this summer with this blog's [#openai](/tags/openai) tag, or on [GitHub](https://github.com/iconix/openai)._
 
 Upon learning that I'd been [accepted to be an OpenAI Scholar this summer](/dl/2018/05/30/openai-scholar), I didn't give myself much room to celebrate. Instead, I immediately started stressing over my next set of decisions[^gratitude]. One of the bigger decisions to appear in front me:
 

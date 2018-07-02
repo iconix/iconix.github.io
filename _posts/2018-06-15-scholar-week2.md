@@ -257,7 +257,7 @@ I'd like to share and promote the blogs of the other amazing OpenAI Scholars! Th
 - Hannah Davis [http://www.hannahishere.com/](http://www.hannahishere.com/)
 - Sophia Arakelyan [https://medium.com/@sophiaarakelyan](https://medium.com/@sophiaarakelyan)
 
-### _Follow my progress this summer with this blog's [#openai](/tags/openai/) tag, or on [GitHub](https://github.com/iconix/openai)._
+### _Follow my progress this summer with this blog's [#openai](/tags/openai) tag, or on [GitHub](https://github.com/iconix/openai)._
 
 #### Footnotes
 
