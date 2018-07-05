@@ -10,7 +10,7 @@ Welcome to week 4! The end of this week marks the halfway point of my [syllabus]
 
 I split my attention between learning about _sequence-to-sequence_ (seq2seq) models and _variational autoencoders_ (VAE), while also tinkering with my LSTM-based language model from weeks 2-3.
 
-_To skip ahead to seq2seq VAEs for text generation, [click here](/dl/2018/06/29/energy-and-vae#seq2seq-vae-for-text-generation)._
+<small>_To skip ahead to seq2seq VAEs for text generation, [click here](/dl/2018/06/29/energy-and-vae#seq2seq-vae-for-text-generation)._</small>
 
 ## 'Energy'-conditioned language model
 
@@ -79,18 +79,22 @@ I also have a goal of producing more _topical generations_ that capture meaning 
 The seq2seq VAE approach promises more _novel yet topical_ generated text. Let's break down each part of the name.
 
 `seq2seq`: a type of network where both the input and output of the network are variable-length sequences. It consists of one RNN that _encodes_ the input sequence, then hands its encoding to another RNN which _decodes_ the encoding into a target sequence.
-- The intermediate "encoding" is known as the `hidden code`, and it represents a compressed representation of what knowledge was needed for the `encoder-decoder` network to translate from input to target.
+- The intermediate "encoding" is known as the `thought vector` (and also the `hidden code`/`representational vector`/`latent vector`), and it represents a compressed representation of what knowledge was needed for the `encoder-decoder` network to translate from input to target.
 
-`autoencoder`: a technique that uses identical data as both the input and target data for the `encoder-decoder` network. The cool thing here is that, in the network's attempt to copy the input to the target, the `hidden code` will become a _latent_ (hidden) representation of the singular data provided (rather than a latent representation of some translation).
+`autoencoder`: a technique that uses identical data as both the input and target data for the `encoder-decoder` network. The cool thing here is that, in the network's attempt to copy the input to the target, the `thought vector` will become a _latent_ (hidden) representation of the singular data provided (rather than a latent representation of some translation).
 
-`variational`: a modification to the `autoencoder` that allows the `hidden code` to represent an entire distribution (rather than a fixed vector). This is cool because whenever you need a vector to feed through the `decoder` network, you can simply sample one (usually called `z`) from the `hidden code` distribution (`encoder` not required for generation!).
+`variational`: a modification to the `autoencoder` that allows the `thought vector` to represent an entire distribution (rather than a fixed vector). This is cool because whenever you need a vector to feed through the `decoder` network, you can simply sample one (usually called `z`) from the `thought vector` distribution (`encoder` not required for generation!).
 
-Put this all together and you have a network that can first learn a rich latent representation of your text, and then use that representation to generate new samples! This satisfies my _more novelty_ goal because I can randomly sample `z` from the latent space of the `hidden code`. This satisfies my _more topical_ goal because this `hidden code` must represent global properties of the text, and so using it to generate text should incorporate more abstract knowledge than the LSTM-LM can while predicting locally, word-by-word.
+Put this all together and you have a network that can first learn a rich latent representation of your text, and then use that representation to generate new samples! This satisfies my _more novelty_ goal because I can randomly sample `z` from the latent space of the `thought vector`. This satisfies my _more topical_ goal because this `thought vector` must represent global properties of the text, and so using it to generate text should incorporate more abstract knowledge than the LSTM-LM can while predicting locally, word-by-word.
 
 ![seq2seq vae language model](/img/posts/seq2seq_vae_text.png)
-_An LSTM-based seq2seq VAE. Image courtesy of Bowman, S. R., Vilnis, L., Vinyals, O., Dai, A.M., Jozefowicz, R., Bengio, S (2016). [Generating Sentences from a Continuous Space](https://arxiv.org/abs/1511.06349)._
+<small>_An LSTM-based seq2seq VAE. Image courtesy of Bowman, S. R., Vilnis, L., Vinyals, O., Dai, A.M., Jozefowicz, R., Bengio, S (2016). [Generating Sentences from a Continuous Space](https://arxiv.org/abs/1511.06349)._</small>
 
-The autoencoder is such an elegant idea! I had several really excellent resources to guide my learning this week.
+The autoencoder is such an elegant idea! Even neater, the **seq2seq VAE `decoder` network can be thought of as a `z`-conditioned language model, similar to my 'energy'-conditioned language model** from part 1! `z` just has the potential to hold much richer knowledge than my feature-engineered choice of 'energy.'
+
+### Resources
+
+I had several really excellent resources to guide my learning this week.
 
 **seq2seq**:
 1. Sutskever, I., Vinyals, O., and Le, Q. V. (2014). [_Sequence to sequence learning with neural networks_](https://arxiv.org/abs/1409.3215)[^not-a-paper].
@@ -103,7 +107,7 @@ The autoencoder is such an elegant idea! I had several really excellent resource
 
 ### Experiments
 
-I also dabbled with training a seq2seq VAE. I found some code at [`kastnerkyle/pytorch-text-vae`](https://github.com/kastnerkyle/pytorch-text-vae), updated it for Python 3 and PyTorch 0.4, and let it train!
+I also dabbled with training a seq2seq VAE. I found some code at [`kastnerkyle/pytorch-text-vae`](https://github.com/kastnerkyle/pytorch-text-vae), updated it for Python 3 and PyTorch 0.4[^update], and let it train!
 
 The decoder seemed quite capable of reconstructing song titles using the hidden code. I then tried full-text song reviews... until I noticed that **this encoding technique seems meant for sentence representations**. It all seems to break pretty hard if you go above a sentence. The Bowman et al. paper stuck to sentence representations, and even then, it mentions:
 > _As the sentences get longer, the fidelity of the round-tripped sentences decreases._
@@ -113,9 +117,9 @@ When I split the reviews into sentences, it then became capable of reconstructin
 The code I was using didn't implement sampling, but it did implement something called _homotopy_, or the linear interpolation between sentences. From Bowman et al.:
 >  _Similarly, the homotopy between two sentences decoded (greedily) from codes `z1` and `z2` is the set of sentences decoded from the codes on the line. Examining these homotopies allows us to get a sense of what neighborhoods in code space look like – how the autoencoder organizes information and what it regards as a continuous deformation between two sentences._
 
-After training on review sentences for a long while, I could generate homotopies. The first column uses the same `s0` and `s1` as the code repo; the second uses the same as the paper.
+After training on review sentences for a long while, **I could generate homotopies** (see table below). The first column uses the same `s0` and `s1` as the [`pytorch-text-vae`](https://github.com/iconix/pytorch-text-vae) repo; the second column uses the same as the Bowman et al. paper.
 
-[`pytorch-text-vae`](https://github.com/kastnerkyle/pytorch-text-vae) repo example | Bowman et al. paper example
+generated homotopy #1 | generated homotopy #2
 --- | ---
 (s0) _it had taken years to believe_ | (s0) _he was silent for a long moment_
 (z0)  it categories hip hop for something | (z0)  i was working for a long moment
@@ -152,7 +156,8 @@ That's all for this week. Next week should be a great one: all about attention!
 
 [^context-lml]: To see what I modified to make context work, search for `ContextLanguageModelLoader` in this [notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/week3_reviews_by_songs.ipynb).
 [^genre]: Last week, I discussed wanting to condition on song genres. However, a quick spot check placed doubts in my mind about the accuracy of the labels I scraped from the web. So I've switched to energy, and I plan to condition on multiple Spotify audio features in the future.
-[^ppl]: I haven't mentioned _perplexity_ since my [week 1 notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/n-gram%20music%20reviews.ipynb), but it's a standard language model measure for how well a model fits a test corpus. It can be calculated by taking the exponent of cross-entropy loss. SOTA (state-of-the-art) LM perplexities are [between 40-70](https://github.com/sebastianruder/NLP-progress/blob/master/language_modeling.md) as of writing.
+[^ppl]: I haven't mentioned _perplexity_ since my [week 1 notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/n-gram%20music%20reviews.ipynb), but it's a standard language model measure for how well a model fits a held-out text corpus. It can be calculated by taking the exponent of cross-entropy loss. SOTA (state-of-the-art) LM perplexities are [between 40-70](https://github.com/sebastianruder/NLP-progress/blob/master/language_modeling.md) as of writing.
 [^wc]: Word clouds courtesy of [https://github.com/amueller/word_cloud](https://github.com/amueller/word_cloud)
 [^holes]: An [example](https://glamglare.com/music/2018/04/12/song-pick-juliana-daugherty-player/): "_starts on just guitar and vocals but slowly opens up into a more cinematic space. It is a story about the experience of watching someone close to you disappear down a rabbit hole_"
 [^not-a-paper]: Me from 4 weeks ago would have rolled my eyes and sighed at a "read this paper to get it" suggestion - but I swear the papers I'm suggesting this week are quite readable! All you need is a solid understanding of RNNs/LSTMs because they are the building blocks.
+[^update]: I forked the repo to update it [here](https://github.com/iconix/pytorch-text-vae)
