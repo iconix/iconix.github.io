@@ -8,6 +8,13 @@ tags: [ 'openai' ]
 
 I spent a busy week training _recurrent neural networks_ (RNNs) using PyTorch, with the ultimate goal of training a _long short-term memory_ (LSTM) network, as promised by my [syllabus](https://github.com/iconix/openai/blob/master/syllabus.md).
 
+<small>_Contents:_</small>
+1. <small>[The limitations of n-grams](#part-i-the-limitations-of-n-grams)</small>
+2. <small>[Getting familiar with RNNs](#part-ii-getting-familiar-with-rnns) (+ [textgenrnn](#textgenrnn))</small>
+3. <small>[PyTorch: first impressions](#part-iii-pytorch-first-impressions) (+ [fastai library](#fastai-library))</small>
+4. <small>[This week's struggles/learnings](#part-iv-this-weeks-struggleslearnings)</small>
+5. <small>[Program updates](#program-updates) (+ [other scholar blogs](#scholar-blogs))</small>
+
 ## Part I. The limitations of n-grams
 
 But why use RNNs when I generated such [_amazing_ text](/dl/2018/06/08/scholar-week1#part-ii-generating-terrible-music-reviews-with-n-grams) last week?
@@ -234,7 +241,7 @@ I had a question early in the week about why I was seeing RNNs with `tanh` activ
 
 It turns out that PyTorch does not support `ReLu` activations in its LSTM and GRU implementations! [[issue#1932](https://github.com/pytorch/pytorch/issues/1932)] `ReLu` is an option for vanilla RNNs, but `tanh` is still the default. This was surprising to me - it's probably a side effect of how quickly best practices change in the field.
 
-## Program Updates
+## Program updates
 
 ### Syllabus edits
 
