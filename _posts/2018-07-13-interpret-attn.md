@@ -24,16 +24,33 @@ _So why interpret?_
 
 Attention is computed as part of the network learning how to accomplish its task, which makes it very appealing as a method of interpretability. Colloquially, it tells us what the model is "paying attention" to at each time step - however, there's [evidence](http://www.abigailsee.com/2017/08/30/four-deep-learning-trends-from-acl-2017-part-2.html#post-hoc-explainability) that it can also learn more complicated relationships that aren't as immediately interpretable.
 
-[`textgenrnn`](https://github.com/minimaxir/textgenrnn) implements a weighted average attention layer at the end of its LSTM-LM. I modified the library slightly to output the attention weights at every generation time step. Then I trained the network on my song reviews dataset. The heatmaps are from the attention weights used during sampling.
+[`textgenrnn`](https://github.com/minimaxir/textgenrnn) implements a weighted average attention layer at the end of its LSTM-LM. I modified the library slightly to output the attention weights at every generation time step. Then I trained the network on my song reviews dataset for 10 epochs, sampling after every 2 epochs. The heatmaps are from the attention weights used during sampling.
 
-Here's how attention shifts as the model generates the phrase, "a nice reminder of summer":
+Here's how attention shifts as the model generates the (cherry-picked) phrase
+
+> "a nice reminder of summer":
 
 ![Attention heatmap for the generated phrase "a nice reminder of summer"](/img/posts/attention-lm.png)
 <small>_<center>The lighter the color, the more attention paid to the corresponding word in the history.</center>_</small>
 
-You can infer that the network paid close attention to the recently generated "reminder" when generating both "of" and "summer", and earlier to "nice" when generating "reminder". This is pretty neat!
+One can infer that the network paid close attention to the recently generated "reminder" when generating both "of" and "summer", and earlier to "nice" when generating "reminder". The model seems to pick up on **a nostalgia for summer** among music writers, which is pretty neat!
 
 It's surprising to me that so much attention is paid to the `<pad>` tokens, particularly early on. I was expecting the model to learn to ignore them and instead focus on `<s>` and eventually actual words as they slide into history. I did not train the model for long, however.
+
+My program mentor Natasha also noticed that the model seems to latch on to particularly **unique or salient words** using the attention mechanism.
+
+For instance, in sampling the phrase:
+
+> "from uk producer joe goddard , which was released earlier this year and now the",
+
+the network attends to "joe goddard" (and particularly "goddard") for a long time:
+
+![Attemtion heatmap for the generated phrase "from uk producer joe goddard , which was released earlier this year and now the"](/img/posts/joe-goddard.png)
+<small>_<center>Notice the light diagonal streak as the model attends closely to "joe goddard" throughout its history window!</center>_</small>
+
+It is possible that the model is attending to words with a **high TF-IDF score**, which would be quite interesting! [TF-IDF](http://www.tfidf.com/), or _term frequency-inverse document frequency_, is a measure of how unique a term is to a document. It is popularly used to reflect word importance.
+
+For more generations and attention heatmaps, check out my [work notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/697390c073050ac31cce65f0ff732fec33124dbc/nbs/textgenrnn_attention.ipynb).
 
 ## Perturbations
 
@@ -71,7 +88,7 @@ Karpathy et al. explored the concept of "interpretable activations" in the paper
 
 ![Quote cell and if-statement cell](/img/posts/rnn-cells-firing.png)
 
-Karpathy also makes the point that many/most activations are not easily interpretable - meaning you have to manually search for the ones that are.
+Karpathy also makes the point that many/most activations are not easily interpretable - meaning one has to manually search for the ones that are.
 
 #### Footnotes
 

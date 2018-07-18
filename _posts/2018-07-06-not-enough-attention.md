@@ -12,27 +12,16 @@ My stated goal for week 5 was to **adapt an LSTM-LM[^lstm-lm] to do classificati
 
 I chose to work on the [Movie Review Sentiment Analysis](https://www.kaggle.com/c/movie-review-sentiment-analysis-kernels-only/) competition (kernels only), one of the only two active NLP competitions at the moment. It's a "Playground Code Competition" and the prize is "knowledge" rather than, say, [$70,000](https://www.kaggle.com/c/home-credit-default-risk).
 
-<small>_To skip ahead to my Kaggle + ULMFiT entry, [click here](#kaggle--ulmfit). To skip to my attention explainer, [click here](#understanding-attention)._</small>
+This week I spent much more time on figuring out transfer learning with LSTM-LMs (plus applying last week's seq2seq VAE learnings) than I did on applying attention. Meanwhile, attention received a high-level treatment.
 
-## Diversions
-
-Well, I did eventually enter the competition, but _without_ an attention mechanism. Here's a non-exhaustive list of things that ended up distracting me from the attention bit this week:
-- Ramping up on the competition's Rotten Tomatoes movie review data set (the format was _not_ what I was expecting).
-- Ramping up on using language model transfer learning and fine-tuning for text classification (à la [ULMFiT](http://nlp.fast.ai/category/classification.html)).
-- Getting lackluster results with said transfer learning using the competition data, then figuring out that fine-tuning with IMDB first worked much better.
-- Trying to make a dent in my [model training infrastructure debt](/dl/2018/06/29/energy-and-vae#work-notes).
-- Adding sampling to my seq2seq VAE code fork from last week[^sample-code].
-
-And more broadly, I've been trying to fight through a pattern that's emerged week after week for me so far as a scholar --- and I think **I'd do better to just embrace the pattern**. When designing my [syllabus](https://github.com/iconix/openai/blob/master/syllabus.md), I scheduled one full week each to **both learn _and_ implement some heavy topics**: [RNNs](/dl/2018/06/15/scholar-week2), [conditioned LSTMs](/dl/2018/06/22/scholar-week3), [seq2seq VAEs](/dl/2018/06/29/energy-and-vae), and now the [attention mechanism](#understanding-attention). But with each topic so far, it's taken me about that one week just to understand the concepts at a high-level and start tinkering with code. I've only **internalized each topic well enough to reasonably apply it by the following week**.
-
-Continuing this accidental pattern, this week I spent much more time applying last week's seq2seq VAE learnings (plus transfer learning with LSTM-LMs) than I did on applying attention. Meanwhile, attention received a high-level treatment.
+<small>_To skip ahead to my attention explainer, [click here](#understanding-attention)._</small>
 
 ## Kaggle + ULMFiT
 
 ![The high level ULMFiT approach](/img/posts/ulmfit-approach.png)
 <small>_The high level ULMFiT approach. Image courtesy of ["Introducing state of the art text classification with universal language models"](http://nlp.fast.ai/classification/2018/05/15/introducting-ulmfit.html) by Jeremy Howard and Sebastian Ruder._</small>
 
-This is the first Kaggle competition I've entered [without a lot of hand holding](/portfolio-building/2017/07/26/first-kaggle). I wrote about the pre-training process I used to enter the competition in my data set description:
+I did eventually enter the competition, but _without_ an attention mechanism (I talk more about why [later](#diversions-and-a-breakthrough)). This is the first Kaggle competition I've entered [without a lot of hand holding](/portfolio-building/2017/07/26/first-kaggle). I wrote about the pre-training process I used to enter the competition in my data set description:
 
 > _Check out [**https://www.kaggle.com/iconix/ulmfit-rt/home**](https://www.kaggle.com/iconix/ulmfit-rt) for more details about my entry!_
 
@@ -80,17 +69,36 @@ I'll leave off with my favorite visualization from Google's blog post on the ["T
 ![Transformer handling coreference resolution](/img/posts/self-attention-coreference.png)
 <small>_How the Transformer works: it "starts by generating initial representations, or embeddings, for each word. ... Then, using self-attention, it aggregates information from all of the other words, generating a new representation per word informed by the entire context. ... This step is then repeated multiple times in parallel for all words, successively generating new representations."_</small>
 
-The Transformer's ability to understand that "it" is the "animal" in the context of "it" being "tired", while "it" is the "street" in the context of "it" being "wide" (also known as _coreference resolution_) --- that's totally bonkers to me.
+The Transformer's ability to understand that "it" is the "animal" in the context of "it" being "tired", while "it" is the "street" in the context of "it" being "wide" (also known as _coreference resolution_) -- that's totally bonkers to me.
 
 Definitely do check out the full [blog post](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html) and [paper](https://arxiv.org/abs/1706.03762)!
 
+## Diversions and a Breakthrough
+
+On a more personal note, I'd feel amiss not to talk about the struggle I've had with sticking to my own schedule this summer, and the mental shift I'm working to embrace.
+
+Here's a non-exhaustive list of things that ended up distracting me from my stated topic of the attention mechanism this week:
+- Ramping up on the competition's Rotten Tomatoes movie review data set (the format was _not_ what I was expecting).
+- Ramping up on using language model transfer learning and fine-tuning for text classification (à la [ULMFiT](http://nlp.fast.ai/category/classification.html)).
+- Getting lackluster results with said transfer learning using the competition data, then figuring out that fine-tuning with IMDB first worked much better.
+- Trying to make a dent in my [model training infrastructure debt](/dl/2018/06/29/energy-and-vae#work-notes).
+- Adding sampling to my seq2seq VAE code fork from last week[^sample-code].
+
+And I could have made a similar list every week of the program so far.
+
+I've been trying to fight through a pattern that's emerged week after week for me so far as a scholar -- and I think I'd do better to just embrace the pattern. When designing my [syllabus](https://github.com/iconix/openai/blob/master/syllabus.md), I scheduled one full week each to **both learn _and_ implement some heavy topics**: [RNNs](/dl/2018/06/15/scholar-week2), [conditioned LSTMs](/dl/2018/06/22/scholar-week3), [seq2seq VAEs](/dl/2018/06/29/energy-and-vae), and now the [attention mechanism](#understanding-attention).
+
+But with each topic so far, it's taken me about that one week just to understand the concepts at a high-level and start tinkering with code. I've only internalized each topic well enough to reasonably apply it by the following week.
+
+**So instead of feeling like I'm failing in some way every week, I am taking the hint that I just need a little more time with these topics, and that is totally fine.** My syllabus has provided me with a clear, instructive path through the first 8 weeks of the program, and even if slightly delayed -- I'm making progress and I'm getting stuff done. This is what matters.
+
 ---
-Next week, I expect to actually implement attention in an LSTM-LM model, as part of my first week on model interpretability (a topic I am particularly excited about).
+Next week, I expect to implement attention in an LSTM-LM model, as part of my first week on model interpretability (a topic I am particularly excited about).
 
 ### _Follow my progress this summer with this blog's [#openai](/tags/openai) tag, or on [GitHub](https://github.com/iconix/openai)._
 
 #### Footnotes
 
 [^lstm-lm]: I started using the acronym `LSTM-LM` last week to mean LSTM-based Language Models. And while we're here, a reminder that `LSTM` stands for Long Short-Term Memory ([good explainer](http://www.wildml.com/2015/10/recurrent-neural-network-tutorial-part-4-implementing-a-grulstm-rnn-with-python-and-theano/)). Later, `seq2seq VAE` == Sequence-to-Sequence Variational Autoencoder; `RNN` == Recurrent Neural Network; `NLP` == Natural Language Processing.
-[^sample-code]: As a follow-up from last week: I mentioned that the seq2seq VAE code that I forked hadn't implemented sampling, so I [shared the _homotopies_](/dl/2018/06/29/energy-and-vae#experiments) it could generate instead. My mentor Natasha then pointed out that sampling is actually very simple to implement. She was right (per usual) - so I added [`generate.py`](https://github.com/iconix/pytorch-text-vae/blob/master/generate.py) to my fork this week!
 [^no-vae]: By the way (because this was an idea on my syllabus draft for a while), an _attentive_ seq2seq VAE would be ineffective. Why? The network is going to be as lazy as you allow it to be, and it just won't bother learning to use a thought vector, variational or otherwise, when it can simply search with attention as needed.
+[^sample-code]: Quick sidebar follow-up from last week: I mentioned that the seq2seq VAE code that I forked hadn't implemented sampling, so I [shared the _homotopies_](/dl/2018/06/29/energy-and-vae#experiments) it could generate instead. My mentor Natasha then pointed out that sampling is actually very simple to implement. She was right (per usual) - so I added [`generate.py`](https://github.com/iconix/pytorch-text-vae/blob/master/generate.py) to my fork this week!
