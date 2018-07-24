@@ -12,7 +12,7 @@ My stated goal for week 5 was to **adapt an LSTM-LM[^lstm-lm] to do classificati
 
 I chose to work on the [Movie Review Sentiment Analysis](https://www.kaggle.com/c/movie-review-sentiment-analysis-kernels-only/) competition (kernels only), one of the only two active NLP competitions at the moment. It's a "Playground Code Competition" and the prize is "knowledge" rather than, say, [$70,000](https://www.kaggle.com/c/home-credit-default-risk).
 
-This week I spent much more time on figuring out transfer learning with LSTM-LMs (plus applying last week's seq2seq VAE learnings) than I did on applying attention. Meanwhile, attention received a high-level treatment.
+This week, I spent much more time on figuring out transfer learning with LSTM-LMs (plus applying last week's seq2seq VAE learnings) than I did on applying attention. Meanwhile, attention received a high-level treatment.
 
 <small>_To skip ahead to my attention explainer, [click here](#understanding-attention)._</small>
 
@@ -90,7 +90,7 @@ I've been trying to fight through a pattern that's emerged week after week for m
 
 But with each topic so far, it's taken me about that one week just to understand the concepts at a high-level and start tinkering with code. I've only internalized each topic well enough to reasonably apply it by the following week.
 
-**So instead of feeling like I'm failing in some way every week, I am taking the hint that I just need a little more time with these topics, and that is totally fine.** My syllabus has provided me with a clear, instructive path through the first 8 weeks of the program, and even if slightly delayed -- I'm making progress and I'm getting stuff done. This is what matters.
+**So instead of feeling like I'm failing in some way every week, I am taking the hint that I just need a little more time with these topics, and that is totally fine.** My syllabus has provided me with a clear, instructive path through the first 8 weeks of the program, and even if slightly delayed -- I'm making a lot of progress, and I'm getting stuff done. This is what matters.
 
 ---
 Next week, I expect to implement attention in an LSTM-LM model, as part of my first week on model interpretability (a topic I am particularly excited about).
