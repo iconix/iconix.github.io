@@ -1,3 +1,4 @@
+// based on: https://github.com/worldmodels/worldmodels.github.io/blob/a45921d53bf662830acc43169d8efd356eb5d8f7/demo/vae_demo.js
 
 var vae_demo = function(settings) {
   "use strict"
@@ -60,7 +61,6 @@ var vae_demo = function(settings) {
       var i, j, k
 
       screen_width = window.document.getElementById(div_name).parentElement.clientWidth
-      //screen_height = window.document.getElementById(div_name).parentElement.clientHeight
 
       // make dom
       var bodyRect = document.body.getBoundingClientRect()
@@ -75,23 +75,12 @@ var vae_demo = function(settings) {
         horizontal = false
       }
 
-      //image_size = Math.max((screen_width - (suggested_slider_width+20) ) / 2, min_image_size)
       slider_width = suggested_slider_width
-      screen_x = screen_width //945 //image_size*2+slider_width+20
+      screen_x = screen_width
       textbox_size = (screen_x / 2) - suggested_slider_width
-      //screen_y = textbox_size * 2
-      //slider_height = textbox_size / N //image_size / N
 
-      //recon_y = train_y = screen_y / 2
       train_x = 0
       recon_x = textbox_size + slider_width + 50
-
-      //z_button_y = file_button_y = textbox_size + 150
-      //file_button_x = 10
-      //z_button_x = textbox_size + 10
-
-      //reset_button_x = z_button_x + 17
-      //reset_button_y = z_button_y + 25
 
       train_desc_x = textbox_size / 3
       train_desc_y = 35
@@ -106,57 +95,19 @@ var vae_demo = function(settings) {
         screen_y = textbox_size + slider_y_offset
         text_size = 20
       } else {
+        // likely to be mobile or a thin vertical browser session.
         slider_y_offset = 0
         screen_y = textbox_size * 2 + slider_y_offset
         text_size = 14
-        /*// likely to be mobile or a thin vertical browser session.
-        textbox_size = min_image_size
-        slider_height = 25
-        screen_x = 760 //Math.max(image_size, screen_width)
-        screen_y = 420 //image_size*2+5*slider_height+175
-        slider_width = (textbox_size)/3 - 10
-
-        train_x = (screen_x-textbox_size) / 2
-        train_y = screen_y / 2
-
-        train_desc_x = train_x
-        train_desc_y = 35
-
-        file_button_x = train_x+(textbox_size/4)
-        file_button_y = textbox_size+60
-
-        recon_x = (screen_x-textbox_size)/2
-        recon_y = screen_y - textbox_size
-
-        recon_desc_x = recon_x
-        recon_desc_y = textbox_size*1+160+0+slider_height*5
-
-        z_button_x = recon_x+(textbox_size/3)
-        z_button_y = textbox_size + 108 + slider_height*5
-
-        reset_button_x = z_button_x + 17
-        reset_button_y = z_button_y + 25
-
-        z_desc_x = train_x+10
-        z_desc_y = textbox_size+85
-
-        k = 0
-        for(i=0;i<3;i++) {
-          for(j=0;j<5;j++) {
-            slider_x[k] = recon_x+5+(slider_width+10)*i
-            slider_y[k] = textbox_size+100+j*slider_height
-            k += 1
-          }
-        }*/
       }
 
       recon_y = train_y = screen_y / 2
 
-      slider_height = textbox_size / N //image_size / N
+      slider_height = textbox_size / N
 
       for(i=0;i<N;i++) {
         slider_x[i] = textbox_size + 17
-        slider_y[i] = slider_y_offset + i * slider_height //55 + i*slider_height
+        slider_y[i] = slider_y_offset + i * slider_height
       }
     }
 
@@ -185,15 +136,10 @@ var vae_demo = function(settings) {
     }
 
     function update_text() {
-      //load_train(data, file_number)
       load_reconstruct(slider_pos)
     }
 
     function redraw_screen() {
-      //random_file_button.position(origx+file_button_x, origy+file_button_y)
-      //random_z_button.position(origx+z_button_x, origy+z_button_y)
-      //reset_z_button.position(origx+reset_button_x, origy+reset_button_y)
-
       draw_sliders()
       update_text()
 
