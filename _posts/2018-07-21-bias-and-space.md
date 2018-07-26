@@ -1,7 +1,7 @@
 ---
 layout: post
 section-type: post
-title: Interpreting Bias and Latent Space
+title: Interpreting Latent Space and Bias
 category: DL
 tags: [ 'openai' ]
 ---
@@ -10,14 +10,14 @@ For week 7, and my second week on model interpretability (see [first week post](
 
 ## Playing in VAE latent space
 
-I spent some quality time this week with the wonderfully interactive and engaging [World Models](https://worldmodels.github.io/) project from David Ha and Jürgen Schmidhuber. It is really impressive to see such an interactive site accompany a [paper](https://arxiv.org/abs/1803.10122) like this!
+I spent some quality time this week with the wonderfully engaging [World Models](https://worldmodels.github.io/) project from David Ha and Jürgen Schmidhuber. It is really impressive to see such an interactive post accompany a [paper](https://arxiv.org/abs/1803.10122) like this!
 
 I particularly enjoyed the demo that allows users to play with the latent vector `z` of a [variational autoencoder (VAE)](/dl/2018/06/29/energy-and-vae#seq2seq-vae-for-text-generation) and see how it affects the reconstruction:
 
 ![VizDoom VAE demo from original World Models project](/img/posts/doom-vae.gif)
 <small>_VizDoom VAE demo from original World Models project._</small>
 
-So I created my own **scaled-down version of this demo**! It features my text-based seq2seq VAE from [week 4](/dl/2018/06/29/energy-and-vae#experiments), rather than screenshots from Doom.
+So I created my own **scaled-down version of this demo**! It features my text-based seq2seq VAE from earlier in the program that encodes sentences from my song review dataset, rather than frames from the video game _Doom_.
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
@@ -35,11 +35,11 @@ So I created my own **scaled-down version of this demo**! It features my text-ba
   };
   var custom_p5 = new p5(vae_demo(vae), vae.div_name);
 </script>
-<small>_The VAE I trained in [week 4](/dl/2018/06/29/energy-and-vae#experiments) on sentences in song reviews. You can load sentences that the model reconstructed well using a particular latent vector `z` and experiment with adjusting the values of `z` to see how it affects the reconstruction. Inspired by a more sophisticated demo from Ha &amp; Schmidhuber's [World Models](https://worldmodels.github.io/) project._</small>
+<small>_The VAE I trained in [week 4](/dl/2018/06/29/energy-and-vae#experiments) on sentences in song reviews. You can load sentences that the model reconstructed well using a particular latent vector `z` and experiment with adjusting the values of `z` to see how it affects the reconstruction. Inspired by Ha &amp; Schmidhuber's [World Models](https://worldmodels.github.io/) demo[^tfjs]._</small>
 
-The original demo uses [tensorflow.js](https://js.tensorflow.org/), a JavaScript library for deploying ML models in the browser. Since I didn't want to learn a new library right now, I instead pre-computed all samples offline with my PyTorch model.
+As a quick recap of [week 4](/dl/2018/06/29/energy-and-vae#seq2seq-vae-for-text-generation), the latent vector of a VAE attempts to encode or compress all of the factors of variation in the data that may be relevant for reproducing it. In the World Models project, it learns to encode aspects of the visual environment of _Doom_, like the player's location and whether an alien is firing at the player. In my demo, it learns to encode aspects of text.
 
-The `z` vector is actually a 128-dimensional vector. Because 128 knobs would be highly unwieldy, I used principal component analysis (PCA) to reduce dimensionality down to 5. Fortunately, PCA allows us to [reverse its effect and reconstruct](https://stats.stackexchange.com/a/229093) the `z` vector, making it feasible to compute all possible samples at each available step (3 available steps in this demo) of each dimension:
+The `z` vector is actually a 128-dimensional vector. Because 128 knobs would be rather unwieldy, I used principal component analysis (PCA) to reduce dimensionality down to 5. Fortunately, PCA allows us to [reverse its effect and reconstruct](https://stats.stackexchange.com/a/229093) the `z` vector, making it feasible to compute all possible samples at each available step (3 available steps in this demo) of each dimension:
 
 $$ \mathit{n\_samples} = \mathit{n\_steps}^\mathit{n\_dimensions} * \mathit{n\_sentences} = (3^5)*5 = 243 * 5 = 1,215 \mathit{samples} $$
 
@@ -81,7 +81,7 @@ But then, what is taste? When the likes of The Chainsmokers and VICE sing your p
   - **1** #1 hit, **5** Top 10 hits, **12** total songs on [Billboard Hot 100](https://www.billboard.com/music/the-chainsmokers/chart-history/hot-100)
   - **97** tracks on HypeM (188,696 times loved by community)
 
-Billboard numbers are used here as an indictor of popularity, and The Chainsmokers and Lil Uzi Vert are fairly comparable. Yet The Chainsmokers have **2.3x more tracks listed** on HypeM (including remixes by other artists) than Lil Uzi Vert. This is a rather shallow analysis as many factors can influence HypeM chart performance -- but the **EDM-pop Chainsmokers do seem a bit over-represented on HypeM**.
+Billboard numbers are used here as an indictor of popularity, and The Chainsmokers and Lil Uzi Vert are fairly comparable. Yet The Chainsmokers have **2.3x more tracks listed** on HypeM (including remixes by other artists) than Lil Uzi Vert. Granted, many factors can influence HypeM chart performance -- but the **EDM-pop Chainsmokers do seem a bit over-represented on HypeM**.
 
 Let's throw in another rap group: **Migos**. Better Billboard numbers, but they still underperform The Chainsmokers on HypeM:
 
@@ -121,7 +121,13 @@ In general, **pop-leaning tracks dominate** the HypeM popular charts. According 
 I've mentioned before not entirely trusting these labels - but assuming they are at least in the ballpark of accurate, the skew is clear.
 
 I could also detect anecdotal evidence of bias in the kinds of samples my models have been most willing to generate:
-- bias towards certain locations, e.g., "Berlin-based producer" and "LA-based producer" (this also echoes the Germany/California split from week 4's [energy-conditioned LM](/dl/2018/06/29/energy-and-vae#energy-conditioned-language-model) word clouds!)
+- bias towards certain locations, e.g., "Berlin-based producer" and "LA-based producer" (this also echoes the Germany/California split from week 4's [energy-conditioned LM](/dl/2018/06/29/energy-and-vae#energy-conditioned-language-model) word clouds)
 - bias towards male-gendered pronouns, e.g., "_his_ soulfully introspective" or "_his_ debut/take/new track"
 
-Much of this analysis is fairly imprecise, but I think it still emphasizes an important point: there are [many opportunities for discrimination in deploying machine learning systems](https://nlpers.blogspot.com/2018/06/many-opportunities-for-discimination-in.html), and it is important to be self-critical as a machine learning practitioner.
+This is a high-level analysis, but I think it still emphasizes an important point: there are [many opportunities for discrimination in deploying machine learning systems](https://nlpers.blogspot.com/2018/06/many-opportunities-for-discimination-in.html), and it is important to be self-critical as a machine learning practitioner.
+
+### _Follow my progress this summer with this blog's [#openai](/tags/openai) tag, or on [GitHub](https://github.com/iconix/openai)._
+
+#### Footnotes
+
+[^tfjs]: The original demo uses [tensorflow.js](https://js.tensorflow.org/), a JavaScript library for deploying ML models in the browser. Since I didn't want to learn a new library right now, I instead pre-computed all samples offline with my PyTorch model. Check out my [work notebook](http://nbviewer.jupyter.org/github/iconix/openai/blob/master/nbs/world-models-vae.ipynb) for a sketch of how the precomputing was done.

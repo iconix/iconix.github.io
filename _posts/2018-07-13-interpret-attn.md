@@ -1,16 +1,18 @@
 ---
 layout: post
 section-type: post
-title: Attention and Interpretability
+title: Interpreting with Attention and More
 category: DL
 tags: [ 'openai' ]
 ---
 
 This week, I picked up from [last week's study of attention](/dl/2018/07/06/not-enough-attention#understanding-attention) and applied it towards **model interpretability**, or the ability for humans to understand a model. I also explored some other ["attribution-based"](https://distill.pub/2018/building-blocks/) methods of interpretability that credit different parts of the model input with the prediction.
 
+<small>_To skip ahead to interpreting with attention, [click here](#attention). Also skip ahead to interpreting with [LIME](#lime), [input gradients](#input-gradients), or [RNN cell activations](#rnn-cell-activations)._</small>
+
 ## Insights from explanations
 
-This is the first of the 2 weeks I plan to spend on the subject of model interpretability, so I must think it's pretty important. Deep learning models have the reputation of being inscrutable "black boxes" because their problem-solving abilities can feel almost magical.
+This is the first of the 2 weeks I plan to spend on the subject of model interpretability, so I must think it's pretty important (_UPDATE: [second week post](/dl/2018/07/21/bias-and-space) is now live!_). Deep learning models have the reputation of being inscrutable "black boxes" because their problem-solving abilities can feel almost magical.
 
 Even now, with all of the hype and effort being applied towards deep learning, little theory about _why_ these networks work so well exist. There's a surprising amount of intuition and guesswork going around for a bunch of researchers and engineers. This leaves room for doubt, especially when deploying these models into the real world.
 
@@ -75,21 +77,32 @@ Unfortunately, because these explanations require multiple runs of the algorithm
 
 ### Input gradients
 
-Input gradients (or "right for the right reasons (rrr)" as the [original paper](https://arxiv.org/abs/1703.03717) terms itself) use backpropagation as a different kind of perturbation - one of infinitesimal changes. The gradients "help define the decision boundary and lie normal to it."[^intuition-source]
+Interpretability through input gradients uses backpropagation as a different kind of perturbation - one of infinitesimal changes.
+
+This technique uses stochastic gradient descent (or another optimization method) on the input to the network. Like LIME, we want to see how changing the input affects network outputs. However, this technique can be used to generate an input that causes some output or neuron in the network to fire maximally.
+
+To do this, the weights of a network are held frozen while we try to maximize the output by performing SGD on the input. This could allow us to see, for example, what input would cause the model to maximally classify a piece of text as having positive sentiment.
+
+Ross et al. of the _Right for the Right Reasons: Training Differentiable Models by Constraining their Explanations_ [paper](https://arxiv.org/abs/1703.03717) also [provide the intuition that](https://github.com/dtak/rrr/blob/master/experiments/2D%20Intuition.ipynb) the input gradients themselves help define the classification decision boundary and lie normal to it. So when you look at the gradients of the probability of the predicted class, we see it will maximize by moving away from the decision boundary:
+
+![Gradients of the probability of the predicted class](/img/posts/rrr-boundary.png)
+<small>_<center>Image from the <a href='https://github.com/dtak/rrr/blob/master/experiments/2D%20Intuition.ipynb'>"RRR" paper intuitions notebook</a>.</center>_</small>
+
+Here is an example of input gradients in action from the "RRR" paper. They even directly compare their technique to LIME:
 
 ![input gradients vs LIME](/img/posts/rrr-v-lime.png)
-<small>_Input gradients explainers on the left; LIME explainers on the right. Image from [this notebook](https://github.com/dtak/rrr/blob/master/experiments/20%20Newsgroups.ipynb)._</small>
+<small>_<center>Input gradients explainers on the left; LIME explainers on the right. Image from <a href='https://github.com/dtak/rrr/blob/master/experiments/20%20Newsgroups.ipynb'>this notebook</a>.</center>_</small>
 
-It turns out that the explanations provided by input gradients are very similar to those of LIME - input gradients are just _much_ more computationally efficient, as well as less sparse about assigning credit. Practically however, the LIME library is more polished and easier to use.
+It turns out that the explanations provided by input gradients are very similar to those of LIME -- input gradients are just _much_ more computationally efficient, as well as less sparse about assigning credit. Practically however, the LIME library is more polished and easier to use.
 
-## Activations
+## RNN cell activations
 
-Karpathy et al. explored the concept of "interpretable activations" in the paper [_Visualizing and Understanding Recurrent Networks_](https://arxiv.org/abs/1506.02078). They liken these interpretable activations to neurons firing at different rates in the brain as it processes the input. From ["The Unreasonable Effectiveness of Recurrent Neural Networks"](http://karpathy.github.io/2015/05/21/rnn-effectiveness/#visualizing-the-predictions-and-the-neuron-firings-in-the-rnn):
+Karpathy et al. explored the concept of "interpretable activations" in the paper [_Visualizing and Understanding Recurrent Networks_](https://arxiv.org/abs/1506.02078). They liken these interpretable activations to neurons firing at different rates in the brain as it processes the input.
+
+From ["The Unreasonable Effectiveness of Recurrent Neural Networks"](http://karpathy.github.io/2015/05/21/rnn-effectiveness/#visualizing-the-predictions-and-the-neuron-firings-in-the-rnn), Karpathy was able to find a recurrent cell in a trained LSTM that turns on only when there is an open quote that hasn't been closed, _effectively keeping track of the fact that a closing quote still needs to happen_ -- very cool! He found another LSTM cell that similarly only turns on when inside of a coding if-statement.
 
 ![Quote cell and if-statement cell](/img/posts/rnn-cells-firing.png)
 
-Karpathy also makes the point that many/most activations are not easily interpretable - meaning one has to manually search for the ones that are.
+Karpathy also makes the point that many/most activations are not easily interpretable -- meaning one has to manually search for ones like the "quotes cell" that are.
 
-#### Footnotes
-
-[^intuition-source]: [https://github.com/dtak/rrr/blob/master/experiments/2D%20Intuition.ipynb](https://github.com/dtak/rrr/blob/master/experiments/2D%20Intuition.ipynb)
+### _Follow my progress this summer with this blog's [#openai](/tags/openai) tag, or on [GitHub](https://github.com/iconix/openai)._
