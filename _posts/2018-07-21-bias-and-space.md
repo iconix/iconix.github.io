@@ -118,7 +118,7 @@ In general, **pop-leaning tracks dominate** the HypeM popular charts. According 
   </tbody>
 </table>
 <br />
-I've mentioned before not entirely trusting these labels - but assuming they are at least in the ballpark of accurate, the skew is clear.
+I've mentioned before not entirely trusting these labels - but assuming they are at least in the ballpark of accurate, the skew is clear. (**UPDATE**: I got much more trustworthy and interesting genre labels from the Spotify API and followed up with more genre explorations [here](/dl/2018/08/14/project-notes-1#data-exploring)!)
 
 I could also detect anecdotal evidence of bias in the kinds of samples my models have been most willing to generate:
 - bias towards certain locations, e.g., "Berlin-based producer" and "LA-based producer" (this also echoes the Germany/California split from week 4's [energy-conditioned LM](/dl/2018/06/29/energy-and-vae#energy-conditioned-language-model) word clouds)
