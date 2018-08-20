@@ -12,7 +12,7 @@ It is also quite freeing to be able to focus once again on a single objective fo
 
 ## Inspiration: Live from Chicago
 
-I have been working from Chicago this August -- this is my first trip to the Windy City, and the change of scenery has brought inspiration and refreshment.
+I have been working from Chicago this August -- this is my first trip to the _Windy City_, and the change of scenery has brought inspiration and refreshment.
 
 I visited the [Chicago History Museum](https://www.chicagohistory.org/) and found the [**_Amplified: Chicago Blues_ exhibit**](https://www.chicagohistory.org/blues) particularly inspiring towards my final project aim of paying homage to good, expressive music commentary.
 
@@ -26,7 +26,7 @@ It was also a sobering reminder that not all commentary is worth amplifying or c
     </tr>
   </tbody>
 </table>
-<small><i>eclectic guitar, amplified harp solos, and driving rhythm section</i> - this is the ideal type of writing I'd love to consistently see my model generate. and yet, I must also be wary of amplifying the troll-like writing on the right, i.e., <i>screaming, idiotic words, and savage music</i> - which, in this case, is also blatantly racist.</small>
+<small><i>"eclectic guitar, amplified harp solos, and driving rhythm section"</i> - this is the ideal type of writing I'd love to consistently see my model generate. and yet, I must also be wary of amplifying the troll-like writing on the right, i.e., <i>"screaming, idiotic words, and savage music"</i> - which, in this case, is also blatantly racist.</small>
 <br />
 
 A good friend of mine here in Chicago reminded me of the **social responsibilities** that I must strive to always keep in mind, even when developing in a seemingly harmless domain (because what could be so bad about automatic music commentary, right?).
@@ -42,13 +42,13 @@ If I make contributions towards realistic text generation, **what am I enabling?
 
 ## Exploring genre
 
-For several weeks now, I have [expressed doubt](/dl/2018/06/29/energy-and-vae#fn:genre) in the genre information I collected in weeks 2-3. Genres were collected (along with song audio features) as a way of conditioning my generated music commentary on something concrete about the song being commented on.
+For several weeks now, I have [expressed doubt](/dl/2018/06/29/energy-and-vae#fn:genre) in the genre information I collected in weeks 2-3 of the program. Genres were collected (along with song audio features) as a way of conditioning my generated music commentary on something concrete about the song being commented on.
 
 ### Data cleaning
 
 This week, I finally revisited and addressed the situation by collecting new genre information from the Spotify API instead. The genres themselves are extremely fascinating, and I had no idea they would be so amazingly specific![^everynoise]
 
-_"vapor twitch" -- "indie poptimism" -- "stomp and holler"_ -- these new genres go far beyond the _bland_ labels of pop/rap/rock/r&b/country that I had previously gathered. **These genres feel like they are _really_ trying to tell me something, as expressively and concisely as possible.**
+_"vapor twitch" -- "indie poptimism" -- "stomp and holler"_ -- these new genres go far beyond the bland labels of pop/rap/rock/r&b/country that I had previously gathered. **These genres feel like they are _really_ trying to tell me something, as expressively and concisely as possible.**
 
 At first, this discovery was actually a little discouraging: I could only imagine how long the genre data tail would be once applied to my commentary collection. I worried that this would result in conditioning that really isolated certain writing, greatly restricting the creativity of my model. Imagine a request for commentary on a _"chamber pop/chillwave/neo-psychedelic/nu gaze"_ (:nerd_face:) song came in to my model, but it's never seen such a genre combination before -- what will it do? (I'm still not sure actually, so stay tuned for when I get to conditioning!)
 
@@ -61,14 +61,14 @@ I am using this notebook to track data revision history from now on: [**`quilt.i
 ### Data exploring
 
 When I started clustering genres, many neat insights emerged. This section turned into a spiritual successor to my [earlier bias investigation](/dl/2018/07/21/bias-and-space#selection-bias).
-- #1 genre found in my commentary collection? _vapor soul_
-- How different is the #1 from the #2 genre, indie poptimism, according to Every Noise? [_not very_](http://everynoise.com/engenremap-indiepoptimism.html)
-- Which genre that was at least visible ([at 0.2% representation](/dl/2018/07/21/bias-and-space#selection-bias)) in my old genre labels is conspicuously missing now? _country_
+- #1 genre found in my commentary collection? _vapor soul_.
+- How different is the #1 from the #2 genre, indie poptimism, according to Every Noise? [_not very_](http://everynoise.com/engenremap-indiepoptimism.html).
+- Which genre that was at least visible ([at 0.2% representation](/dl/2018/07/21/bias-and-space#selection-bias)) in my old genre labels is conspicuously missing now? _country_.
 
 [The Every Noise project](http://everynoise.com) enabled some deeper diving into how to better interpret these somewhat opaque labels. It provides "an algorithmically-generated, readability-adjusted **scatter-plot** of the musical genre-space", where:
 > "in general down is more organic, up is more mechanical and electric; left is denser and more atmospheric, right is spikier and bouncier."
 
-These scatter plots can show both **similar and dissimilar genres** to a specific genre, as well as which artist tend to belong to a genre.
+There are scatter plots to show both **similar and dissimilar genres** to a specific genre, as well as which artist tend to belong to a genre.
 
 It can tell you what it believes is the ["most representative"](https://artists.spotify.com/blog/how-spotify-discovers-the-genres-of-tomorrow) song for a genre label. It links to genre-based playlists on Spotify.
 
@@ -76,6 +76,8 @@ Let's take a look at the **top genres** in my commentary collection:
 
 ![genre cloud](/img/posts/genrecloud.png)
 <small><i>Top 25: 1. vapor soul (4344), 2. indie poptimism (3886), 3. pop (3799), 4. indietronica (3462), 5. electropop (3406), 6. indie r&b (3242), 7. tropical house (2359), 8. modern rock (2171), 9. indie psych-rock (1942), 10. indie pop (1845), 11. shimmer pop (1827), 12. edm (1826), 13. chillwave (1705), 14. rap (1452), 15. indie electro-pop (1451), 16. alternative dance (1418), 17. metropopolis (1303), 18. hip hop (1230), 19. pop rap (1174), 20. nu disco (1086), 21. dance pop (1054), 22. chamber pop (996), 23. aussietronica (973), 24. art pop (973), 25. house (917).</i></small>
+
+I picked out a few genres to inspect further that felt both representative of the most popular sounds in the data set, as well as distinct from one another. I wanted to get a feel for what these genres sound like, as well as their relationships to other genres.
 
 <table style='border: 1px solid black'>
   <thead>
@@ -149,13 +151,13 @@ Let's take a look at the **top genres** in my commentary collection:
 <br/>
 
 <small>Observations from the rabbit hole:</small>
-- <small>The top 11 genres are considered very similar to each other. Also similar: #13, #15, #17, #23...</small>
-- <small>Rap and freak folk have tall genre maps, indicating more variation between "organic" and "mechanical and electric" and less variation between "atmospheric" and "spikier and bouncier" sounds. Interestingly, rap and freak folk are considered very dissimilar genres by Every Noise.</small>
+- <small>The top 11 genres are considered very similar to each other. Also similar: #13, #15, #17, #23... this again speaks to the genre skew in the data set.</small>
+- <small>Rap and freak folk have tall genre maps, indicating more variation between "organic" and "mechanical and electric" and less variation between "atmospheric" and "spikier and bouncier" sounds. Interestingly, rap and freak folk are also considered very dissimilar to each other by Every Noise.</small>
 - <small>Another comment on representation is to note the sparsity of similar top genres to nu disco and neo soul ... and the density to genres vapor soul, edm, and electronic.</small>
 - <small>I do like the distinctions between the edm and electronic genres... a tale of two houses.</small>
-- <small>There are still many interesting top genres left out of this manual clustering: indie folk (#28), indie anthem-folk (#32), escape room (#34), post-teen pop (#35), deep australian indie (#37), future garage (#63), swedish electropop (#68), modern alternative rock (#70)...</small>
+- <small>There are still many interesting top genres left out of this manual clustering: indie folk (#28), indie anthem-folk (#32), escape room (#34), post-teen pop (#35), deep australian indie (#37), future garage (#63), swedish electropop (#68), modern alternative rock (#70), etc.</small>
 - <small>Interesting to look at top genres that didn't cluster as I expected... e.g., rap (#14) was _not_ particularly similar to electronic trap (#38), bass trap (#58), or trap soul (#80). And despite its affinity for other house genres, edm (#12) was _not_ particularly similar to filter house (#44), deep house (#51), microhouse (#69), disco house (#86), or float house (#108).</small>
-- <small>Interesting to also look at the dissimilarity scatter-plots and notice what's under-represented in top genres, e.g.,: negations of vapor soul (anti-folk, no wave, art rock, modern blues, blues-rock); negations of edm (movie tunes, christmas, broadway, disney, lots of region-specific music); negations of rap (post rock, anime score, hauntology, neoclassical)</small>
+- <small>Interesting to also look at the dissimilarity scatter-plots and notice what's under-represented in top genres, e.g.,: negations of vapor soul (anti-folk, no wave, art rock, modern blues, blues-rock); negations of edm (movie tunes, christmas, broadway, disney, lots of region-specific music); negations of rap (post rock, anime score, hauntology, neoclassical).</small>
 
 This _Every Noise_-based clustering (e.g., adding under-represented "new jack swing" to the similar but better-represented "rap" genre) to reduce the genre tail is not what I'm using for the project, although this would be a very cool extension.
 
