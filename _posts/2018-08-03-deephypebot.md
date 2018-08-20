@@ -6,7 +6,7 @@ category: DL
 tags: [ 'openai' ]
 ---
 
-_This post is a replica of my OpenAI Scholar final project proposal, also available [here](https://github.com/iconix/openai/blob/master/deephypebot.md)._
+_This post is a replica of my OpenAI Scholar final project proposal, also available [here](https://github.com/iconix/deephypebot/blob/master/README.md)._
 
 ## @deephypebot
 _tl;dr- generating conditioned music commentary on Twitter._
@@ -53,16 +53,19 @@ Once generations for a new proposed tweet are available, an email will be sent t
 - "Starting an Open Source Project" by GitHub [[guide](https://opensource.guide/starting-a-project/)] - #oss
 - "Rules of Machine Learning: Best Practices for ML Engineering" by Google [[guide](https://developers.google.com/machine-learning/guides/rules-of-ml/)] - #eng
 - Sculley, D., Holt, G., Golovin, D., Davydov, E., Phillips, T., Ebner, D., Chaudhary, V., Young, M (2014). Machine Learning: The High-Interest Credit Card of Technical Debt [[paper](https://ai.google/research/pubs/pub43146)] - #eng
-- "Dockerizing a Python 3 Flask App Line-by-Line" by Zach Bloomquist [[guide](https://medium.com/bitcraft/dockerizing-a-python-3-flask-app-line-by-line-400aef1ded3a)] - #eng
+- "Step-by-step Guide to Deploying Deep Learning Models" by Bowei, Hive Machine Learning Engineer [[guide](https://thehive.ai/blog/simple-ml-serving)] - #eng
+- "Tutorial to deploy Machine Learning models in Production as APIs (using Flask)" by Prathamesh Sarang [[guide](https://www.analyticsvidhya.com/blog/2017/09/machine-learning-models-as-apis-using-flask/)] - #eng
 - "Build Your Own Twitter Bots!" [[code](https://github.com/handav/twitter-bots)] [[video](https://egghead.io/courses/create-your-own-twitter-bots)] - #twitterbot
     - A class by fellow Scholar, [Hannah Davis](http://www.hannahishere.com/)!
 - "Make-A-Twitter-Bot Workshop" by Allison Parrish [[guide](https://gist.github.com/aparrish/3ee64d07f0a00b08618a)] - #twitterbot
 - Sohn, K., Yan, X., Lee, H. Learning Structured Output Representation using Deep Conditional Generative Models [CVAE [paper](http://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models.pdf)] -[](http://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models.pdf)#vae
 - Bernardo, F., Zbyszynski, M., Fiebrink, R., Grierson, M. (2016). Interactive Machine Learning for End-User Innovation [[paper](http://research.gold.ac.uk/19767/)] - #onlinelearning
+- https://devcenter.heroku.com/articles/getting-started-with-python
 
 **Software…**
 - [Quilt](https://quiltdata.com/) for versioning and deploying data
-- [Tweepy](https://github.com/tweepy/tweepy) or [Twython   ](https://github.com/ryanmcgrath/twython) for Python Twitter API access
+- [Tweepy](https://github.com/tweepy/tweepy) or [Twython](https://github.com/ryanmcgrath/twython) for Python Twitter API access
+- [Heroku](https://www.heroku.com/) free tier for deployments
 
 ## Timeline
 
