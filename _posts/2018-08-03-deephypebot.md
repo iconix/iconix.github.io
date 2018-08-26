@@ -60,11 +60,19 @@ Once generations for a new proposed tweet are available, an email will be sent t
 - "Make-A-Twitter-Bot Workshop" by Allison Parrish [[guide](https://gist.github.com/aparrish/3ee64d07f0a00b08618a)] - #twitterbot
 - Sohn, K., Yan, X., Lee, H. Learning Structured Output Representation using Deep Conditional Generative Models [CVAE [paper](http://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models.pdf)] -[](http://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models.pdf)#vae
 - Bernardo, F., Zbyszynski, M., Fiebrink, R., Grierson, M. (2016). Interactive Machine Learning for End-User Innovation [[paper](http://research.gold.ac.uk/19767/)] - #onlinelearning
-- https://devcenter.heroku.com/articles/getting-started-with-python
+- https://devcenter.heroku.com/articles/getting-started-with-
+- https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xviii-deployment-on-heroku
+- https://developer.spotify.com/documentation/web-api/quick-start/
 
 **Software…**
+- [PyTorch](https://pytorch.org/) for deep learning
 - [Quilt](https://quiltdata.com/) for versioning and deploying data
-- [Tweepy](https://github.com/tweepy/tweepy) or [Twython](https://github.com/ryanmcgrath/twython) for Python Twitter API access
+- [Conda](https://conda.io/docs/) and [npm](https://www.npmjs.com/) for package and environment management in Python and JavaScript
+- [Flask](http://flask.pocoo.org/) for a lightweight Python web (model) server
+- [Express.js](https://expressjs.com/) for a lightweight Node.js web (API) server
+- [Twit](https://github.com/ttezel/twit) for Node.js Twitter API access
+- [Spotify Web API Node](https://github.com/thelinmichael/spotify-web-api-node) for Node.js Spotify Web API access
+- [Node Google Spreadsheet](https://github.com/theoephraim/node-google-spreadsheet) for Node.js Google Sheets API access
 - [Heroku](https://www.heroku.com/) free tier for deployments
 
 ## Timeline
