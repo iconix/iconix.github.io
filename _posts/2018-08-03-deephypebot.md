@@ -6,7 +6,7 @@ category: DL
 tags: [ 'openai' ]
 ---
 
-_This post is a replica of my OpenAI Scholar final project proposal, also available [here](https://github.com/iconix/deephypebot/blob/master/README.md)._
+_This post is a replica of my OpenAI Scholar final project proposal, also available [here](https://github.com/iconix/deephypebot/blob/master/proposal.md)._
 
 ## [@deephypebot](http://twitter.com/deephypebot)
 _tl;dr- auto-generating conditioned music commentary on Twitter._
@@ -29,11 +29,11 @@ From there, I split the commentary into sentences, which are a good length for a
 
 ### Neural network
 
-A _language model_ (LM) is an approach to generating text by estimating the probability distribution over sequences of linguistic units (characters, words, sentences). This project centers around a _sequence-to-sequence variational autoencoder_ (seq2seq VAE) model that generates text with an additional _latent constraints generative adversarial network_ (LC-GAN) model that helps control aspects of the text generated.
+A _language model_ (LM) is an approach to generating text by estimating the probability distribution over sequences of linguistic units (characters, words, sentences). This project centers around a _sequence-to-sequence conditional variational autoencoder_ (seq2seq CVAE) model that generates text conditioned on a thought vector `z` + attributes of the referenced music `v` (simply concatenated together as `cat(z, v)`). The conditional fed into the CVAE is provided by an additional _latent constraints generative adversarial network_ (LC-GAN) model that helps control aspects of the text generated.
 
-The seq2seq VAE consists of an LSTM-based encoder and decoder, and once trained, the decoder can be used independently as a language model conditioned on latent space `z` (more on seq2seq VAEs [here](https://iconix.github.io/dl/2018/06/29/energy-and-vae#seq2seq-vae-for-text-generation)).
+The CVAE consists of an LSTM-based encoder and decoder, and once trained, the decoder can be used independently as a language model conditioned on latent space `cat(z, v)` (more on seq2seq VAEs [here](/dl/2018/06/29/energy-and-vae#seq2seq-vae-for-text-generation)). The conditional input is fed into the decoder only.
 
-Then the LC-GAN can be used to fine-tune the input `z` to this LM to generate samples with specific attributes, such as realism or readability (more on the LC-GAN [here](https://iconix.github.io/dl/2018/07/28/lcgan)). It can also be used to condition generations on attributes like song audio features or artist genres.
+The LC-GAN is used to determine which conditional inputs `cat(z, v)` to this LM tend to generate samples with particular attributes (more on the LC-GAN [here](/dl/2018/07/28/lcgan)). This project uses LDA topic modeling as its automatic reward function for encouraging samples of a descriptive, almost flowery style (more on LDA topic modeling [here](/dl/2018/08/24/project-notes-2)). The generator is trained to fool the discriminator with "fake" (e.g., not from training data) samples, ostensibly from the desired topic set. Once trained, the generator can be used independently to provide conditional inputs to the CVAE for inference.
 
 ### Making inference requests to the network
 
@@ -43,7 +43,7 @@ This will require detecting the song and artist discussed in tweets that show up
 
 ### From samples to tweets
 
-Text generation is [a notoriously messy affair](https://iconix.github.io/dl/2018/06/20/arxiv-song-titles#text-generation-is-a-messy-affair) where "you will not get quality generated text 100% of the time, even with a heavily-trained neural network." While much effort will be put into having as automated and clean a pipeline as possible, some human supervision is prudent.
+Text generation is [a notoriously messy affair](/dl/2018/06/20/arxiv-song-titles#text-generation-is-a-messy-affair) where "you will not get quality generated text 100% of the time, even with a heavily-trained neural network." While much effort will be put into having as automated and clean a pipeline as possible, some human supervision is prudent.
 
 Once generations for a new proposed tweet are available, an email will be sent to the human curator (me), who will select and lightly edit for grammar and such before releasing to [@deephypebot](http://twitter.com/deephypebot) for tweeting.
 
@@ -55,7 +55,7 @@ Once generations for a new proposed tweet are available, an email will be sent t
 - Sculley, D., Holt, G., Golovin, D., Davydov, E., Phillips, T., Ebner, D., Chaudhary, V., Young, M (2014). _Machine Learning: The High-Interest Credit Card of Technical Debt._ [[paper](https://ai.google/research/pubs/pub43146)] - #eng
 - "Build Your Own Twitter Bots!" [[code](https://github.com/handav/twitter-bots)] [[video](https://egghead.io/courses/create-your-own-twitter-bots)] - #twitterbot
     - A class by fellow Scholar, [Hannah Davis](http://www.hannahishere.com/)!
-- "Web API Tutorial" by Spotify [[guide](https://developer.spotify.com/documentation/web-api/quick-start/)]
+- "Web API Tutorial" by Spotify [[guide](https://developer.spotify.com/documentation/web-api/quick-start/)] - #spotify
 - Sohn, K., Yan, X., Lee, H. _Learning Structured Output Representation using Deep Conditional Generative Models._ [CVAE [paper](http://papers.nips.cc/paper/5775-learning-structured-output-representation-using-deep-conditional-generative-models.pdf)] - #vae
 - Engel, J., Hoffman, M., Roberts, A. (2017). _Latent Constraints: Learning to Generate Conditionally from Unconditional Generative Models._ [LC-GAN [paper](https://arxiv.org/abs/1711.05772)] - #gan
 - "Deploying a Python Flask app on Heroku" by John Kagga [[guide](https://medium.com/the-andela-way/deploying-a-python-flask-app-to-heroku-41250bda27d0)] - #eng
