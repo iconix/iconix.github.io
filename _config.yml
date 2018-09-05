@@ -69,6 +69,7 @@ lines: # You can add HTML Tags in the Text
   - text: "\\\"You don't have to see the whole staircase. Just take the first step.\\\""
   - text: "\\\"Vision without action is a daydream.\\\""
   - text: "Trust in your own power."
+  - text: "\\\"Slow is smooth, and smooth is fast.\\\""
 
 me-img: "/img/allo-moji1.png"
 

@@ -6,25 +6,25 @@ category: DL
 tags: [ 'openai' ]
 ---
 
-## Motivation:
+## Motivation
 
 [@deephypebot](https://twitter.com/deephypebot) is a music commentary generator. It is essentially a _language model_, trained on past human music writing from the web and conditioned on attributes of the referenced music. There is an additional training step that attempts to encourage a certain type of descriptive, almost flowery writing commonly found in this genre.
 
 Our goal is to teach this language model to generate consistently good and entertaining new writing about songs.
 
-## Project Achievements:
+## Project Achievements
 
 - Functional, documented pipeline code ([GitHub repo](https://github.com/iconix/deephypebot))
 - Inference through trained LC-GAN + VAE architecture
 - A technical white paper (_coming soon_)
 
-## Components:
+## Components
 
 ![Project architecture diagram](/img/posts/deephypebot-architecture.svg)
 
 _A detailed breakdown of the project architecture can be found in the [**project proposal**](https://github.com/iconix/deephypebot/blob/master/proposal.md)_.
 
-## Future Work:
+## Future Work
 
 Here are some ideas that I didn't quite get to but would love to in the future!
 
@@ -45,7 +45,7 @@ This summer has been an intense foray into the independence and self-determinati
 
 I am grateful that this program allowed me to find and refine my blogging voice, including more visual storytelling than ever before. I am much more comfortable working with deep learning frameworks, especially PyTorch. And I now have experience building an end-to-end, deep learning product. Kudos all around!
 
-## Future Plans:
+## Future Plans
 
 - Moving back east!
 - Going broader on/experimenting more with creative applications in ML - both new and existing.
