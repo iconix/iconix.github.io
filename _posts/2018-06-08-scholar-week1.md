@@ -22,7 +22,7 @@ I didn't want just any old post though (e.g., many blogs highlight multiple trac
 
 There was also attrition from retrieving the actual contents of the posts from the original sites (using the free [Mercury Web Parser API](https://mercury.postlight.com/web-parser/)).
 
-Finally, I wanted reviews of songs that were also available on Spotify. This is so that I can retrieve interesting characteristics about the songs later in the summer (from Spotify's [Audio Features API](https://beta.developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/)).
+Finally, I wanted reviews of songs that were also available on Spotify. This is so that I can retrieve interesting characteristics about the songs later in the summer (from Spotify's [Audio Features](https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-audio-features/) and [Artist Genres](https://developer.spotify.com/documentation/web-api/reference/artists/get-artist/) APIs).
 
 See the review count funnel/filter down to ~30K reviews, as well as word count distribution per review:
 

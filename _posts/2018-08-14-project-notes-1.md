@@ -50,7 +50,7 @@ This week, I finally revisited and addressed the situation by collecting new gen
 
 _"vapor twitch" -- "indie poptimism" -- "stomp and holler"_ -- these new genres go far beyond the bland labels of pop/rap/rock/r&b/country that I had previously gathered. **These genres feel like they are _really_ trying to tell me something, as expressively and concisely as possible.**
 
-At first, this discovery was actually a little discouraging: I could only imagine how long the genre data tail would be once applied to my commentary collection. I worried that this would result in conditioning that really isolated certain writing, greatly restricting the creativity of my model. Imagine a request for commentary on a _"chamber pop/chillwave/neo-psychedelic/nu gaze"_ (:nerd_face:) song came in to my model, but it's never seen such a genre combination before -- what will it do? (I'm still not sure actually, so stay tuned for when I get to conditioning!)
+At first, this discovery was actually a little discouraging: I could only imagine how long the genre data tail would be once applied to [my commentary collection](/dl/2018/06/08/scholar-week1#part-i-where-did-all-my-data-come-from). I worried that this would result in conditioning that really isolated certain writing, greatly restricting the creativity of my model. Imagine a request for commentary on a _"chamber pop/chillwave/neo-psychedelic/nu gaze"_ (:nerd_face:) song came in to my model, but it's never seen such a genre combination before -- what will it do? (I'm still not sure actually, so stay tuned for when I get to conditioning!)
 
 Nevertheless, I was able to run some numbers to find that the tail doesn't appear absolutely unmanageable. I also applied some simple genre clustering to further reduce the tail.
 

@@ -8,6 +8,8 @@ tags: [ 'openai' ]
 
 _This post is a replica of my OpenAI Scholar final project proposal, also available [here](https://github.com/iconix/deephypebot/blob/master/proposal.md)._
 
+_**UPDATE 8/31/18: ["deephypebot: an overview"](/dl/2018/08/03/deephypebot) is a revamped, more comprehensive version of this post. Check it out!**_
+
 ## [@deephypebot](http://twitter.com/deephypebot)
 _tl;dr- auto-generating conditioned music commentary on Twitter._
 
