@@ -58,7 +58,7 @@ Text generation is [a notoriously messy affair](https://iconix.github.io/dl/2018
 
 Once multiple generations for a new proposed tweet are available, they are added to a spreadsheet where the human curator (me) can select which samples are released to [@deephypebot](http://twitter.com/deephypebot) for tweeting.
 
-<a class="twitter-timeline" data-width="50%" data-tweet-limit="4" href="https://twitter.com/deephypebot?ref_src=twsrc%5Etfw">Tweets by deephypebot</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<a class="twitter-timeline" data-tweet-limit="4" href="https://twitter.com/deephypebot?ref_src=twsrc%5Etfw">Tweets by deephypebot</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 <small>_Note_: these retweets are best viewed on Twitter, where you can see the original tweets!</small>
 
