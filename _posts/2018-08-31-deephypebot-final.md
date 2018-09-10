@@ -15,7 +15,8 @@ Our goal is to teach this language model to generate consistently good and enter
 ## Project Achievements
 
 - Model inference through pre-trained LC-GAN + CVAE deep learning architecture (details below)
-- Functional, documented pipeline code ([GitHub repo](https://github.com/iconix/deephypebot))
+- Open-sourced, documented pipeline code ([GitHub repo](https://github.com/iconix/deephypebot))
+- Open-sourced model training code ([seq2seq CVAE](https://github.com/iconix/pytorch-text-vae); [LC-GAN](https://github.com/iconix/openai/blob/master/nbs/lcgan.ipynb))
 - A technical white paper ([pdf](https://github.com/iconix/deephypebot/blob/master/deephypebot_paper.pdf))
 
 ## Architecture
@@ -42,7 +43,7 @@ The LC-GAN is used to determine which conditioned embeddings `<z,a>` fed into th
 ![LC-GAN architecture](/img/posts/LC-GAN-conditioned.svg)
 <small>LC-GAN architecture.</small>
 
-The CVAE code used for this project is available here: **<https://github.com/iconix/pytorch-text-vae>**.
+The seq2seq CVAE code used for this project is available here: **<https://github.com/iconix/pytorch-text-vae>**.
 
 The LC-GAN code used for this project is available here: **<https://github.com/iconix/openai/blob/master/nbs/lcgan.ipynb>**.
 
