@@ -10,7 +10,7 @@ I've [talked a bit about topic modeling](/notes/2017/12/07/topics-and-dim-reduct
 
 Fortunately, my experiments this week suggest that topic modeling can indeed make a good reward function.
 
-**_Topic modeling_ is a set of techniques for discovering "topics" (clusters of words) that best represent collections of text**. This is a form of _dimensionality reduction_, itself a set of techniques for transforming a high-dimensional data set (i.e., sentences) into a lower dimension (i.e., topics), with as little information loss as possible[^ae]. It can be thought of as a kind of summarization, distillation, or representation learning.
+**_Topic modeling_ is a set of techniques for discovering "topics" (clusters of words) that best represent collections of text**. This is a form of _dimensionality reduction_, itself a set of techniques for transforming a high-dimensional data set (i.e., sentences) into a lower dimension (i.e., topics), with as little information loss as possible[^ae]. It can be thought of as a kind of summarization, distillation, or learning of representation.
 
 Topic modeling can be particularly useful for:
 1. Finding structure and understanding over collections of text
@@ -27,10 +27,10 @@ I observed a range of `n_topics` parameters on my commentary data set. I care mo
 
 `n_topics` | topic descriptions |
 --- | --- |
-2 | _repetitive nonsense + song description_ **vs.** _tour and release dates + expository language on artist_ |
-3 | _tour dates + song description_ **vs.** _repetitive nonsense + personal-style writing_ **vs.** _expository language on artists_ |
-4 | _song description_ **vs.** _repetitive nonsense + personal-style writing_ **vs.** _tour dates + repeated phrases across sentences_ **vs.** _wwws + expository language on artist and releases_ |
-5 | _promotional writing + "check it outs"s + social media sharing_ **vs.** _personal-style writing_ **vs.** _common prefixings + expository language on artists and releases_ **vs.** _non-English language + song description + repetitive nonsense_ **vs.** _tour dates + expository language on artists_ |
+2 | **1)** _repetitive nonsense + song description_ **2)** _tour and release dates + expository language on artist_ |
+3 | **1)** _tour dates + song description_ **2)** _repetitive nonsense + personal-style writing_ **3)** _expository language on artists_ |
+4 | **1)** _song description_ **2)** _repetitive nonsense + personal-style writing_ **3)** _tour dates + repeated phrases across sentences_ **4)** _wwws + expository language on artist and releases_ |
+5 | **1)** _promotional writing + "check it outs"s + social media sharing_ **2)** _personal-style writing_ **3)** _common prefixings + expository language on artists and releases_ **4)** _non-English language + song description + repetitive nonsense_ **5)** _tour dates + expository language on artists_ |
 
 <br />
 
@@ -39,10 +39,11 @@ Full observations and results (including `pyLDAvis` visualizations like the one 
 **`n_topics=4` appears to be the ideal setting for achieving the separation I want.** I would like to reiterate how subjective and task-oriented this choice is though: if my objective changed to just, say, discouraging _promotional writing_ and _social media sharing_, then 5 topics might be more suitable.
 
 <small>A few notes on reading `pyLDAvis` visualizations:</small>
-- <small>Circle size is "proportional to the proportions of the topics across the N total tokens in the
-corpus"</small>
-- <small>_Relevance_ (red bars) and _saliency_ (blue bars) are alternative ways of measuring the importance or information value of a term to a topic. They both prefer more distinctive terms to generic ones.</small>
-- <small>More details: <https://cran.r-project.org/web/packages/LDAvis/vignettes/details.pdf></small>
+- <small>Circle size is proportional to the topic's overall prevalence in the corpus.</small>
+- <small>_Saliency_ (blue bars) measures the overall frequency of a term in the corpus.</small>
+- <small>_Relevance_ (red bars) is a weighted measure of the frequency of each term in a topic. It is meant to show how much information a term conveys about a topic. The smaller the weight $$\lambda$$ (which you can slide to adjust), the more preference given towards terms distinctive to a topic -- making a topic more distinguishable from the others.</small>
+- <small>Hidden feature: if you _hover_ over a word on the right, you can see all topics in which the term appears.</small>
+- <small>Helpful explainer video: <http://stat-graphics.org/movies/ldavis.html></small>
 
 
 <div style='overflow: hidden; padding-top: 85%; position: relative;'>
