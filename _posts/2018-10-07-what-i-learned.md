@@ -15,13 +15,15 @@ It has been awesome to hear that others are **eager to apply for the next cohort
 
 Note: Much of what I will say is _subject to change_ since I participated in the inaugural Scholar cohort. OpenAI will naturally iterate like any good engineer 😊
 
+**UPDATE 10/11/18:** Applications for the 2019 Winter Scholars Program are [**now open**](https://blog.openai.com/openai-scholars-2019/)! Apply by November 16, 2018!
+
 ## What I've Learned
 
 The OpenAI Scholars program is a really great opportunity for **self-motivated newcomers to deep learning**. It is important to recognize that Scholars are asked to set aside their regular schedules for 13 weeks of intensive self-study, with a touch of guidance from their assigned mentor.
 
 **What you put in is what you get out.** It starts with the syllabus you create for your own program ([here was mine](https://github.com/iconix/openai/blob/master/syllabus.md)). I decided to focus on _natural language processing_; some Scholars had other focuses like [_reinforcement learning_](https://hollygrimm.com/reinforcementlearning), while others took more of a [broad survey](https://everyd-ai.com/blog/) of deep learning approaches.
 
-**Preparation can only help.** While the Scholars program is especially geared towards software engineers with little-to-no deep learning experience, it can't hurt to become familiar with the subject matter of the program. Prior to the summer, I had taken (a now outdated version of) [Andrew Ng's _Machine Learning_ course](/notes/2017/07/03/ng-ml-notes) and [fast.ai's _Practical Deep Learning for Coders_](http://course.fast.ai/). I still had a ton of learning to do over the summer, but it was helpful not having to start at ground zero.
+**Preparation can only help.** While the Scholars program is especially geared towards software engineers with little-to-no deep learning experience, it can't hurt to become familiar with the subject matter of the program. Prior to the summer, I had taken (a now outdated version of) [Andrew Ng's _Machine Learning_ course](/notes/2017/07/03/ng-ml-notes) and [fast.ai's _Practical Deep Learning for Coders_](http://course.fast.ai/). My program mentor [Natasha Jaques](https://twitter.com/natashajaques) also found Udacity's [_Deep Learning_ course](https://www.udacity.com/course/deep-learning--ud730) really useful personally, and it is taught by a research scientist at Google AI. I still had a ton of learning to do over the summer, but it was helpful not having to start at ground zero.
 
 **13 weeks can fly by _fast_.** The time pressure this summer was really real. This is all the more reason to try to keep to a schedule. Even so, nearly every Scholar in my cohort created an overambitious syllabus. This turned out to be fine, generally -- we could adjust our syllabi and schedules as we went. I even wrote a little bit about the craziness of my schedule [in week 5](/dl/2018/07/06/not-enough-attention#diversions-and-a-breakthrough), when **I determined to _not_ get discouraged by the pace, as long as I kept working and making progress**. I'd really encourage this mindset -- my [final project](/dl/2018/08/31/deephypebot-final) turned out fine in the end 😊
 
